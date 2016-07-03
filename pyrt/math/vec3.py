@@ -1,6 +1,5 @@
 import math
-
-G_EPSILON = 1E-24
+from .constants import *
 
 class Vec3:
     """Class representing a 3D-Vector
@@ -13,9 +12,9 @@ class Vec3:
         :param y: y-component
         :param z: z-component
         """
-        self.x = x
-        self.y = y
-        self.z = z
+        self.x = float(x)
+        self.y = float(y)
+        self.z = float(z)
 
     def __str__(self):
         """Convert vector to string
@@ -164,5 +163,47 @@ def sign(v):
     Vec3(fsign(v.x), fsign(v.y), fsign(v.z))
 
 
-def vec3copy(v):
+def Vec3copy(v):
     return Vec3(v.x, v.y, v.z)
+
+
+'''
+
+Original C Code:
+
+#define Vec3_set(p, X, Y, Z) (p).x = (X),  (p).y = (Y),  (p).z = (Z)
+#define Vec3_add(a,b,result)  (result).x = (a).x + (b).x, (result).y = (a).y + (b).y, (result).z = (a).z + (b).z
+#define Vec3_sub(a,b,result)    (result).x = (a).x - (b).x, (result).y = (a).y - (b).y, (result).z = (a).z - (b).z
+#define Vec3_scale(a,s)  (a).x *= (s), (a).y *= (s), (a).z *= (s)
+#define Vec3_dot(a,b)    ((a).x * (b).x + (a).y * (b).y + (a).z * (b).z)
+#define Vec3_cross(a,b,result)  (result).x = (a).y * (b).z  -  (a).z * (b).y, (result).y = (a).z * (b).x  -  (a).x * (b).z, (result).z = (a).x * (b).y  -  (a).y * (b).x
+#define Vec3_changesign(p)  (p).x = (-(p).x),  (p).y = (-(p).y),  (p).z = (-(p).z)
+#define Vec3_sscale(s,a,r)  (r).x=(s)*(a).x,(r).y=(s)*(a).y,(r).z=(s)*(a).z
+#define Vec3_addscaled(v1,s,v2,r) (r).x = (v1).x + (s)*(v2).x, (r).y = (v1).y + (s)*(v2).y, (r).z = (v1).z + (s)*(v2).z
+
+
+//-----------------------------------------------------------------------------
+// Refract Funktion (Renderman; HLSL)
+inline Vec3 refract(Vec3& I, Vec3& N, float eta)
+{
+  float dot = Vec3_dot(I,N);
+  float k = 1.0f - eta*eta*(1.0f-dot*dot);
+  if (k<0) return I;
+  return I*eta - N*(eta*dot+sqrt(k));
+}
+//-----------------------------------------------------------------------------
+// Abstand zweier Punkte
+inline float distance(Vec3& A, Vec3& B)
+{
+  return length(B-A);
+}
+//-----------------------------------------------------------------------------
+// Alle Komponenten werden positiv
+inline Vec3    abs(const Vec3& v)
+{  Vec3 r;
+   r.x = fabs(v.x); r.y = fabs(v.y); r.z = fabs(v.z);
+   return r;
+}
+
+
+'''
