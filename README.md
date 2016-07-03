@@ -2,6 +2,7 @@
 
 PyRT is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
 
+  * Ray Tracing in Jupyter Notebook
   * Exploring ray tracing concepts for geo data using Python.
   * Rendering geo data, including large point clouds.
   * Implementing new algorithms for large 3D City Model rendering.
@@ -25,13 +26,14 @@ PyRT is *not* a 3D-Modelling package. It is all about rendering from code.
 In PyRT you create a scene first. Scenes consist of atleast one camera and geometry. Creation of scenes is done in an object oriented way:
 
 ```python
+    from pyrt.math import *
     from pyrt.geometry import Triangle
-    from pyrt.cameras import PerspectiveCamera
-    from pyrt.renderers import SimpleRT
+    from pyrt.camera import PerspectiveCamera
+    from pyrt.renderer import SimpleRT
     
     camera = PerspectiveCamera(640,480)
     scene = Scene()
-    scene.Add(Triangle(vec3(0, 0, 0), vec3(0, 5, 0), vec3(1, 5, 0)))
+    scene.Add(Triangle(Vec3(0, 0, 0), Vec3(0, 5, 0), Vec3(1, 5, 0)))
     scene.SetCamera(camera)
 
     engine = renderer.SimpleRT()
