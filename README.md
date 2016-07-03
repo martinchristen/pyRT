@@ -26,19 +26,19 @@ PyRT is *not* a 3D-Modelling package. It is all about rendering from code.
 In PyRT you create a scene first. Scenes consist of atleast one camera and geometry. Creation of scenes is done in an object oriented way:
 
 ```python
-    from pyrt.math import *
-    from pyrt.geometry import Triangle
-    from pyrt.camera import PerspectiveCamera
-    from pyrt.renderer import SimpleRT
-    
-    camera = PerspectiveCamera(640,480)
-    scene = Scene()
-    scene.Add(Triangle(Vec3(0, 0, 0), Vec3(0, 5, 0), Vec3(1, 5, 0)))
-    scene.SetCamera(camera)
+from pyrt.math import *
+from pyrt.geometry import Triangle
+from pyrt.camera import PerspectiveCamera
+from pyrt.renderer import SimpleRT
 
-    engine = renderer.SimpleRT()
+camera = PerspectiveCamera(640,480)
+scene = Scene()
+scene.Add(Triangle(Vec3(0, 0, 0), Vec3(0, 5, 0), Vec3(1, 5, 0)))
+scene.SetCamera(camera)
 
-    imgdata = engine.render(mainscene)
+engine = renderer.SimpleRT()
+
+imgdata = engine.render(scene)
 ```
 
 PyRT has an open rendering concept, you can create **your own renderer**. In the example above "SimpleRT" was used, which is a minimalistic raycaster.
@@ -54,7 +54,7 @@ More information about this license can be found under: [https://www.gnu.org/lic
 
 ## Author
 
-PyRT is created and maintained by Martin Christen. You can contact me martin.christen@gmail.com
+PyRT is created and maintained by Martin Christen. You can contact me by e-mail: martin.christen@gmail.com
 
 
 ## Support this project!
@@ -66,8 +66,5 @@ Some Contribution examples:
 * Contribute: implement new renderers
 * Contrubute: support new geometry types 
 * Contribute: implement new lighting models
-
-
-
 
 
