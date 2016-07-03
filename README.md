@@ -1,8 +1,8 @@
 # PyRT - The Python Raytracer
 
-PyRT is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
+PyRT (pronounced "pirate") is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
 
-  * Ray Tracing in Jupyter Notebook
+  * Ray Tracing in the Jupyter Notebook
   * Exploring ray tracing concepts for geo data using Python.
   * Rendering geo data, including large point clouds.
   * Implementing new algorithms for large 3D City Model rendering.
@@ -45,7 +45,7 @@ PyRT has an open rendering concept, you can create **your own renderer**. In the
 
 ## Python & RayTracing, isn't that too slow ?
 
-No. Custom rendererers can be written in C with Python bindings. This is planned in future, later versions will even support the GPU using OpenCL and/or other libraries, but at the moment the primary focus is to create a pythonic interface to scenegraph based ray tracing.
+No. Custom renderers can be written in C with Python bindings. This is planned in future, later versions will even support the GPU using OpenCL and/or other libraries, but at the moment the primary focus is to create a pythonic interface to scenegraph based ray tracing.
 
 ## License
 
