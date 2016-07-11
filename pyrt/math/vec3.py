@@ -2,7 +2,7 @@ import math
 from .constants import *
 
 class Vec3:
-    """Class representing a 3D-Vector. Values are always stored as float.
+    """Class representing a 3D-Vector. Values are always stored as float
     """
     def __init__(self, *args, **kwargs):
         """
@@ -150,25 +150,32 @@ class Vec3:
             raise IndexError("Vec3 has 3 components: [0] [1] and [2]")
 
     def copy(self):
+        """
+        :return: copy of current vector
+        """
         return Vec3(self.x, self.y, self.z)
 
     def isZero(self):
+        """
+        :return: Truf if this is a zero-vector
+        """
         return math.fabs(self.x) < G_EPSILON and math.fabs(self.y) < G_EPSILON and math.fabs(self.z) < G_EPSILON
 
     def length(self):
+        """
+        :return: return length of vector
+        """
         return math.sqrt(self.x**2 + self.y**2 + self.z**2)
 
     def normalize(self):
+        """
+        normalize this vector
+        """
         l = self.length()
         if l != 0:
             self.x /= l
             self.y /= l
             self.z /= l
-
-    def set(self, x,y,z):
-        self.x = x
-        self.y = y
-        self.z = z
 
 
 # Vector operations:
@@ -232,7 +239,6 @@ def refract(N, I, eta):
         return I * eta - N * (eta * d + math.sqrt(k))
 
 
-
 def sign(v):
     def fsign(f):
         if f < 0:
@@ -242,6 +248,6 @@ def sign(v):
         else:
             return 0
 
-    Vec3(fsign(v.x), fsign(v.y), fsign(v.z))
+    return Vec3(fsign(v.x), fsign(v.y), fsign(v.z))
 
 
