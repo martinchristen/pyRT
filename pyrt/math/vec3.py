@@ -77,6 +77,19 @@ class Vec3:
         other: vector to subtract"""
         return Vec3(self.x - other.x, self.y - other.y, self.z - other.z)
 
+
+    def __eq__(self, other):
+        if type(other) == list or type(other) == tuple:   # not checking type within tuple/list
+            if len(other) == 3:
+                return (abs(self.x - other[0]) < G_EPSILON) and (abs(self.y- other[1]) < G_EPSILON) and (abs(self.z - other[2]) < G_EPSILON)
+            else:
+                raise ValueError("Can't compare vector with list or tuple of length != 3")
+        elif type(other) == Vec3:
+            return (abs(self.x - other.x) < G_EPSILON) and (abs(self.y - other.y) < G_EPSILON) and (abs(self.z - other.z) < G_EPSILON)
+        else:
+            raise ValueError("Can't compare this type")
+
+
     def __mul__(self, s):
         if type(s) == Vec3:
             return Vec3(self.x * s.x, self.y * s.y, self.z * s.z)
