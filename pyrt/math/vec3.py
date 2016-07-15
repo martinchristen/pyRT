@@ -108,7 +108,7 @@ class Vec3:
             print("multiplicaton with wrong type")
             return Vec3(0., 0., 0.)
 
-    def __div__(self, s):
+    def __truediv__(self, s):
         if type(s) == Vec3:
             return Vec3(self.x / s.x, self.y / s.y, self.z / s.z)
         elif type(s) == float or type(s) == int:
@@ -117,11 +117,11 @@ class Vec3:
             print("multiplicaton with wrong type")
             return Vec3(0., 0., 0.)
 
-    def __rdiv__(self, s):
+    def __rtruediv__(self, s):
         if type(s) == Vec3:
-            return Vec3(self.x / s.x, self.y / s.y, self.z / s.z)
+            return Vec3(s.x / self.x, s.y / self.y, s.z / self.z)
         elif type(s) == float or type(s) == int:
-            return Vec3(self.x / s, self.y / s, self.z / s)
+            return Vec3(s / self.x, s / self.y, s / self.z)
         else:
             print("multiplicaton with wrong type")
             return Vec3(0., 0., 0.)
@@ -176,78 +176,3 @@ class Vec3:
             self.x /= l
             self.y /= l
             self.z /= l
-
-
-# Vector operations:
-# ------------------
-
-def cross(v1, v2):
-    """Calculates cross product
-    v1: vector
-    v2: vector
-    """
-    x = v1.y * v2.z - v1.z * v2.y
-    y = v1.z * v2.x - v1.x * v2.z
-    z = v1.x * v2.y - v1.y * v2.x
-    return Vec3(x, y, z)
-
-def dot(a,b):
-    """calculates the dot product"""
-    return a.x * b.x + a.y * b.y + a.z * b.z
-
-
-def normalize(v):
-    """Returns the normalized vector without modifying the original vector"""
-    l = v.length()
-    if l != 0:
-        return Vec3(v.x / l, v.y / l, v.z / l)
-    else:
-        return Vec3(0.0, 0.0, 0.0)
-
-
-def reflect(N, I):
-    """Reflects a vector
-    N: Normal
-    I: Incdient vector"""
-    return I + N * (-2.0 * dot(N, I))
-
-
-def faceforward(N, I):
-    '''
-    faceforward operation
-    N: Normal vector
-    I: Incident vector
-    '''
-    if dot(N, I) < 0:
-        return N
-    else:
-        return -N
-
-
-def refract(N, I, eta):
-    '''
-    refract operation
-    N: Normal vector
-    I: Incident vector
-    eta: Refraction koefficient
-    '''
-    d = dot(I, N)
-    k = 1 - eta * eta * (1 - d * d)
-    if k < 0:
-        return I
-    else:
-        return I * eta - N * (eta * d + math.sqrt(k))
-
-
-def sign(v):
-    def fsign(f):
-        if f < 0:
-            return -1
-        if f > 0:
-            return 1
-        else:
-            return 0
-
-    return Vec3(fsign(v.x), fsign(v.y), fsign(v.z))
-
-

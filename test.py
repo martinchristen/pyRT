@@ -87,6 +87,25 @@ class Vec3Test(unittest.TestCase):
         self.assertEqual(a*b*x, (4,12,24))
         self.assertEqual(d,e)
 
+    def testDivision(self):
+        v1 = Vec3(1, 2, 3)
+        v2 = Vec3(4, 4, 5)
+        v3 = v1 / v2
+        self.assertEqual(v3, (0.25, 0.5, 0.6))
+
+        v4 = Vec3(2,4,6)
+        v5 = v4 / 2.0
+        self.assertEqual(v5, (1.0, 2.0, 3.0))
+
+        v6 = Vec3(2, 4, 8)
+        v7 = 2.0 / v6
+        self.assertEqual(v7, (1.0, 0.5, 0.25))
+
+        v8 = Vec3(2, 25, 16)
+        v9 = Vec3(4, 5, 8)
+        v10 = v8 / v9
+        self.assertEqual(v10, (0.5, 5.0, 2.0))
+
     def testFunctions(self):
         v1 = Vec3(1, 2, 3)
         v2 = Vec3(3, 4, 5)
