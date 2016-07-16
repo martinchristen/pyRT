@@ -8,5 +8,8 @@ class Vec4:
        x,y,z,w Component of vector (float or int)
     """
     def __init__(self, x=0.0, y=0.0, z=0.0, w=0.0):
-        pass
+        self.x = x
+        self.y = y
+        self.z = z
+        self.w = w
 
