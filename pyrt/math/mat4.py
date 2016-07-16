@@ -141,11 +141,28 @@ class Mat4:
             newmat.m[15] = b30 * a03 + b31 * a13 + b32 * a23 + b33 * a33
 
             return newmat
+
         if type(other) == Vec3:
-            pass # TODO: implement
+            result = Vec3()
+            result.x = self.m[0] * other.x + self.m[1] * other.y + self.m[2] * other.z + self.m[3]
+            result.y = self.m[4] * other.x + self.m[5] * other.y + self.m[6] * other.z + self.m[7]
+            result.z = self.m[8] * other.x + self.m[9] * other.y + self.m[10] * other.z + self.m[11]
+            w = self.m[12] * other.x + self.m[13] * other.y + self.m[14] * other.z + self.m[15]
+
+            result.x = result.x / w
+            result.y = result.y / w
+            result.z = result.z / w
+
+            return result
 
         if type(other) == Vec4:
-            pass # TODO: implement
-    
+            result = Vec4()
+            result.x = self.m[0] * other.x + self.m[1] * other.y + self.m[2] * other.z + self.m[3]
+            result.y = self.m[4] * other.x + self.m[5] * other.y + self.m[6] * other.z + self.m[7]
+            result.z = self.m[8] * other.x + self.m[9] * other.y + self.m[10] * other.z + self.m[11]
+            result.w = self.m[12] * other.x + self.m[13] * other.y + self.m[14] * other.z + self.m[15]
+
+            return result
+
         else:
             raise ValueError("Can't multiply matrix with specified type: " + str(type(other)))
