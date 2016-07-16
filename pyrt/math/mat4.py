@@ -37,14 +37,31 @@ class Mat4:
         return s
 
     def __getitem__(self, key):
-        if key == 0:
-            return (self.m[0], self.m[1], self.m[2], self.m[3])
-        elif key == 1:
-            return (self.m[4], self.m[5], self.m[6], self.m[7])
-        elif key == 2:
-            return (self.m[8], self.m[9], self.m[10], self.m[11])
-        elif key == 3:
-            return (self.m[12], self.m[13], self.m[14], self.m[15])
+        if type(key) == tuple:
+            if len(key) != 2:
+                raise IndexError("Index must be 2-dimensional!")
+            x,y = key
+
+            if x<0 or x>4 or y<0 or y>4:
+                raise IndexError("Index out of range!")
+
+            return self.m[x + y*4]
         else:
-            raise IndexError("Wrong index for 4x4 matrix")
+            raise IndexError("Matrix indices must be specified as tuple, for example:   s = m[1,2]")
+
+    def __setitem__(self, key, value):
+
+        if type(key) == tuple:
+            if len(key) != 2:
+                raise IndexError("Index must be 2-dimensional!")
+            x, y = key
+
+            if x < 0 or x > 4 or y < 0 or y > 4:
+                raise IndexError("Index out of range!")
+
+            self.m[x + y * 4] = value
+
+        else:
+            raise IndexError("Matrix indices must be access as tuple, for example:   m[1,2] = 5")
+
 
