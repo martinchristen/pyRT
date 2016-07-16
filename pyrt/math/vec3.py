@@ -96,8 +96,7 @@ class Vec3:
         elif type(s) == float or type(s) == int:
             return Vec3(self.x * s, self.y * s, self.z * s)
         else:
-            print("multiplicaton with wrong type")
-            return Vec3(0.,0.,0.)
+            raise ValueError("Multiplicaton with wrong type: " + str(type(s)))
 
     def __rmul__(self, s):
         if type(s) == Vec3:
@@ -105,8 +104,7 @@ class Vec3:
         elif type(s) == float or type(s) == int:
             return Vec3(self.x * s, self.y * s, self.z * s)
         else:
-            print("multiplicaton with wrong type")
-            return Vec3(0., 0., 0.)
+            raise ValueError("Multiplicaton with wrong type:" + str(type(s)))
 
     def __truediv__(self, s):
         if type(s) == Vec3:
@@ -114,8 +112,8 @@ class Vec3:
         elif type(s) == float or type(s) == int:
             return Vec3(self.x / s, self.y / s, self.z / s)
         else:
-            print("multiplicaton with wrong type")
-            return Vec3(0., 0., 0.)
+            raise ValueError("Division with wrong type" + str(type(s)))
+
 
     def __rtruediv__(self, s):
         if type(s) == Vec3:
@@ -123,8 +121,7 @@ class Vec3:
         elif type(s) == float or type(s) == int:
             return Vec3(s / self.x, s / self.y, s / self.z)
         else:
-            print("multiplicaton with wrong type")
-            return Vec3(0., 0., 0.)
+            raise ValueError("Division with wrong type: " + str(type(s)))
 
     def __neg__(self):
         return Vec3(-self.x, -self.y, -self.z)
