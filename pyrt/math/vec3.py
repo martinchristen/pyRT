@@ -157,7 +157,7 @@ class Vec3:
 
     def isZero(self):
         """
-        :return: Truf if this is a zero-vector
+        :return: True if this is a zero-vector
         """
         return math.fabs(self.x) < G_EPSILON and math.fabs(self.y) < G_EPSILON and math.fabs(self.z) < G_EPSILON
 
