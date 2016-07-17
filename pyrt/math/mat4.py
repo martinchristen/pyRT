@@ -76,6 +76,43 @@ class Mat4:
                 index1 = y+x*4
                 self.m[index0] = t[index1]
 
+    def __eq__(self, other):
+        if type(other) == list or type(other) == tuple:  # not checking type within tuple/list
+            if len(other) == 16:
+                for i in range(0, 16):
+                    if abs(self.m[i] - other[i]) > G_EPSILON:
+                        return False
+                return True
+            else:
+                raise ValueError("Can't compare 4x4 Matrix with list or tuple of length != 16")
+        elif type(other) == Mat4:
+            for i in range(0,16):
+                if (abs(self.m[i] - other.m[i]) > G_EPSILON):
+                    return False
+            return True
+        else:
+            raise ValueError("Can't compare matrix with " + str(type(other)))
+
+    def __add__(self, other):
+        """add two Mat4"""
+        if type(other) == Mat4:
+            return Mat4((self.m[0] + other.m[0], self.m[1] + other.m[1], self.m[2] + other.m[2], self.m[3] + other.m[3],
+                         self.m[4] + other.m[4], self.m[5] + other.m[5], self.m[6] + other.m[6], self.m[7] + other.m[7],
+                         self.m[8] + other.m[8], self.m[9] + other.m[9], self.m[10] + other.m[10], self.m[11] + other.m[11],
+                         self.m[12] + other.m[12], self.m[13] + other.m[13], self.m[14] + other.m[14], self.m[15] + other.m[15]))
+        else:
+            raise ValueError("Wrong type for matrix addition: " + str(type(other)))
+
+    def __sub__(self, other):
+        """subtract two Mat4"""
+        if type(other) == Mat4:
+            return Mat4((self.m[0] - other.m[0], self.m[1] - other.m[1], self.m[2] - other.m[2], self.m[3] - other.m[3],
+                         self.m[4] - other.m[4], self.m[5] - other.m[5], self.m[6] - other.m[6], self.m[7] - other.m[7],
+                         self.m[8] - other.m[8], self.m[9] - other.m[9], self.m[10] - other.m[10], self.m[11] - other.m[11],
+                         self.m[12] - other.m[12],  self.m[13] - other.m[13], self.m[14] - other.m[14], self.m[15] - other.m[15]))
+        else:
+            raise ValueError("Wrong type for matrix addition: " + str(type(other)))
+
 
     def __mul__(self, other):
         """
@@ -129,7 +166,6 @@ class Mat4:
             result.w = self.m[12] * other.x + self.m[13] * other.y + self.m[14] * other.z + self.m[15]
 
             return result
-
         else:
             raise ValueError("Can't multiply matrix with specified type: " + str(type(other)))
 
