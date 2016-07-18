@@ -128,14 +128,71 @@ class Vec3Test(unittest.TestCase):
 
         self.assertEqual(s, (0.2672612419124244, 0.5345224838248488, 0.8017837257372732))
 
+# -- Testing Vec4 Class ------------------------------------------------------------------------------------------------
 
+class Vec4Test(unittest.TestCase):
+    # ------------------------------------------------------------------------------------------------------------------
+    def testStandardConstructor(self):
+        s = Vec4(1, 2, 3, 4)
+        self.assertEqual(s.x, 1.0)
+        self.assertEqual(s.y, 2.0)
+        self.assertEqual(s.z, 3.0)
+        self.assertEqual(s.w, 4.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testTupleConstructor(self):
+        s = Vec4((1, 2, 3, 4))
+        self.assertEqual(s.x, 1.0)
+        self.assertEqual(s.y, 2.0)
+        self.assertEqual(s.z, 3.0)
+        self.assertEqual(s.w, 4.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testListConstructor(self):
+        s = Vec4([1, 2, 3, 4 ])
+        self.assertEqual(s.x, 1.0)
+        self.assertEqual(s.y, 2.0)
+        self.assertEqual(s.z, 3.0)
+        self.assertEqual(s.w, 4.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testNamedConstructor(self):
+        s = Vec4(x=1)
+        self.assertEqual(s.x, 1.0)
+        self.assertEqual(s.y, 0.0)
+        self.assertEqual(s.z, 0.0)
+        self.assertEqual(s.w, 1.0)
+
+        s = Vec4(y=1)
+        self.assertEqual(s.x, 0.0)
+        self.assertEqual(s.y, 1.0)
+        self.assertEqual(s.z, 0.0)
+        self.assertEqual(s.w, 1.0)
+
+        s = Vec4(z=1)
+        self.assertEqual(s.x, 0.0)
+        self.assertEqual(s.y, 0.0)
+        self.assertEqual(s.z, 1.0)
+        self.assertEqual(s.w, 1.0)
+
+        s = Vec4(x=1, y=2, z=3, w=4)
+        self.assertEqual(s.x, 1.0)
+        self.assertEqual(s.y, 2.0)
+        self.assertEqual(s.z, 3.0)
+        self.assertEqual(s.w, 4.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testEqual(self):
+        s = Vec4(1,2,3,4)
+        self.assertEqual(s, (1,2,3,4))
+        self.assertEqual(s, [1,2,3,4])
 
 # -- Testing Mat4 Class ------------------------------------------------------------------------------------------------
 
 class Mat4Test(unittest.TestCase):
 
     # ------------------------------------------------------------------------------------------------------------------
-    def testStandardConstructor(self):
+    def testConstructor(self):
         # 1 - Construct Empty
         m = Mat4()
         self.assertEqual(m, (0,0,0,0,
