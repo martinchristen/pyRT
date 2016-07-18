@@ -158,6 +158,34 @@ class Mat4Test(unittest.TestCase):
                              13, 14, 15, 16))
 
     # ------------------------------------------------------------------------------------------------------------------
+    def testAccess(self):
+        m = Mat4((1, 2, 3, 4,
+                  5, 6, 7, 8,
+                  9, 10, 11, 12,
+                  13, 14, 15, 16))
+
+        self.assertEqual(m[0, 0], 1.0)
+        self.assertEqual(m[1, 0], 2.0)
+        self.assertEqual(m[2, 0], 3.0)
+        self.assertEqual(m[3, 0], 4.0)
+
+        self.assertEqual(m[0, 1], 5.0)
+        self.assertEqual(m[1, 1], 6.0)
+        self.assertEqual(m[2, 1], 7.0)
+        self.assertEqual(m[3, 1], 8.0)
+
+        self.assertEqual(m[0, 2], 9.0)
+        self.assertEqual(m[1, 2], 10.0)
+        self.assertEqual(m[2, 2], 11.0)
+        self.assertEqual(m[3, 2], 12.0)
+
+        self.assertEqual(m[0, 3], 13.0)
+        self.assertEqual(m[1, 3], 14.0)
+        self.assertEqual(m[2, 3], 15.0)
+        self.assertEqual(m[3, 3], 16.0)
+
+
+    # ------------------------------------------------------------------------------------------------------------------
     def testAddition(self):
         m0 = Mat4([2,4,6,8,10,12,14,16,18,20,22,24,26,28,30,32])
         m1 = Mat4([1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1])
