@@ -11,4 +11,6 @@ u = Triangle(Vertex(position=(0,0,0)),
              Vertex(position=(0,1,0)))
 
 
+print("Triangle area = " + str(u.area()))
 
+print("Incenter = " + str(u.incenter()))

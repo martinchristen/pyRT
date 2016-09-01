@@ -3,10 +3,10 @@ from ..math import *
 
 class Vertex:
     def __init__(self, **kwargs):
-        self.position = None
+        self.position = Vec3(0,0,0)
         self.normal = None
         self.color = None
-        self.texcoord = None
+        self.texcoord = Vec2(0,0)
 
         if len(kwargs) == 0:
             raise ValueError("Vertex must specify attributes, for example: position, normal, color, texcoord")
