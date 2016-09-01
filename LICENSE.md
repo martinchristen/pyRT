@@ -1,4 +1,4 @@
-pyRT - The Python Raytracer
+pyRT - The Python Raytracer (MIT-LICENSE)
 
 Copyright (C) 2016 Martin Christen
 
