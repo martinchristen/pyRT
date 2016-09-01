@@ -36,7 +36,7 @@ class Vertex:
 
             # MATERIAL not yet supported
             '''
-            if "color" in kwargs:
+            if "color" in kwargs:   # it is probably better to have a class "Color" instead of using Vec4.
                 if type(kwargs["color"]) == Vec4:
                     pass
                 elif type(kwargs["color"]) == Vec3:
