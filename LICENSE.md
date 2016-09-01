@@ -1,4 +1,3 @@
-
 pyRT - The Python Raytracer
 
 Copyright (C) 2016 Martin Christen
