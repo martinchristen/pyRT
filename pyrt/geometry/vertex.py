@@ -6,7 +6,7 @@ class Vertex:
         self.position = Vec3(0,0,0)
         self.normal = None
         self.color = None
-        self.texcoord = Vec2(0,0)
+        self.texcoord = None
 
         if len(kwargs) == 0:
             raise ValueError("Vertex must specify attributes, for example: position, normal, color, texcoord")

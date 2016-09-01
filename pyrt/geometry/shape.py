@@ -7,7 +7,7 @@ class Shape():
         pass
 
     @abstractmethod
-    def hit(self, ray: Ray, tmin: float, tmax: float, hitrecord: HitRecord) -> bool:
+    def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
         '''
         :param ray: the ray to check hit
         :param tmin: tmin to test intersection
@@ -18,7 +18,7 @@ class Shape():
         pass
 
     @abstractmethod
-    def hitShadow(self, ray: Ray, tmin: float, tmax: float) -> bool:
+    def hitShadow(self, ray: Ray) -> bool:
         '''
         :param ray:
         :param tmin:

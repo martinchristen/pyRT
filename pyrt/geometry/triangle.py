@@ -115,17 +115,77 @@ class Triangle(Shape):
         return Vec2(u,v)
     #-------------------------------------------------------------------------------------------------------------------
 
-    def hit(self, ray: Ray, tmin: float, tmax: float, hitrecord: HitRecord) -> bool:
+    def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
         '''
+        Ray Triangle Intersection
+        Original Code from:
+        "Practical Analysis of Optimized Ray-Triangle Intersection"
+        Tomas Möller
+        Department of Computer Engineering, Chalmers University of Technology, Sweden.
+        http://fileadmin.cs.lth.se/cs/Personal/Tomas_Akenine-Moller/raytri/
+
         :param ray: the ray to check hit
         :param tmin: tmin to test intersection
         :param tmax: tmax to test intersection
         :param hitrecord: the hitrecord which is only valid if there is a hit
         :return: True if there is a hit
         '''
-        pass
+        EPSILON = 0.000001 # todo: move outside
 
-    def hitShadow(self, ray: Ray, tmin: float, tmax: float) -> bool:
+        # find vectors for two edges sharing vert0
+        edge1 = self.b.position - self.a.position
+        edge2 = self.c.position - self.a.position
+
+        # begin calculating determinant - also used to calculate U parameter
+        pvec = cross3(ray.direction, edge2)
+
+        # if determinant is near zero, ray lies in plane of triangle
+        det = dot3(edge1, pvec)
+
+        if det > EPSILON:
+            tvec = ray.start - self.a.position
+            u = dot3(tvec, pvec)
+            if u < 0.0 or u > det:
+                return False
+
+            qvec = cross3(tvec, edge1)
+            v = dot3(ray.direction, qvec)
+            if v < 0.0 or u+v > det:
+                return False
+
+        elif det < -EPSILON:
+            tvec = ray.start - self.a.position
+            u = dot3(tvec, pvec)
+            if u > 0.0 or u < det:
+                return False
+
+            qvec = cross3(tvec, edge1)
+            v = dot3(ray.direction, qvec)
+            if v > 0.0 or u + v < det:
+                return False
+        else:
+            return False
+
+        inv_det = 1.0 / det
+        t = dot3(edge2, qvec) * inv_det
+        u *= inv_det
+        v *= inv_det
+
+        if t > 0.0: # and t<tmax
+            hitrecord.t = t
+            hitrecord.point = ray.start + t*ray.direction
+            hitrecord.normal = cross3(edge1, edge2)
+            if self.a.normal != None and self.b.normal != None and self.c.normal != None:
+                nU = self.b.normal - self.a.normal
+                nV = self.c.normal - self.a.normal
+                hitrecord.normal_g = self.a.normal.normal + nU*u + nV*v
+            else:
+                hitrecord.normal_g = hitrecord.normal
+
+            # todo: Calculate Texture Coordinate
+
+
+    def hitShadow(self, ray: Ray) -> bool:
         '''
         :param ray:
         :param tmin:
