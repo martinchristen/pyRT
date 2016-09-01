@@ -1,31 +1,32 @@
 ## Todo List
 
-This is the current incomplete todo list for the project.
+This is the current todo list for the project.
 There is no order in which the classes are implemented, some things are even developed in parallel.
-
 
 ### Create all math classes
 
-- [ ] Vec3
-- [ ] Vec4
-- [ ] Mat4
-- [ ] Ray
+- [ ] Vec2
+- [X] Vec3
+- [X] Vec4
+- [X] Mat4
+- [X] Ray
 
 ### Create geometry classes
 
-- [ ] base Geometry with _def intersect(ray)_
-- [ ] Triangle
+- [X] Base Class  ("Shape")
+- [X] Triangle
 - [ ] Sphere
 - [ ] Mesh
 
 ### Scenegraph
 
-- [ ] create scenegraph
+- [ ] Create Scenegraph
+- [ ] Acceleration Structure: HBV
 
 ## Material
 
+- [ ] Color Class (RGB)
 - [ ] Basic Material
-
 
 ## Lighting models
 
@@ -40,3 +41,9 @@ There is no order in which the classes are implemented, some things are even dev
 - [ ] Base Class
 - [ ] RayTester
 - [ ] SimpleRT
+
+### Importer / Exporter
+
+- [ ] Wavefront obj importer
+- [ ] Wavefront obj exporter
+- [ ] Three.js exporter
