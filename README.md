@@ -1,5 +1,7 @@
 # PyRT - The Python Raytracer #
 
+[![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 <p align="center">
   <img src="docs/img/pyRT_64.png" />
 </p>

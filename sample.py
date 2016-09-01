@@ -1,5 +1,6 @@
 from pyrt.geometry import *
-from pyrt.math import *
+#from pyrt.math import *
+from pyrt.camera import *
 
 t = Triangle(Vertex(position=Vec3(0,0,0)),
              Vertex(position=Vec3(1,0,0)),
@@ -14,3 +15,8 @@ u = Triangle(Vertex(position=(0,0,0)),
 print("Triangle area = " + str(u.area()))
 
 print("Incenter = " + str(u.incenter()))
+
+
+
+cam = PerspectiveCamera(640,480, 45)
+print(cam)
