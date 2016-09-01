@@ -1,9 +1,11 @@
 import math
 from .constants import *
 
+
 class Vec3:
     """Class representing a 3D-Vector. Values are always stored as float
     """
+
     def __init__(self, *args, **kwargs):
         """
         Vec3 can be constructed the following way:
@@ -25,9 +27,9 @@ class Vec3:
 
         if len(kwargs) == 0:
             if len(args) == 3:
-                    self.x = float(args[0])
-                    self.y = float(args[1])
-                    self.z = float(args[2])
+                self.x = float(args[0])
+                self.y = float(args[1])
+                self.z = float(args[2])
             elif len(args) == 1:
                 if type(args) == tuple or type(args) == list:
                     self.x = float(args[0][0])
@@ -61,7 +63,6 @@ class Vec3:
             else:
                 self.z = 0
 
-
     def __str__(self):
         """Convert vector to string
         """
@@ -77,18 +78,18 @@ class Vec3:
         other: vector to subtract"""
         return Vec3(self.x - other.x, self.y - other.y, self.z - other.z)
 
-
     def __eq__(self, other):
-        if type(other) == list or type(other) == tuple:   # not checking type within tuple/list
+        if type(other) == list or type(other) == tuple:  # not checking type within tuple/list
             if len(other) == 3:
-                return (abs(self.x - other[0]) < G_EPSILON) and (abs(self.y- other[1]) < G_EPSILON) and (abs(self.z - other[2]) < G_EPSILON)
+                return (abs(self.x - other[0]) < G_EPSILON) and (abs(self.y - other[1]) < G_EPSILON) and (
+                abs(self.z - other[2]) < G_EPSILON)
             else:
                 raise ValueError("Can't compare vector with list or tuple of length != 3")
         elif type(other) == Vec3:
-            return (abs(self.x - other.x) < G_EPSILON) and (abs(self.y - other.y) < G_EPSILON) and (abs(self.z - other.z) < G_EPSILON)
+            return (abs(self.x - other.x) < G_EPSILON) and (abs(self.y - other.y) < G_EPSILON) and (
+            abs(self.z - other.z) < G_EPSILON)
         else:
             raise ValueError("Can't compare this type")
-
 
     def __mul__(self, s):
         if type(s) == Vec3:
@@ -114,7 +115,6 @@ class Vec3:
         else:
             raise ValueError("Division with wrong type" + str(type(s)))
 
-
     def __rtruediv__(self, s):
         if type(s) == Vec3:
             return Vec3(s.x / self.x, s.y / self.y, s.z / self.z)
@@ -138,7 +138,7 @@ class Vec3:
 
     def __setitem__(self, key, value):
         if key == 0:
-             self.x = float(value)
+            self.x = float(value)
         elif key == 1:
             self.y = float(value)
         elif key == 2:
@@ -162,7 +162,7 @@ class Vec3:
         """
         :return: return length of vector
         """
-        return math.sqrt(self.x**2 + self.y**2 + self.z**2)
+        return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2)
 
     def normalize(self):
         """

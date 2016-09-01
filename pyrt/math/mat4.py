@@ -3,10 +3,12 @@ from .constants import *
 from .vec3 import *
 from .vec4 import *
 
+
 class Mat4:
     """
     Class representing a 4x4 Matrix
     """
+
     def __init__(self, elm=None):
         """
         elm:
@@ -41,12 +43,12 @@ class Mat4:
         if type(key) == tuple:
             if len(key) != 2:
                 raise IndexError("Index must be 2-dimensional!")
-            x,y = key
+            x, y = key
 
-            if x<0 or x>4 or y<0 or y>4:
+            if x < 0 or x > 4 or y < 0 or y > 4:
                 raise IndexError("Index out of range!")
 
-            return self.m[x + y*4]
+            return self.m[x + y * 4]
         else:
             raise IndexError("Matrix indices must be specified as tuple, for example:   s = m[1,2]")
 
@@ -64,16 +66,15 @@ class Mat4:
         else:
             raise IndexError("Matrix indices must be access as tuple, for example:   m[1,2] = 5")
 
-
     def transpose(self):
         """
         Transpose matrix
         """
         t = self.m.copy()
-        for x in range(0,4):
-            for y in range(0,4):
-                index0 = x+y*4
-                index1 = y+x*4
+        for x in range(0, 4):
+            for y in range(0, 4):
+                index0 = x + y * 4
+                index1 = y + x * 4
                 self.m[index0] = t[index1]
 
     def __eq__(self, other):
@@ -86,7 +87,7 @@ class Mat4:
             else:
                 raise ValueError("Can't compare 4x4 Matrix with list or tuple of length != 16")
         elif type(other) == Mat4:
-            for i in range(0,16):
+            for i in range(0, 16):
                 if (abs(self.m[i] - other.m[i]) > G_EPSILON):
                     return False
             return True
@@ -98,8 +99,10 @@ class Mat4:
         if type(other) == Mat4:
             return Mat4((self.m[0] + other.m[0], self.m[1] + other.m[1], self.m[2] + other.m[2], self.m[3] + other.m[3],
                          self.m[4] + other.m[4], self.m[5] + other.m[5], self.m[6] + other.m[6], self.m[7] + other.m[7],
-                         self.m[8] + other.m[8], self.m[9] + other.m[9], self.m[10] + other.m[10], self.m[11] + other.m[11],
-                         self.m[12] + other.m[12], self.m[13] + other.m[13], self.m[14] + other.m[14], self.m[15] + other.m[15]))
+                         self.m[8] + other.m[8], self.m[9] + other.m[9], self.m[10] + other.m[10],
+                         self.m[11] + other.m[11],
+                         self.m[12] + other.m[12], self.m[13] + other.m[13], self.m[14] + other.m[14],
+                         self.m[15] + other.m[15]))
         else:
             raise ValueError("Wrong type for matrix addition: " + str(type(other)))
 
@@ -108,11 +111,12 @@ class Mat4:
         if type(other) == Mat4:
             return Mat4((self.m[0] - other.m[0], self.m[1] - other.m[1], self.m[2] - other.m[2], self.m[3] - other.m[3],
                          self.m[4] - other.m[4], self.m[5] - other.m[5], self.m[6] - other.m[6], self.m[7] - other.m[7],
-                         self.m[8] - other.m[8], self.m[9] - other.m[9], self.m[10] - other.m[10], self.m[11] - other.m[11],
-                         self.m[12] - other.m[12],  self.m[13] - other.m[13], self.m[14] - other.m[14], self.m[15] - other.m[15]))
+                         self.m[8] - other.m[8], self.m[9] - other.m[9], self.m[10] - other.m[10],
+                         self.m[11] - other.m[11],
+                         self.m[12] - other.m[12], self.m[13] - other.m[13], self.m[14] - other.m[14],
+                         self.m[15] - other.m[15]))
         else:
             raise ValueError("Wrong type for matrix addition: " + str(type(other)))
-
 
     def __mul__(self, other):
         """
@@ -123,25 +127,41 @@ class Mat4:
         if type(other) == Mat4:
             newmat = Mat4()
 
-            newmat.m[0] = other.m[0] * self.m[0] + other.m[4] * self.m[1] + other.m[8] * self.m[2] + other.m[12] * self.m[3]
-            newmat.m[4] = other.m[0] * self.m[4] + other.m[4] * self.m[5] + other.m[8] * self.m[6] + other.m[12] * self.m[7]
-            newmat.m[8] = other.m[0] * self.m[8] + other.m[4] * self.m[9] + other.m[8] * self.m[10] + other.m[12] * self.m[11]
-            newmat.m[12] = other.m[0] * self.m[12] + other.m[4] * self.m[13] + other.m[8] * self.m[14] + other.m[12] * self.m[15]
+            newmat.m[0] = other.m[0] * self.m[0] + other.m[4] * self.m[1] + other.m[8] * self.m[2] + other.m[12] * \
+                                                                                                     self.m[3]
+            newmat.m[4] = other.m[0] * self.m[4] + other.m[4] * self.m[5] + other.m[8] * self.m[6] + other.m[12] * \
+                                                                                                     self.m[7]
+            newmat.m[8] = other.m[0] * self.m[8] + other.m[4] * self.m[9] + other.m[8] * self.m[10] + other.m[12] * \
+                                                                                                      self.m[11]
+            newmat.m[12] = other.m[0] * self.m[12] + other.m[4] * self.m[13] + other.m[8] * self.m[14] + other.m[12] * \
+                                                                                                         self.m[15]
 
-            newmat.m[1] = other.m[1] * self.m[0] + other.m[5] * self.m[1] + other.m[9] * self.m[2] + other.m[13] * self.m[3]
-            newmat.m[5] = other.m[1] * self.m[4] + other.m[5] * self.m[5] + other.m[9] * self.m[6] + other.m[13] * self.m[7]
-            newmat.m[9] = other.m[1] * self.m[8] + other.m[5] * self.m[9] + other.m[9] * self.m[10] + other.m[13] * self.m[11]
-            newmat.m[13] = other.m[1] * self.m[12] + other.m[5] * self.m[13] + other.m[9] * self.m[14] + other.m[13] * self.m[15]
+            newmat.m[1] = other.m[1] * self.m[0] + other.m[5] * self.m[1] + other.m[9] * self.m[2] + other.m[13] * \
+                                                                                                     self.m[3]
+            newmat.m[5] = other.m[1] * self.m[4] + other.m[5] * self.m[5] + other.m[9] * self.m[6] + other.m[13] * \
+                                                                                                     self.m[7]
+            newmat.m[9] = other.m[1] * self.m[8] + other.m[5] * self.m[9] + other.m[9] * self.m[10] + other.m[13] * \
+                                                                                                      self.m[11]
+            newmat.m[13] = other.m[1] * self.m[12] + other.m[5] * self.m[13] + other.m[9] * self.m[14] + other.m[13] * \
+                                                                                                         self.m[15]
 
-            newmat.m[2] = other.m[2] * self.m[0] + other.m[6] * self.m[1] + other.m[10] * self.m[2] + other.m[14] * self.m[3]
-            newmat.m[6] = other.m[2] * self.m[4] + other.m[6] * self.m[5] + other.m[10] * self.m[6] + other.m[14] * self.m[7]
-            newmat.m[10] = other.m[2] * self.m[8] + other.m[6] * self.m[9] + other.m[10] * self.m[10] + other.m[14] * self.m[11]
-            newmat.m[14] = other.m[2] * self.m[12] + other.m[6] * self.m[13] + other.m[10] * self.m[14] + other.m[14] * self.m[15]
+            newmat.m[2] = other.m[2] * self.m[0] + other.m[6] * self.m[1] + other.m[10] * self.m[2] + other.m[14] * \
+                                                                                                      self.m[3]
+            newmat.m[6] = other.m[2] * self.m[4] + other.m[6] * self.m[5] + other.m[10] * self.m[6] + other.m[14] * \
+                                                                                                      self.m[7]
+            newmat.m[10] = other.m[2] * self.m[8] + other.m[6] * self.m[9] + other.m[10] * self.m[10] + other.m[14] * \
+                                                                                                        self.m[11]
+            newmat.m[14] = other.m[2] * self.m[12] + other.m[6] * self.m[13] + other.m[10] * self.m[14] + other.m[14] * \
+                                                                                                          self.m[15]
 
-            newmat.m[3] = other.m[3] * self.m[0] + other.m[7] * self.m[1] + other.m[11] * self.m[2] + other.m[15] * self.m[3]
-            newmat.m[7] = other.m[3] * self.m[4] + other.m[7] * self.m[5] + other.m[11] * self.m[6] + other.m[15] * self.m[7]
-            newmat.m[11] = other.m[3] * self.m[8] + other.m[7] * self.m[9] + other.m[11] * self.m[10] + other.m[15] * self.m[11]
-            newmat.m[15] = other.m[3] * self.m[12] + other.m[7] * self.m[13] + other.m[11] * self.m[14] + other.m[15] * self.m[15]
+            newmat.m[3] = other.m[3] * self.m[0] + other.m[7] * self.m[1] + other.m[11] * self.m[2] + other.m[15] * \
+                                                                                                      self.m[3]
+            newmat.m[7] = other.m[3] * self.m[4] + other.m[7] * self.m[5] + other.m[11] * self.m[6] + other.m[15] * \
+                                                                                                      self.m[7]
+            newmat.m[11] = other.m[3] * self.m[8] + other.m[7] * self.m[9] + other.m[11] * self.m[10] + other.m[15] * \
+                                                                                                        self.m[11]
+            newmat.m[15] = other.m[3] * self.m[12] + other.m[7] * self.m[13] + other.m[11] * self.m[14] + other.m[15] * \
+                                                                                                          self.m[15]
 
             return newmat
 
@@ -168,5 +188,3 @@ class Mat4:
             return result
         else:
             raise ValueError("Can't multiply matrix with specified type: " + str(type(other)))
-
-
