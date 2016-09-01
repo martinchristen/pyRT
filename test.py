@@ -2,7 +2,6 @@ import unittest
 
 from pyrt.math import *
 
-
 # -- Testing Vec3 Class ------------------------------------------------------------------------------------------------
 
 class Vec3Test(unittest.TestCase):

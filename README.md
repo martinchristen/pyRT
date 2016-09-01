@@ -1,5 +1,10 @@
 # PyRT - The Python Raytracer
 
+<p align="center">
+  <img src="docs/img/pyRT_512.png" />
+</p>
+
+
 PyRT (pronounced "pirate") is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
 
   * Ray Tracing in the Jupyter Notebook
@@ -9,11 +14,7 @@ PyRT (pronounced "pirate") is a raytracer written in Python 3.x. This project is
   * Creating 3D-Maps from OpenStreetMap data
   * ...
 
-PyRT just started in July 2016, it is **not yet useable** it is **work in progress**. The first running version will be available **later in July**.
-
-<p align="center">
-  <img src="docs/img/wip.png" />
-</p>
+PyRT just started in July 2016, it is still **work in progress** - API changes will be frequent.
 
 ## Dependencies
 
@@ -33,7 +34,10 @@ from pyrt.renderer import SimpleRT
 
 camera = PerspectiveCamera(640,480)
 scene = Scene()
-scene.Add(Triangle(Vec3(0, 0, 0), Vec3(0, 5, 0), Vec3(1, 5, 0)))
+scene.Add(Triangle(Vertex(position=(0, 0, 0), color=(1,0,0)), 
+                   Vertex(position=(0, 5, 0), color=(0,1,0)), 
+                   Vertex(position=(1, 5, 0), color=(0,0,1)))
+                   
 scene.SetCamera(camera)
 
 engine = renderer.SimpleRT()

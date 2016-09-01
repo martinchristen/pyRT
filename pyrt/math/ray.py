@@ -12,7 +12,7 @@ class HitRecord:
 
 
 class Ray:
-    def __init__(self, start, direction):
+    def __init__(self, start: Vec3, direction: Vec3) -> None:
         if type(start) != Vec3 or type(direction) != Vec3:
             print("Error: start and direction must be Vec3")
             return
