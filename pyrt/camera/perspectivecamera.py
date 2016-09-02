@@ -1,46 +1,20 @@
 from ..math import *
-
+from math import pi, tan
 
 class PerspectiveCamera:
-    def __init__(self, width=640, height=480, fov=45):
+    def __init__(self, width : float = 640, height : float = 480, hfov : float = 45, lookfrom: Vec3 = Vec3(0,0,10), lookat: Vec3 = Vec3(0,0,0), up : Vec3 = Vec3(0,1,0)) -> None:
         """
         :param width: horizontal resolution of the output image
         :param height: vertical resolution of the output image
-        :param fov: horizontal field of view (in degrees)
+        :param hfov: vertical field of view (in degrees)
+        :param lookfrom: vector looking from
+        :param lookat: vector looking at
+        :param up: up vector
         """
-        self.width = width  # image width in pixels
-        self.height = height  # image height in pixels
-        self.position = Vec3(15., 0., 1.)  # camera position
-        self.viewdirection = Vec3(-1., 0., 0.)  # view direction
-        self.viewdirection.normalize()
-        self.upvec = Vec3(0., 0., 1.)  #up-vector
-        self.movedirection = Vec3()  # move direction
-        self.right = Vec3(1., 0., 0.)  # right vector
-        self.up = Vec3(0., 0., 1.)  # up-vector
+        pass
 
-        self.near = 0.1  # near plane
-        self.far = 1000.0  # far plane
-        self.fov = deg2rad(fov)   # field of view (stored in rad)
-
-        self.update()
-
-    def update(self):
-        self.up = self.upvec
-
-        self.aspect = self.width / self.height
-        self.hh = math.tan(self.fov / 2) * self.near
-        self.hw = self.hh * self.aspect
-        self.pixelsize = self.hw * 2.0 / self.width
-        self.center = self.viewdirection * self.near
-        self.tl = self.center - self.right * self.hw + self.up * self.hh
-        self.movedirection = self.viewdirection
-
-    def primaryRay(self, x, y):
-        direction = self.tl + self.right * (self.pixelsize / 2.0) - self.upvec * (self.pixelsize / 2.0)
-        direction = direction + self.right * (x * self.pixelsize) - self.up * (y * self.pixelsize)
-
-        r = Ray(self.position, direction)
-        return r
+    def primaryRay(self, x: Vec3, y: Vec3) -> Ray:
+        pass
 
     def __str__(self):
         s = "********************************************\n"

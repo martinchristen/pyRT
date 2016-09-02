@@ -292,7 +292,7 @@ class Mat4Test(unittest.TestCase):
 
     # ------------------------------------------------------------------------------------------------------------------
     def testIdentity(self):
-        m = CreateIdentity4()
+        m = createIdentity4()
         self.assertEqual(m, (1, 0, 0, 0,
                              0, 1, 0, 0,
                              0, 0, 1, 0,
