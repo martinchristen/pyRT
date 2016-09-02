@@ -146,7 +146,6 @@ class Triangle(Shape):
             v = dot3(ray.direction, qvec)
             if v < 0.0 or u+v > det:
                 return False
-
         elif det < -EPSILON:
             tvec = ray.start - self.a.position
             u = dot3(tvec, pvec)
@@ -156,7 +155,7 @@ class Triangle(Shape):
             qvec = cross3(tvec, edge1)
             v = dot3(ray.direction, qvec)
             if v > 0.0 or u + v < det:
-                return False
+               return False
         else:
             return False
 
@@ -176,7 +175,9 @@ class Triangle(Shape):
             else:
                 hitrecord.normal_g = hitrecord.normal
 
-            # todo: Calculate Texture Coordinate
+            return True
+
+        return False
 
 
     def hitShadow(self, ray: Ray) -> bool:
