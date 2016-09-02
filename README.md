@@ -1,6 +1,7 @@
 # PyRT - The Python Raytracer #
 
-[![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT)
+
 
 <p align="center">
   <img src="docs/img/pyRT_64.png" />
@@ -29,7 +30,7 @@ In PyRT you create a scene first. Scenes consist of atleast one camera and geome
 
 ```python
 from pyrt.math import *
-from pyrt.geometry import Triangle
+from pyrt.geometry import Triangle, Vertex
 from pyrt.camera import PerspectiveCamera
 from pyrt.renderer import SimpleRT
 
@@ -37,11 +38,11 @@ camera = PerspectiveCamera(640,480)
 scene = Scene()
 scene.Add(Triangle(Vertex(position=(0, 0, 0), color=(1,0,0)), 
                    Vertex(position=(0, 5, 0), color=(0,1,0)), 
-                   Vertex(position=(1, 5, 0), color=(0,0,1)))
+                   Vertex(position=(1, 5, 0), color=(0,0,1))))
                    
 scene.SetCamera(camera)
 
-engine = renderer.SimpleRT()
+engine = SimpleRT()
 
 imgdata = engine.render(scene)
 ```
