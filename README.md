@@ -1,15 +1,14 @@
 # PyRT - The Python Raytracer #
 
-[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT)
+[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/martinchristen/pyRT/blob/master/LICENSE.md)
+
+![Logo](docs/img/pyRT_256.png)
 
 
-<p align="center">
-  <img src="docs/img/pyRT_64.png" />
-</p>
-
-PyRT (pronounced "pirate") is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
+**PyRT** (pronounced _pirate_) is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
 
   * Ray Tracing in the Jupyter Notebook
+  * Teaching Ray Tracing
   * Exploring ray tracing concepts for geo data using Python.
   * Rendering geo data, including large point clouds.
   * Implementing new algorithms for large 3D City Model rendering.
