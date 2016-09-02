@@ -116,7 +116,7 @@ class Mat4:
                          self.m[12] - other.m[12], self.m[13] - other.m[13], self.m[14] - other.m[14],
                          self.m[15] - other.m[15]))
         else:
-            raise ValueError("Wrong type for matrix addition: " + str(type(other)))
+            raise ValueError("Wrong type for matrix subtraction: " + str(type(other)))
 
     def __mul__(self, other):
         """
