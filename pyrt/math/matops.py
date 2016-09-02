@@ -151,7 +151,7 @@ def createPerspective(fovy: float, aspect: float, znear: float, zfar : float) ->
     return Mat4((r0, 0., 0., 0.,
                  0., f, 0., 0.,
                  0., 0., r10, r11,
-                 0., 0., 0., 0.))
+                 0., 0., -1., 0.))
 # ----------------------------------------------------------------------------------------------------------------------
 
 def createOrtho(left: float, right : float, bottom: float, top: float, znear: float, zfar: float) -> Mat4:

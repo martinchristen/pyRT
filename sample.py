@@ -41,3 +41,4 @@ imgdata = engine.render(scene)
 im = Image.new("RGBA", (width,height))
 im.putdata(imgdata)
 im.save("sample.png")
+
