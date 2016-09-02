@@ -1,5 +1,7 @@
 # Contributing to pyRT
 
+[![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
+
 We'd love for you to contribute to our source code and to make pyRT even better than it is
 today! 
  
