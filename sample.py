@@ -12,14 +12,22 @@ from pyrt.geometry import Triangle, Vertex
 from pyrt.camera import PerspectiveCamera
 from pyrt.renderer import SimpleRT
 
-camera = PerspectiveCamera(640, 480)
+width = 640
+height = 480
+camera = PerspectiveCamera(width, height)
 scene = Scene()
-scene.Add(Triangle(Vertex(position=(0, 0, 0), color=(1, 0, 0)),
-                   Vertex(position=(0, 5, 0), color=(0, 1, 0)),
-                   Vertex(position=(1, 5, 0), color=(0, 0, 1))))
+scene.add(Triangle(Vertex(position=(0, 0, 0), color=(1, 0, 0)),
+                   Vertex(position=(0, 0, 5), color=(0, 1, 0)),
+                   Vertex(position=(5, 5, 0), color=(0, 0, 1))))
 
-scene.SetCamera(camera)
+scene.setCamera(camera)
 
 engine = SimpleRT()
 
 imgdata = engine.render(scene)
+
+
+# save image using pillow
+im = Image.new("RGBA", (width,height))
+im.putdata(imgdata)
+im.save("sample.png")

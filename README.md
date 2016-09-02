@@ -36,11 +36,11 @@ from pyrt.renderer import SimpleRT
 
 camera = PerspectiveCamera(640,480)
 scene = Scene()
-scene.Add(Triangle(Vertex(position=(0, 0, 0), color=(1,0,0)), 
+scene.add(Triangle(Vertex(position=(0, 0, 0), color=(1,0,0)), 
                    Vertex(position=(0, 5, 0), color=(0,1,0)), 
                    Vertex(position=(1, 5, 0), color=(0,0,1))))
                    
-scene.SetCamera(camera)
+scene.setCamera(camera)
 
 engine = SimpleRT()
 

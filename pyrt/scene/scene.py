@@ -6,8 +6,8 @@ class Scene:
         self.camera = None
         self.nodes = []
 
-    def Add(self, object):
+    def add(self, object):
         self.nodes.append(object)
 
-    def SetCamera(self, cam):
+    def setCamera(self, cam):
         self.camera = cam
