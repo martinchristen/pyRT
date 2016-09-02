@@ -6,16 +6,10 @@ class Triangle(Shape):
     def __init__(self, a: Vertex, b: Vertex, c: Vertex):
         if type(a) != Vertex or type(b) != Vertex or type(c) != Vertex:
             raise ValueError("Please initialize Triangle with 3x Vertex")
-
-        Shape.__init__(self)
-
+        Shape.__init__(self, "Triangle")
         self.a = a
         self.b = b
         self.c = c
-
-        print("[init] Triangle")
-        print(str(self))
-
 
     def __str__(self):
         return "△ABC: Position[" + str(self.a.position) + ", " + str(self.b.position) + ", " + str(self.c.position) + "]"

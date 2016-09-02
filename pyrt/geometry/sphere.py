@@ -3,7 +3,7 @@ from ..math import *
 
 class Sphere(Shape):
     def __init__(self):
-        Shape.__init__(self)
+        Shape.__init__(self, "Sphere")
         print("[init] sphere")
 
     def hit(self, ray: Ray, tmin: float, tmax: float, hitrecord: HitRecord) -> bool:

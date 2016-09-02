@@ -1,22 +1,25 @@
-from pyrt.geometry import *
-#from pyrt.math import *
-from pyrt.camera import *
+try:
+    from PIL import Image
 
-t = Triangle(Vertex(position=Vec3(0,0,0)),
-             Vertex(position=Vec3(1,0,0)),
-             Vertex(position=Vec3(0,1,0)))
+except:
+    import pip
+    pip.main(['install', 'Pillow'])    # install Pillow if you don't have it yet...
+    from PIL import Image
 
+from pyrt.math import *
+from pyrt.scene import *
+from pyrt.geometry import Triangle, Vertex
+from pyrt.camera import PerspectiveCamera
+from pyrt.renderer import SimpleRT
 
-u = Triangle(Vertex(position=(0,0,0)),
-             Vertex(position=(1,0,0)),
-             Vertex(position=(0,1,0)))
+camera = PerspectiveCamera(640, 480)
+scene = Scene()
+scene.Add(Triangle(Vertex(position=(0, 0, 0), color=(1, 0, 0)),
+                   Vertex(position=(0, 5, 0), color=(0, 1, 0)),
+                   Vertex(position=(1, 5, 0), color=(0, 0, 1))))
 
+scene.SetCamera(camera)
 
-print("Triangle area = " + str(u.area()))
+engine = SimpleRT()
 
-print("Incenter = " + str(u.incenter()))
-
-
-
-cam = PerspectiveCamera(640,480, 45)
-print(cam)
+imgdata = engine.render(scene)

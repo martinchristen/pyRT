@@ -8,8 +8,6 @@ class PerspectiveCamera:
         :param height: vertical resolution of the output image
         :param fov: horizontal field of view (in degrees)
         """
-        print("[init] Perspective Camera")
-
         self.width = width  # image width in pixels
         self.height = height  # image height in pixels
         self.position = Vec3(15., 0., 1.)  # camera position
