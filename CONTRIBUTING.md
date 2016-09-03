@@ -44,7 +44,7 @@ would like to implement a new feature then consider what kind of change it is:
 _I know there can be many speed improvements done by just using numpy or whatever cool external module you think of.
 As soon as the Pure-Python code is stable we can do that, but for now I really want no external dependencies._
   
-For examples Pillow is acceptable.  
+For examples (in the example directory) Pillow, moviepy or other dependencies is acceptable if they are documented.
   
 ## Rendering Examples
   
