@@ -25,10 +25,10 @@ def snowflake(image: Image, lev: int, x1 : int, y1 : int, x5:int, y5: int, color
         x4 = int(x1+2.*deltaX/3.)
         y4 = int(y1+2.*deltaY/3.)
 
-        snowflake(image, lev - 1, x1, y1, x2, y2,color)
-        snowflake(image, lev - 1, x2, y2, x3, y3,color)
-        snowflake(image, lev - 1, x3, y3, x4, y4,color)
-        snowflake(image, lev - 1, x4, y4, x5, y5,color)
+        snowflake(image, lev-1, x1, y1, x2, y2,color)
+        snowflake(image, lev-1, x2, y2, x3, y3,color)
+        snowflake(image, lev-1, x3, y3, x4, y4,color)
+        snowflake(image, lev-1, x4, y4, x5, y5,color)
 
 
 w = 512
