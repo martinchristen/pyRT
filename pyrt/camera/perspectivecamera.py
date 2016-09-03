@@ -1,8 +1,9 @@
 from ..math import *
+from .camera import Camera
 from math import pi, tan
 
 
-class PerspectiveCamera(object):
+class PerspectiveCamera(Camera):
     def __init__(self, width: float = 640, height: float = 480, vfov: float = 45, lookfrom: Vec3 = Vec3(0, 0, 10),
                  lookat: Vec3 = Vec3(0, 0, 0), up: Vec3 = Vec3(0, 1, 0)) -> None:
         """
@@ -13,6 +14,9 @@ class PerspectiveCamera(object):
         :param lookat: vector looking at
         :param up: up vector
         """
+
+        Camera.__init__(self)
+
         pass
 
     def primaryRay(self, x: Vec3, y: Vec3) -> Ray:
