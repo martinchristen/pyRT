@@ -15,7 +15,7 @@ class Triangle(Shape):
         return "△ABC: Position[" + str(self.a.position) + ", " + str(self.b.position) + ", " + str(
             self.c.position) + "]"
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def area(self) -> float:
         '''
         Calculate area of triangle
@@ -24,7 +24,7 @@ class Triangle(Shape):
         return cross3(self.b.position - self.a.position,
                       self.c.position - self.a.position).length() / 2.0
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def toBarycentric(self, p: Vec3) -> Vec3:
         '''
         Calculate barycentric coordinate of point p
@@ -42,7 +42,7 @@ class Triangle(Shape):
         y = apc / abc
         return Vec3(x, y, 1.0 - x - y)
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def fromBarycentric(self, b: Vec3) -> Vec3:
         '''
         Calculate cartesian coordinate from barycentric coordinate
@@ -51,7 +51,7 @@ class Triangle(Shape):
         '''
         return self.a.position * b.x + self.b.position * b.y + self.c.position * b.z
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def circumradius(self) -> float:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
@@ -64,7 +64,7 @@ class Triangle(Shape):
             return 0.0
         return z / n
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def inradius(self) -> float:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
@@ -74,7 +74,7 @@ class Triangle(Shape):
             return 0.0
         return math.sqrt((s - a) * (s - b) * (s - c) / s)
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def circumcenter(self) -> Vec3:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
@@ -87,7 +87,7 @@ class Triangle(Shape):
             return Vec3(0, 0, 0)
         return self.fromBarycentric(Vec3(q / n, w / n, e / n))
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def incenter(self) -> Vec3:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
@@ -98,11 +98,11 @@ class Triangle(Shape):
 
         return self.fromBarycentric(Vec3(a / n, b / n, c / n))
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def centroid(self) -> Vec3:
         return (self.a.position + self.b.position + self.c.position) / 3.0
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
     def calcTexcoord(self, p: Vec3) -> Vec2:
         '''
         Returns texture-coordinate at cartesian position p
@@ -114,7 +114,7 @@ class Triangle(Shape):
         v = self.a.texcoord.y * pb.x + self.b.texcoord.y * pb.y + self.c.texcoord.y * pb.z
         return Vec2(u, v)
 
-    # -------------------------------------------------------------------------------------------------------------------
+    # ------------------------------------------------------------------------------------------------------------------
 
     def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
         '''
@@ -196,7 +196,7 @@ class Triangle(Shape):
         pass
 
 
-# -----------------------------------------------------------------------------------------------------------------------
+# ----------------------------------------------------------------------------------------------------------------------
 # Utility functions related to triangles
 
 def triangleArea(a: Vec3, b: Vec3, c: Vec3) -> float:
