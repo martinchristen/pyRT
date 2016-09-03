@@ -78,11 +78,11 @@ def reflect3(N, I):
 # ---------------------------------------------------------------------------------------------------------------------
 
 def faceforward3(N, I):
-    '''
+    """
     faceforward operation
     N: Normal vector
     I: Incident vector
-    '''
+    """
     if dot3(N, I) < 0:
         return N
     else:
@@ -91,12 +91,12 @@ def faceforward3(N, I):
 # ---------------------------------------------------------------------------------------------------------------------
 
 def refract3(N, I, eta):
-    '''
+    """
     refract operation
     N: Normal vector
     I: Incident vector
     eta: Refraction koefficient
-    '''
+    """
     d = dot3(I, N)
     k = 1 - eta * eta * (1 - d * d)
     if k < 0:

@@ -27,20 +27,20 @@ class Triangle(Shape):
 
     # ------------------------------------------------------------------------------------------------------------------
     def area(self) -> float:
-        '''
+        """
         Calculate area of triangle
         :return: area
-        '''
+        """
         return cross3(self.b.position - self.a.position,
                       self.c.position - self.a.position).length() / 2.0
 
     # ------------------------------------------------------------------------------------------------------------------
     def toBarycentric(self, p: Vec3) -> Vec3:
-        '''
+        """
         Calculate barycentric coordinate of point p
         :param P: the input point (cartesian)
         :return: barycentric coordinate
-        '''
+        """
         abc = triangleArea(self.a.position, self.b.position, self.c.position)
         pbc = triangleArea(p, self.b.position, self.c.position)
         apc = triangleArea(self.a.position, p, self.c.position)
@@ -54,11 +54,11 @@ class Triangle(Shape):
 
     # ------------------------------------------------------------------------------------------------------------------
     def fromBarycentric(self, b: Vec3) -> Vec3:
-        '''
+        """
         Calculate cartesian coordinate from barycentric coordinate
         :param b: barycentric coordinate
         :return: cartesian coordinate
-        '''
+        """
         return self.a.position * b.x + self.b.position * b.y + self.c.position * b.z
 
     # ------------------------------------------------------------------------------------------------------------------
@@ -114,11 +114,11 @@ class Triangle(Shape):
 
     # ------------------------------------------------------------------------------------------------------------------
     def calcTexcoord(self, p: Vec3) -> Vec2:
-        '''
+        """
         Returns texture-coordinate at cartesian position p
         :param p:
         :return: returns
-        '''
+        """
         pb = self.toBarycentric(p)
         u = self.a.texcoord.x * pb.x + self.b.texcoord.x * pb.y + self.c.texcoord.x * pb.z
         v = self.a.texcoord.y * pb.x + self.b.texcoord.y * pb.y + self.c.texcoord.y * pb.z
@@ -127,7 +127,7 @@ class Triangle(Shape):
     # ------------------------------------------------------------------------------------------------------------------
 
     def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
-        '''
+        """
         Ray Triangle Intersection
         Original Code from:
         "Practical Analysis of Optimized Ray-Triangle Intersection"
@@ -140,8 +140,7 @@ class Triangle(Shape):
         :param tmax: tmax to test intersection
         :param hitrecord: the hitrecord which is only valid if there is a hit
         :return: True if there is a hit
-        '''
-
+        """
 
         # find vectors for two edges sharing vert0
         edge1 = self.b.position - self.a.position
@@ -197,12 +196,12 @@ class Triangle(Shape):
         return False
 
     def hitShadow(self, ray: Ray) -> bool:
-        '''
+        """
         :param ray:
         :param tmin:
         :param tmax:
         :return:
-        '''
+        """
         pass
 
 
@@ -210,8 +209,8 @@ class Triangle(Shape):
 # Utility functions related to triangles
 
 def triangleArea(a: Vec3, b: Vec3, c: Vec3) -> float:
-    '''
+    """
     Calculate area of triangle
     :return: area
-    '''
+    """
     return cross3(b - a, c - a).length() / 2.0

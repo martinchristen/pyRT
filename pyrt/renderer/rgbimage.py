@@ -26,9 +26,9 @@ class RGBImage(object):
     #-------------------------------------------------------------------------------------------------------------------
 
     def drawLine(self, start: Vec2, end: Vec2, color: Vec3 = Vec3(1.,1.,1.)) -> None:
-        '''Bresenham's line algorithm
+        """Bresenham's line algorithm
            modified from: https://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm#Python
-        '''
+        """
         dx = abs(end.x - start.x)
         dy = abs(end.y - start.y)
         x, y = start.x, start.y
