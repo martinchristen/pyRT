@@ -1,3 +1,9 @@
+"""
+Vec3: 3 dimensional vector class
+
+This is the class for handling 3 dimensional vectors
+"""
+
 import math
 from .constants import *
 

@@ -1,3 +1,9 @@
+"""
+Vec4: 4 dimensional vector class
+
+This is the class for handling 4 dimensional vectors
+"""
+
 import math
 from .constants import *
 from .vec3 import *

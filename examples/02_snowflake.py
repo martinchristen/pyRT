@@ -9,7 +9,8 @@ from PIL import Image
 
 sys.path.append("../")
 
-
+#don't warn about too many arguments, we know what we're doing ;-)
+#pylint: disable-msg=R0913
 def snowflake(image: Image, lev: int, x1: int, y1: int, x5: int, y5: int, color: Vec3) -> None:
     if lev == 0:
         image.drawLine(Vec2(x1, y1), Vec2(x5, y5), color)

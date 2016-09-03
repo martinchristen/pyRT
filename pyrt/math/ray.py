@@ -1,3 +1,10 @@
+"""
+Ray - Handling rays for ray tracing
+
+This is the code for handling 3D rays
+"""
+
+
 from .vec3 import *
 
 

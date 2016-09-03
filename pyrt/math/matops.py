@@ -177,6 +177,8 @@ def createPerspective4(fovy: float, aspect: float, znear: float, zfar : float) -
                  0., 0., r10, r11,
                  0., 0., -1., 0.))
 # ---------------------------------------------------------------------------------------------------------------------
+#pylint: disable-msg=R0913
+
 
 def createOrtho4(left: float, right : float, bottom: float, top: float, znear: float, zfar: float) -> Mat4:
     """

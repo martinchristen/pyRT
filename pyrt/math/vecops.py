@@ -1,3 +1,9 @@
+"""
+Vector operations
+
+varius utility functions for vectors
+"""
+
 import math
 from .vec2 import *
 from .vec3 import *

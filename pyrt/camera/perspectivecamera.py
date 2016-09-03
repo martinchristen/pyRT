@@ -1,6 +1,11 @@
+"""
+Perspective Camera
+
+This is for a standard perspective camera
+"""
+
 from ..math import Ray, createPerspective4
 from .camera import Camera
-from math import pi, tan
 
 
 class PerspectiveCamera(Camera):

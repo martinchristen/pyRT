@@ -1,3 +1,10 @@
+"""
+Mat4: 4x4 Matrix Class
+
+This is the class for handling 4x4 Matrices
+"""
+
+
 import math
 from .constants import *
 from .vec3 import *

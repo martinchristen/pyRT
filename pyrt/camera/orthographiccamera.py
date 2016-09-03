@@ -1,3 +1,9 @@
+"""
+Orthographic Camera
+
+This is for a standard orthographic camera
+"""
+
 from ..math import Ray, Vec3
 from .camera import Camera
 

@@ -3,6 +3,7 @@ This is the geometric shape description
 
 (renderable object)
 """
+
 from abc import abstractmethod
 from ..math import Ray, HitRecord
 import uuid

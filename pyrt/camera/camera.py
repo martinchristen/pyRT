@@ -3,8 +3,9 @@ Base class for cameras
 
 Inherit from this if you create a new camera model
 """
+
 from abc import abstractmethod
-from ..math import Vec3, Mat4, createLookAt4, createIdentity4, Ray
+from ..math import Vec3, createLookAt4, createIdentity4, Ray
 
 
 class Camera(object):
@@ -13,12 +14,25 @@ class Camera(object):
 
     def __init__(self):
         self.view = createIdentity4()
-        pass
 
     def setView(self, eye: Vec3, center: Vec3, up: Vec3):
+        """
+        Set View Matrix using look-at (from eye to center)
+
+        :param eye: current position
+        :param center: position where to look at
+        :param up: up-axis when looking at
+        :return:
+        """
         self.view = createLookAt4(eye, center, up)
-        pass
 
     @abstractmethod
     def primaryRay(self, x: float, y: float) -> Ray:
+        """
+        Calculate primary ray
+
+        :param x: screen position x (subpixel)
+        :param y: screen position y (subpixel)
+        :return: ray
+        """
         pass

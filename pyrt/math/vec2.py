@@ -1,3 +1,9 @@
+"""
+Vec2: 2 dimensional vector class
+
+This is the class for handling 2 dimensional vectors
+"""
+
 import math
 from .constants import *
 
