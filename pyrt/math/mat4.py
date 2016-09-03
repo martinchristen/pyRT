@@ -5,6 +5,7 @@ from .vec4 import *
 
 
 class Mat4(object):
+
     """
     Class representing a 4x4 Matrix
     """
@@ -16,7 +17,6 @@ class Mat4(object):
 
             if elm is a list or a tuple with 16 values, it will be initialized as 4x4 matrix
         """
-
         if type(elm) == type(None):
             self.m = [0., 0., 0., 0.,
                       0., 0., 0., 0.,
@@ -31,8 +31,7 @@ class Mat4(object):
                 raise ValueError("Mat4 must be initialized in a list or tuple with 16 floats")
 
     def __str__(self):
-        """Convert to string
-        """
+        """Convert to string"""
         s = "[[" + str(self.m[0]) + ", " + str(self.m[1]) + ", " + str(self.m[2]) + ", " + str(self.m[3]) + "]\n"
         s += "[" + str(self.m[4]) + ", " + str(self.m[5]) + ", " + str(self.m[6]) + ", " + str(self.m[7]) + "]\n"
         s += "[" + str(self.m[8]) + ", " + str(self.m[9]) + ", " + str(self.m[10]) + ", " + str(self.m[11]) + "]\n"
@@ -67,9 +66,7 @@ class Mat4(object):
             raise IndexError("Matrix indices must be access as tuple, for example:   m[1,2] = 5")
 
     def transpose(self):
-        """
-        Transpose matrix
-        """
+        """Transpose matrix"""
         t = self.m.copy()
         for x in range(0, 4):
             for y in range(0, 4):
@@ -124,6 +121,7 @@ class Mat4(object):
         Matrix4 Vector3 multiplication
         Matrix4 Vector4 multiplication
         """
+
         if type(other) == Mat4:
             newmat = Mat4()
 
