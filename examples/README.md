@@ -43,10 +43,15 @@ This example draws a Koch curve using recursion. It is just another example how 
 
 ### Drawing Circles
 
-This example draws 100 random circles using using <span style="font-family:Monospace;">image.drawCircle(center, radius, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm" target="_blank">Midpoint circle algorithm</a>.
+This example draws 100 random circles using  <span style="font-family:Monospace;">image.drawCircle(center, radius, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm" target="_blank">Midpoint circle algorithm</a>.
 
 ![Example 01](03.png)
 
+### Drawing Rectangles
+
+This example draws 50 random rectangles using <span style="font-family:Monospace;">image.drawRectangle(bottomleft, width, height, color)</span>.
+
+![Example 01](04.png)
 
 
 

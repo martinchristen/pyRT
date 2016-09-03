@@ -11,6 +11,8 @@ class RGBImage:
         else:   # in future there will be RGBA, FLOAT images
             raise ValueError("unknown/unsupported image type")
 
+    #-------------------------------------------------------------------------------------------------------------------
+
     def drawPoint(self, pos: Vec2, color: Vec3) -> None:
         # This code is really slow if you write many pixels - it even contains a bounds check.
         # If you draw many points, please use self.data directly.
@@ -19,6 +21,8 @@ class RGBImage:
         y = self.height-pos.y-1
         if x>=0 and x<self.width and y>=0 and y<self.height:
             self.data[y*self.width+x] = (int(color[0]*255.), int(color[1]*255.), int(color[2]*255.))
+
+    #-------------------------------------------------------------------------------------------------------------------
 
     def drawLine(self, start: Vec2, end: Vec2, color: Vec3 = Vec3(1.,1.,1.)) -> None:
         '''Bresenham's line algorithm
@@ -49,6 +53,8 @@ class RGBImage:
                 y += sy
         self.drawPoint(Vec2(x, y), color)
 
+    #-------------------------------------------------------------------------------------------------------------------
+
     def drawCircle(self, center: Vec2, radius: int, color: Vec3):
         switch = 3 - (2 * radius)
         x = 0
@@ -68,4 +74,25 @@ class RGBImage:
                 switch = switch + (4 * (x - y)) + 10
                 y = y - 1
             x = x + 1
+
+    #-------------------------------------------------------------------------------------------------------------------
+
+    def drawRectangle(self, bl : Vec2, width: int, height: int, color: Vec3) -> None:
+        """
+        Draws a rectangle.
+        This is quite slow and would be much faster using direct image buffer filling instead of using bresenham lines.
+
+        :param bl: bottom left coordinate of center
+        :param width: width of rectangle
+        :param height: height of rectangle
+        :param color: color of rectangle
+        :return:
+        """
+        for y in range(height):
+            start = Vec2(bl.x, bl.y + y)
+            end = Vec2(bl.x + width, bl.y + y)
+            self.drawLine(start, end, color)
+
+
+
 
