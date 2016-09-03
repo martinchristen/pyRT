@@ -2,15 +2,11 @@
 # In this example you learn how 3D transformation works
 # In addition to example 5, an animated gif is created using Pillow
 
-import sys
-
 from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 from pyrt.camera import PerspectiveCamera
 from pyrt.geometry import Triangle, Vertex
 from PIL import Image
-
-sys.path.append("../")
 
 
 w = 320

@@ -1,13 +1,11 @@
 # Example 2: **Introduction to the image class**
 # This example draws 500 lines and stores the image using PIL
 
-import sys
 from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 import random
 from PIL import Image
 
-sys.path.append("../")
 
 w = 320
 h = 240

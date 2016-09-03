@@ -1,13 +1,11 @@
 # Example 2: **Introduction to the image class**
 # This example draws two Koch (snowflake) curves
 
-import sys
 from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 import math
 from PIL import Image
 
-sys.path.append("../")
 
 #don't warn about too many arguments, we know what we're doing ;-)
 #pylint: disable-msg=R0913

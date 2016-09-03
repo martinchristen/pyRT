@@ -4,8 +4,6 @@
 # In addition to example 5, an animated gif is created using Pillow
 # This example requires Pillow, moviepy and its dependencies (esp. numpy) to create an animated gif.
 
-import sys
-
 from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 from pyrt.camera import PerspectiveCamera
@@ -13,8 +11,6 @@ from pyrt.geometry import Triangle, Vertex
 from PIL import Image
 import moviepy.editor as mpy    # pip install moviepy
 import numpy as np
-
-sys.path.append("../")
 
 
 def make_frame(t):
