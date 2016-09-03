@@ -1,41 +1,28 @@
-from ..math import *
+from ..math import Ray, createPerspective4
 from .camera import Camera
 from math import pi, tan
 
 
 class PerspectiveCamera(Camera):
-    def __init__(self, width: float = 640, height: float = 480, vfov: float = 45, lookfrom: Vec3 = Vec3(0, 0, 10),
-                 lookat: Vec3 = Vec3(0, 0, 0), up: Vec3 = Vec3(0, 1, 0)) -> None:
+
+    """This defines a perspective camera"""
+
+    def __init__(self, width: int = 640, height: int = 480, fov: float = 45) -> None:
         """
+        Initialize perspective camera
+
         :param width: horizontal resolution of the output image
         :param height: vertical resolution of the output image
-        :param vfov: vertical field of view (in degrees)
-        :param lookfrom: vector looking from
-        :param lookat: vector looking at
-        :param up: up vector
+        :param fov: field of view (degree)
         """
-
         Camera.__init__(self)
 
-        pass
+        self.width = width
+        self.height = height
+        znear = 0.1
+        zfar = 1000.0
+        aspect = width / height
+        self.projection = createPerspective4(fov, aspect, znear, zfar)
 
-    def primaryRay(self, x: Vec3, y: Vec3) -> Ray:
+    def primaryRay(self, x: float, y: float) -> Ray:
         pass
-
-    def __str__(self):
-        s = "********************************************\n"
-        s += "** Camera Info                            **\n"
-        s += "********************************************\n"
-        s += "Half Height = " + str(self.hh) + "\n"
-        s += "Half Width = " + str(self.hw) + "\n"
-        s += "Pixelsize = " + str(self.pixelsize) + "\n"
-        s += "aspect = " + str(self.aspect) + "\n"
-        s += "Center Vector: " + str(self.center) + "\n"
-        s += "TopLeft Vector: " + str(self.tl) + "\n"
-        s += "Pos: " + str(self.position) + "\n"
-        s += "View Direction: " + str(self.viewdirection) + "\n"
-        s += "UpVec vec: " + str(self.upvec) + "\n"
-        s += "Up: " + str(self.up) + "\n"
-        s += "Right Vec: " + str(self.right) + "\n"
-        s += "********************************************\n"
-        return s

@@ -2,6 +2,9 @@ from ..math import Ray, Vec3
 from .camera import Camera
 
 class OrthographicCamera(Camera):
+
+    """This defines an orthographic camera"""
+
     def __init__(self, width=512, height=512):
         """
         :param width: horizontal resolution of the output image
@@ -15,6 +18,6 @@ class OrthographicCamera(Camera):
 
         print("[init] Orthographic Camera")
 
-    def primaryRay(self, x, y):
-        r = Ray(Vec3(x, y, 0), self.direction)
+    def primaryRay(self, x: float, y: float) -> Ray:
+        r = Ray(Vec3(x, y, 0.), self.direction)
         return r

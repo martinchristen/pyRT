@@ -66,6 +66,7 @@ def createScale4(x: float, y: float, z: float, w: float = 1.) -> Mat4:
 def createRotationX4(angle: float = 0.) -> Mat4:
     """
     Create a rotation matrix
+
     :param angle: rotation about x-axis (radiant)
     :return: rotation matrix
     """
@@ -79,6 +80,7 @@ def createRotationX4(angle: float = 0.) -> Mat4:
 def createRotationY4(angle: float = 0) -> Mat4:
     """
     Create a rotation matrix
+
     :param angle: rotation about y-axis (radiant)
     :return: rotation matrix
     """
@@ -92,6 +94,7 @@ def createRotationY4(angle: float = 0) -> Mat4:
 def createRotationZ4(angle: float = 0) -> Mat4:
     """
     Create a rotation matrix
+
     :param angle: rotation about z-axis (radiant)
     :return: rotation matrix
     """
@@ -103,6 +106,14 @@ def createRotationZ4(angle: float = 0) -> Mat4:
 
 
 def createLookAt4(eye: Vec3, center: Vec3, up: Vec3) -> Mat4:
+    """
+    Create a look-at matrix
+
+    :param eye:
+    :param center:
+    :param up:
+    :return:
+    """
     z0 = eye.x - center.x
     z1 = eye.y - center.y
     z2 = eye.z - center.z
@@ -146,7 +157,16 @@ def createLookAt4(eye: Vec3, center: Vec3, up: Vec3) -> Mat4:
 # ---------------------------------------------------------------------------------------------------------------------
 
 
-def createPerspective(fovy: float, aspect: float, znear: float, zfar : float) -> Mat4:
+def createPerspective4(fovy: float, aspect: float, znear: float, zfar : float) -> Mat4:
+    """
+    Create a perspective transform
+
+    :param fovy: field of view
+    :param aspect: aspect ratio
+    :param znear: near plane
+    :param zfar: far plane
+    :return: Matrix holding the transformation
+    """
     f = 1.0 / tan(fovy * pi / 360.0)
     r0 = f / aspect
     r10 = (zfar + znear) / (znear - zfar)
@@ -158,7 +178,18 @@ def createPerspective(fovy: float, aspect: float, znear: float, zfar : float) ->
                  0., 0., -1., 0.))
 # ---------------------------------------------------------------------------------------------------------------------
 
-def createOrtho(left: float, right : float, bottom: float, top: float, znear: float, zfar: float) -> Mat4:
+def createOrtho4(left: float, right : float, bottom: float, top: float, znear: float, zfar: float) -> Mat4:
+    """
+    Create an orthogonal transform
+
+    :param left: left plane
+    :param right:  right plane
+    :param bottom:  bottom plane
+    :param top: top plane
+    :param znear: near plane
+    :param zfar: far plane
+    :return: Matrix holding the transformation
+    """
     rl = (right - left)
     tb = (top - bottom)
     fn = (zfar - znear)
