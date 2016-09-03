@@ -4,6 +4,16 @@
 
 We'd love for you to contribute to our source code and to make pyRT even better than it is
 today! 
+
+There are several ways to support this project, constribute, test, document, ...
+
+Some contribution examples:
+
+* Implement new renderers
+* Support new geometry types 
+* Implement new lighting models
+* Create some cool rendering examples (2D/3D or whatever)
+* Help to increase the project health score!
  
 ## Got a Question or Problem?
 
@@ -26,6 +36,15 @@ would like to implement a new feature then consider what kind of change it is:
   into the project.
 * **Small Changes** can be crafted and submitted to the [GitHub Repository][github] as a Pull
   Request.
+
+## Coding Guideline
+   
+**Keep pure Python for now!**
+
+_I know there can be many speed improvements done by just using numpy or whatever cool external module you think of.
+As soon as the Pure-Python code is stable we can do that, but for now I really want no external dependencies._
+  
+For examples Pillow is acceptable.  
   
 ## Rendering Examples
   
