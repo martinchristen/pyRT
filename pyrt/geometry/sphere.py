@@ -9,7 +9,8 @@ from ..math import Ray, HitRecord
 
 
 class Sphere(Shape):
-    """The Sphere class for raytracing spheres"""
+
+    """The Sphere class for raytracing"""
 
     def __init__(self):
         Shape.__init__(self, "Sphere")

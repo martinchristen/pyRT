@@ -19,7 +19,7 @@ class Mat4(object):
 
             if elm is a list or a tuple with 16 values, it will be initialized as 4x4 matrix
         """
-        if type(elm) == type(None):
+        if isinstance(elm, type(None)):
             self.m = [0., 0., 0., 0.,
                       0., 0., 0., 0.,
                       0., 0., 0., 0.,

@@ -1,5 +1,4 @@
 from .renderer import Renderer
-from .rgbimage import RGBImage
 from ..scene import Scene
 from ..math import *
 import time

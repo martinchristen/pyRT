@@ -9,6 +9,9 @@ from ..math import *
 
 
 class Triangle(Shape):
+
+    """Triangle class for raytracing"""
+
     def __init__(self, a: Vertex, b: Vertex, c: Vertex):
         if type(a) != Vertex or type(b) != Vertex or type(c) != Vertex:
             raise ValueError("Please initialize Triangle with 3x Vertex")
@@ -16,6 +19,7 @@ class Triangle(Shape):
         self.a = a
         self.b = b
         self.c = c
+        self.EPSILON = 0.000001
 
     def __str__(self):
         return "△ABC: Position[" + str(self.a.position) + ", " + str(self.b.position) + ", " + str(
@@ -137,7 +141,7 @@ class Triangle(Shape):
         :param hitrecord: the hitrecord which is only valid if there is a hit
         :return: True if there is a hit
         '''
-        EPSILON = 0.000001  # todo: move outside
+
 
         # find vectors for two edges sharing vert0
         edge1 = self.b.position - self.a.position
@@ -149,7 +153,7 @@ class Triangle(Shape):
         # if determinant is near zero, ray lies in plane of triangle
         det = dot3(edge1, pvec)
 
-        if det > EPSILON:
+        if det > self.EPSILON:
             tvec = ray.start - self.a.position
             u = dot3(tvec, pvec)
             if u < 0.0 or u > det:
@@ -159,7 +163,7 @@ class Triangle(Shape):
             v = dot3(ray.direction, qvec)
             if v < 0.0 or u + v > det:
                 return False
-        elif det < -EPSILON:
+        elif det < -self.EPSILON:
             tvec = ray.start - self.a.position
             u = dot3(tvec, pvec)
             if u > 0.0 or u < det:
