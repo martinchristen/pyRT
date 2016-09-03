@@ -49,3 +49,23 @@ class RGBImage:
                 y += sy
         self.drawPoint(Vec2(x, y), color)
 
+    def drawCircle(self, center: Vec2, radius: int, color: Vec3):
+        switch = 3 - (2 * radius)
+        x = 0
+        y = radius
+        while x <= y:
+            self.drawPoint(Vec2(x + center.x, -y + center.y), color)
+            self.drawPoint(Vec2(y + center.x, -x + center.y), color)
+            self.drawPoint(Vec2(y + center.x, x + center.y), color)
+            self.drawPoint(Vec2(x + center.x, y + center.y), color)
+            self.drawPoint(Vec2(-x + center.x, y + center.y), color)
+            self.drawPoint(Vec2(-y + center.x, x + center.y), color)
+            self.drawPoint(Vec2(-y + center.x, -x + center.y), color)
+            self.drawPoint(Vec2(-x + center.x, -y + center.y), color)
+            if switch < 0:
+                switch = switch + (4 * x) + 6
+            else:
+                switch = switch + (4 * (x - y)) + 10
+                y = y - 1
+            x = x + 1
+
