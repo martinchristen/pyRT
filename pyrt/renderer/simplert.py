@@ -7,8 +7,8 @@ class SimpleRT(Renderer):
     def __init__(self):
         Renderer.__init__(self, "Simple Raytracer")
 
-    def render(self, scene: Scene) -> None:
-        if scene.camera == None:
+    def render(self, scene: Scene) -> list:
+        if not scene.camera:
             print("Warning: Can't render: there is no (active) camera in the scene!")
             return None
 

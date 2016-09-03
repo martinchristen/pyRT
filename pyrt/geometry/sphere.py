@@ -1,3 +1,8 @@
+"""
+This is the geometric object sphere
+(renderable object)
+"""
+
 from ..geometry import *
 from ..math import *
 
@@ -7,7 +12,7 @@ class Sphere(Shape):
         Shape.__init__(self, "Sphere")
         print("[init] sphere")
 
-    def hit(self, ray: Ray, tmin: float, tmax: float, hitrecord: HitRecord) -> bool:
+    def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
         '''
         :param ray: the ray to check hit
         :param tmin: tmin to test intersection
@@ -17,7 +22,7 @@ class Sphere(Shape):
         '''
         pass
 
-    def hitShadow(self, ray: Ray, tmin: float, tmax: float) -> bool:
+    def hitShadow(self, ray: Ray) -> bool:
         '''
         :param ray:
         :param tmin:

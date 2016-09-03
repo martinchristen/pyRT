@@ -1,3 +1,8 @@
+"""
+This is the geometric object triangle
+(renderable object)
+"""
+
 from ..geometry import *
 from ..math import *
 

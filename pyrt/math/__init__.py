@@ -1,3 +1,8 @@
+"""
+Math for pyRT
+This contains vector, matrix operations and other mathematical utils like planes, rays, ...
+"""
+
 from .constants import *
 from .ray import *
 from .vec3 import *
