@@ -20,6 +20,8 @@ Images are for example generated as list of RGB tuples, which are then stored as
 
 ### Drawing Points
 
+[00_drawpoints.py](00_drawpoints.py)
+
 This example creates an image and draws 5000 random points using <span style="font-family:Monospace;">image.drawPoint(point,color)</span>
 
 ![Example 01](00.png)
@@ -27,6 +29,8 @@ This example creates an image and draws 5000 random points using <span style="fo
 The image is stored using pillow.
 
 ### Drawing Lines
+
+[01_drawlines.py](01_drawlines.py)
 
 This example draws 500 random lines using using <span style="font-family:Monospace;">image.drawLine(start, end, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm" target="_blank">Bresenham line drawing algorithm</a>.
 
@@ -36,6 +40,8 @@ This example draws 500 random lines using using <span style="font-family:Monospa
 
 ### Drawing Koch curve
 
+[02_snowflake.py](02_snowflake.py)
+
 This example draws a Koch curve using recursion. It is just another example how line drawing can be used.
 
 ![Example 01](02.png)
@@ -43,11 +49,15 @@ This example draws a Koch curve using recursion. It is just another example how 
 
 ### Drawing Circles
 
+[03_circle.py](03_circle.py)
+
 This example draws 100 random circles using  <span style="font-family:Monospace;">image.drawCircle(center, radius, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm" target="_blank">Midpoint circle algorithm</a>.
 
 ![Example 01](03.png)
 
 ### Drawing Rectangles
+
+[04_rectangle.py](04_rectangle.py)
 
 This example draws 50 random rectangles using <span style="font-family:Monospace;">image.drawRectangle(bottomleft, width, height, color)</span>.
 
