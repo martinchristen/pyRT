@@ -1,5 +1,6 @@
 """
 This is the geometry module, containing maily shapes.
+
 Also the vertex specification is found here.
 """
 

@@ -1,4 +1,8 @@
-# Matrix Operations
+"""
+Matrix Operations
+
+This file contains all important external matrix operations and some utility functions
+"""
 
 import math
 from .vec2 import *

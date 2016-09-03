@@ -1,5 +1,6 @@
 """
 Math for pyRT
+
 This contains vector, matrix operations and other mathematical utils like planes, rays, ...
 """
 

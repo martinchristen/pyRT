@@ -1,5 +1,6 @@
 """
 This module contains different camera specifications.
+
 Especially perspective and orthographic cameras.
 """
 

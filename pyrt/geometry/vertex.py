@@ -1,11 +1,12 @@
 """
-Here the vertex is defined, supported attributes are:
+Here the vertex is defined
+
+The following attributes are supported:
   * position
   * normal
   * color
   * texcoord
 """
-
 
 from ..math import *
 

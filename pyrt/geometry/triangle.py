@@ -1,5 +1,6 @@
 """
 This is the geometric object triangle
+
 (renderable object)
 """
 

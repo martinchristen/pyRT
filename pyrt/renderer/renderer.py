@@ -1,5 +1,6 @@
 """
 This is the abstract Renderer.
+
 If you override if you implement your own.
 """
 
@@ -16,6 +17,7 @@ class Renderer(object):
     def render(self, scene : Scene) -> list:
         """
         Abstract rendering. This actually renmders the scene and returns the image data
+
         :param scene: the scene to render
         :return:
         """

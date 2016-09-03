@@ -8,6 +8,8 @@ class Mat4(object):
 
     """
     Class representing a 4x4 Matrix
+
+    It contains all important methods for matrices. Some external operations are defined in "matops.py".
     """
 
     def __init__(self, elm=None):
@@ -117,6 +119,8 @@ class Mat4(object):
 
     def __mul__(self, other):
         """
+        The following multiplications are supported:
+
         Matrix4 Matrix4 multiplication
         Matrix4 Vector3 multiplication
         Matrix4 Vector4 multiplication
