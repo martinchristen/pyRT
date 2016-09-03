@@ -1,6 +1,6 @@
 # PyRT - The Python Raytracer #
 
-[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/martinchristen/pyRT/blob/master/LICENSE.md)
+[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT) [![Code Health](https://landscape.io/github/martinchristen/pyRT/master/landscape.svg?style=flat)](https://landscape.io/github/martinchristen/pyRT/master) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/martinchristen/pyRT/blob/master/LICENSE.md)
 
 ![Logo](docs/img/pyRT_256.png)
 
@@ -57,19 +57,10 @@ No. Custom renderers can be written in C with Python bindings. This is planned i
 PyRT is released under MIT. 
 More information about this license can be found under: [https://opensource.org/licenses/MIT]()
 
-## Author ##
+## About the Author ##
 
 PyRT is created and maintained by Martin Christen. You can contact me by e-mail: martin.christen@gmail.com
 
-## Support this project! ##
-
-There are several ways to support this project, constribute, test, document, ...
-
-Some Contribution examples:
-
-* Contribute: implement new renderers
-* Contrubute: support new geometry types 
-* Contribute: implement new lighting models
-* Contribute: rendering examples
+Please note: This project is developed in my spare time, there is no official support or anything.
 
 
