@@ -121,46 +121,72 @@ class Mat4(object):
         Matrix4 Vector3 multiplication
         Matrix4 Vector4 multiplication
         """
-
         if type(other) == Mat4:
             newmat = Mat4()
-
-            newmat.m[0] = other.m[0] * self.m[0] + other.m[4] * self.m[1] + other.m[8] * self.m[2] + other.m[12] * \
-                                                                                                     self.m[3]
-            newmat.m[4] = other.m[0] * self.m[4] + other.m[4] * self.m[5] + other.m[8] * self.m[6] + other.m[12] * \
-                                                                                                     self.m[7]
-            newmat.m[8] = other.m[0] * self.m[8] + other.m[4] * self.m[9] + other.m[8] * self.m[10] + other.m[12] * \
-                                                                                                      self.m[11]
-            newmat.m[12] = other.m[0] * self.m[12] + other.m[4] * self.m[13] + other.m[8] * self.m[14] + other.m[12] * \
-                                                                                                         self.m[15]
-
-            newmat.m[1] = other.m[1] * self.m[0] + other.m[5] * self.m[1] + other.m[9] * self.m[2] + other.m[13] * \
-                                                                                                     self.m[3]
-            newmat.m[5] = other.m[1] * self.m[4] + other.m[5] * self.m[5] + other.m[9] * self.m[6] + other.m[13] * \
-                                                                                                     self.m[7]
-            newmat.m[9] = other.m[1] * self.m[8] + other.m[5] * self.m[9] + other.m[9] * self.m[10] + other.m[13] * \
-                                                                                                      self.m[11]
-            newmat.m[13] = other.m[1] * self.m[12] + other.m[5] * self.m[13] + other.m[9] * self.m[14] + other.m[13] * \
-                                                                                                         self.m[15]
-
-            newmat.m[2] = other.m[2] * self.m[0] + other.m[6] * self.m[1] + other.m[10] * self.m[2] + other.m[14] * \
-                                                                                                      self.m[3]
-            newmat.m[6] = other.m[2] * self.m[4] + other.m[6] * self.m[5] + other.m[10] * self.m[6] + other.m[14] * \
-                                                                                                      self.m[7]
-            newmat.m[10] = other.m[2] * self.m[8] + other.m[6] * self.m[9] + other.m[10] * self.m[10] + other.m[14] * \
-                                                                                                        self.m[11]
-            newmat.m[14] = other.m[2] * self.m[12] + other.m[6] * self.m[13] + other.m[10] * self.m[14] + other.m[14] * \
-                                                                                                          self.m[15]
-
-            newmat.m[3] = other.m[3] * self.m[0] + other.m[7] * self.m[1] + other.m[11] * self.m[2] + other.m[15] * \
-                                                                                                      self.m[3]
-            newmat.m[7] = other.m[3] * self.m[4] + other.m[7] * self.m[5] + other.m[11] * self.m[6] + other.m[15] * \
-                                                                                                      self.m[7]
-            newmat.m[11] = other.m[3] * self.m[8] + other.m[7] * self.m[9] + other.m[11] * self.m[10] + other.m[15] * \
-                                                                                                        self.m[11]
-            newmat.m[15] = other.m[3] * self.m[12] + other.m[7] * self.m[13] + other.m[11] * self.m[14] + other.m[15] * \
-                                                                                                          self.m[15]
-
+            newmat.m[0] = other.m[0] * self.m[0]\
+                          + other.m[4] * self.m[1] \
+                          + other.m[8] * self.m[2] \
+                          + other.m[12] * self.m[3]
+            newmat.m[4] = other.m[0] * self.m[4] \
+                          + other.m[4] * self.m[5] \
+                          + other.m[8] * self.m[6] \
+                          + other.m[12] * self.m[7]
+            newmat.m[8] = other.m[0] * self.m[8] \
+                          + other.m[4] * self.m[9] \
+                          + other.m[8] * self.m[10] \
+                          + other.m[12] * self.m[11]
+            newmat.m[12] = other.m[0] * self.m[12] \
+                           + other.m[4] * self.m[13] \
+                           + other.m[8] * self.m[14] \
+                           + other.m[12] * self.m[15]
+            newmat.m[1] = other.m[1] * self.m[0] \
+                          + other.m[5] * self.m[1] \
+                          + other.m[9] * self.m[2] \
+                          + other.m[13] * self.m[3]
+            newmat.m[5] = other.m[1] * self.m[4] \
+                          + other.m[5] * self.m[5] \
+                          + other.m[9] * self.m[6] \
+                          + other.m[13] * self.m[7]
+            newmat.m[9] = other.m[1] * self.m[8] \
+                          + other.m[5] * self.m[9] \
+                          + other.m[9] * self.m[10] \
+                          + other.m[13] * self.m[11]
+            newmat.m[13] = other.m[1] * self.m[12] \
+                           + other.m[5] * self.m[13] \
+                           + other.m[9] * self.m[14] \
+                           + other.m[13] * self.m[15]
+            newmat.m[2] = other.m[2] * self.m[0] \
+                          + other.m[6] * self.m[1] \
+                          + other.m[10] * self.m[2] \
+                          + other.m[14] * self.m[3]
+            newmat.m[6] = other.m[2] * self.m[4] \
+                          + other.m[6] * self.m[5] \
+                          + other.m[10] * self.m[6] \
+                          + other.m[14] * self.m[7]
+            newmat.m[10] = other.m[2] * self.m[8] \
+                           + other.m[6] * self.m[9] \
+                           + other.m[10] * self.m[10] \
+                           + other.m[14] * self.m[11]
+            newmat.m[14] = other.m[2] * self.m[12] \
+                           + other.m[6] * self.m[13] \
+                           + other.m[10] * self.m[14] \
+                           + other.m[14] * self.m[15]
+            newmat.m[3] = other.m[3] * self.m[0] \
+                          + other.m[7] * self.m[1] \
+                          + other.m[11] * self.m[2] \
+                          + other.m[15] * self.m[3]
+            newmat.m[7] = other.m[3] * self.m[4] \
+                          + other.m[7] * self.m[5] \
+                          + other.m[11] * self.m[6] \
+                          + other.m[15] * self.m[7]
+            newmat.m[11] = other.m[3] * self.m[8] \
+                           + other.m[7] * self.m[9] \
+                           + other.m[11] * self.m[10] \
+                           + other.m[15] * self.m[11]
+            newmat.m[15] = other.m[3] * self.m[12] \
+                           + other.m[7] * self.m[13] \
+                           + other.m[11] * self.m[14] \
+                           + other.m[15] * self.m[15]
             return newmat
 
         if type(other) == Vec3:
