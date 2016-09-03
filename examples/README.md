@@ -1,10 +1,19 @@
 # pyRT Examples
 
-For the examples you need "pillow" installed.
+For the examples you need "pillow" installed. This can be done using pip:
+
+    pip install Pillow
+    
+or by using this code:
+
+    import pip
+    
+    
+    pip.main(['install', 'Pillow'])
 
 ## Using 'pyrt.image'
 
-The first series of examples is just about images and drawing into them. It is not about raytracing yet.
+The first series of examples is just about images and drawing into them.
 It is important to understand the concept of an "image generator". 
 While most graphics applications draw something on the screen, in pyRT there is no interactive window displaying anything.
 Images are for example generated as list of RGB tuples, which are then stored as an image in a common format like PNG. 
@@ -19,7 +28,9 @@ The image is stored using pillow.
 
 ### Drawing Lines
 
-This example draws 500 random lines using using <span style="font-family:Monospace;">image.drawLine(start, end, color)</span>
+This example draws 500 random lines using using <span style="font-family:Monospace;">image.drawLine(start, end, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Bresenham%27s_line_algorithm" target="_blank">Bresenham line drawing algorithm</a>.
+
+<cite>J. E. Bresenham. 1965. Algorithm for computer control of a digital plotter. IBM Syst. J. 4, 1 (March 1965), 25-30. DOI=http://dx.doi.org/10.1147/sj.41.0025</cite>
 
 ![Example 01](01.png)
 
@@ -28,5 +39,16 @@ This example draws 500 random lines using using <span style="font-family:Monospa
 This example draws a Koch curve using recursion. It is just another example how line drawing can be used.
 
 ![Example 01](02.png)
+
+
+### Drawing Circles
+
+This example draws 100 random circles using using <span style="font-family:Monospace;">image.drawCircle(center, radius, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm" target="_blank">Midpoint circle algorithm</a>.
+
+![Example 01](03.png)
+
+
+
+
 
 
