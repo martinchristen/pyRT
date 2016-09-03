@@ -184,7 +184,7 @@ class Triangle(Shape):
             hitrecord.t = t
             hitrecord.point = ray.start + t * ray.direction
             hitrecord.normal = cross3(edge1, edge2)
-            if self.a.normal != None and self.b.normal != None and self.c.normal != None:
+            if self.a.normal is not None and self.b.normal is not None and self.c.normal is not None:
                 nU = self.b.normal - self.a.normal
                 nV = self.c.normal - self.a.normal
                 hitrecord.normal_g = self.a.normal.normal + nU * u + nV * v

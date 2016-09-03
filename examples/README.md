@@ -1,13 +1,16 @@
 # pyRT Examples
 
-For the examples you need "pillow" installed. This can be done using pip
+For the examples you need "pillow" installed. This can be done using pip.
+Some examples generate animated gif, for that you need the moviepy module. Please note that moviepy has a lot of dependencies - for example numpy - which are also installed.
 
     pip install Pillow
+    pip install moviepy
     
 or by running this Python code:
 
     import pip
     pip.main(['install', 'Pillow'])
+    pip.main(['install', 'moviepy'])
 
 ## Using 'pyrt.image'
 
@@ -42,7 +45,7 @@ This example draws 500 random lines using using <span style="font-family:Monospa
 
 This example draws a Koch curve using recursion. It is just another example how line drawing can be used.
 
-![Example 01](02.png)
+![Example 02](02.png)
 
 
 ### Drawing Circles
@@ -51,7 +54,7 @@ This example draws a Koch curve using recursion. It is just another example how 
 
 This example draws 100 random circles using  <span style="font-family:Monospace;">image.drawCircle(center, radius, color)</span>. Drawing lines is done using the <a href="https://en.wikipedia.org/wiki/Midpoint_circle_algorithm" target="_blank">Midpoint circle algorithm</a>.
 
-![Example 01](03.png)
+![Example 03](03.png)
 
 ### Drawing Rectangles
 
@@ -59,9 +62,25 @@ This example draws 100 random circles using  <span style="font-family:Monospace;
 
 This example draws 50 random rectangles using <span style="font-family:Monospace;">image.drawRectangle(bottomleft, width, height, color)</span>.
 
-![Example 01](04.png)
+![Example 04](04.png)
 
 
+## Introduction to 3D Math
 
+### Drawing a triangle in 3D
+
+[05_triangle3d.py](05_triangle3d.py)
+
+This example shows how a projection matrix and the viewing transformation is used to render a (wireframe) 3D triangle on the image.
+
+![Example 05](05.png)
+
+### Drawing an animated triangle in 3D
+
+[06_triangle3danim.py](05_triangle3danim.py)
+
+This example generates an animated gif by moving the camera (changing the view matrix). The movie is created using moviepy module which is required to run this example.
+
+![Example 06](06.gif)
 
 

@@ -1,4 +1,4 @@
-# Example 3: **Introduction to the image class**
+# Example 4: **Introduction to the image class**
 # This example draws 20 rectangles and stores the image using PIL
 
 import sys
