@@ -38,7 +38,6 @@ imgdata = engine.render(scene)
 
 
 # save image using pillow
-im = Image.new("RGBA", (width,height))
+im = Image.new("RGBA", (width, height))
 im.putdata(imgdata)
 im.save("sample.png")
-

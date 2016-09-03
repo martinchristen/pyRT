@@ -7,8 +7,7 @@ class SimpleRT(Renderer):
     def __init__(self):
         Renderer.__init__(self, "Simple Raytracer")
 
-
-    def render(self, scene : Scene) -> None:
+    def render(self, scene: Scene) -> None:
         if scene.camera == None:
             print("Warning: Can't render: there is no (active) camera in the scene!")
             return None
@@ -24,9 +23,9 @@ class SimpleRT(Renderer):
         for y in range(0, h):
             for x in range(0, w):
                 ray = scene.camera.primaryRay(x, y)
-                num_rays +=1
+                num_rays += 1
 
-                r = g = b = 0 # background color
+                r = g = b = 0  # background color
                 for element in scene.nodes:
                     if element.hit(ray, hr):
                         r = 255
@@ -36,12 +35,11 @@ class SimpleRT(Renderer):
                 image.append((r, g, b))
 
         time_end = time.time()
-        print ("# RENDER STATISTICS" + 31*"#")
+        print("# RENDER STATISTICS" + 31 * "#")
         time_total = time_end - time_start
         print("TIME FOR RENDERING: " + str(time_total) + "s")
         print("NUMBER OF RAYS: " + str(num_rays))
         print("RAYS/s: " + str(num_rays / time_total))
-        print(50*"#")
+        print(50 * "#")
 
         return image
-

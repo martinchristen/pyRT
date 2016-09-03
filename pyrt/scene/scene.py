@@ -1,5 +1,3 @@
-
-
 class Scene(object):
     def __init__(self):
         self.camera = None

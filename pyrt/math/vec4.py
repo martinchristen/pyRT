@@ -2,9 +2,11 @@ import math
 from .constants import *
 from .vec3 import *
 
+
 class Vec4(object):
     """Class representing a 4D-Vector. Values are always stored as float
     """
+
     def __init__(self, *args, **kwargs):
         """
         Vec3 can be constructed the following way:
@@ -28,10 +30,10 @@ class Vec4(object):
 
         if len(kwargs) == 0:
             if len(args) == 4:
-                    self.x = float(args[0])
-                    self.y = float(args[1])
-                    self.z = float(args[2])
-                    self.w = float(args[3])
+                self.x = float(args[0])
+                self.y = float(args[1])
+                self.z = float(args[2])
+                self.w = float(args[3])
             elif len(args) == 1:
                 if type(args) == tuple or type(args) == list:
                     self.x = float(args[0][0])
@@ -81,11 +83,10 @@ class Vec4(object):
             else:
                 self.w = 1.0
 
-
     def __str__(self):
         """Convert vector to string
         """
-        return "Vec4(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", "  +  str(self.w) + ")"
+        return "Vec4(" + str(self.x) + ", " + str(self.y) + ", " + str(self.z) + ", " + str(self.w) + ")"
 
     def __add__(self, other):
         """add two vectors
@@ -97,9 +98,8 @@ class Vec4(object):
         other: vector to subtract"""
         return Vec4(self.x - other.x, self.y - other.y, self.z - other.z, self.w - other.w)
 
-
     def __eq__(self, other):
-        if type(other) == list or type(other) == tuple:   # not checking type within tuple/list
+        if type(other) == list or type(other) == tuple:  # not checking type within tuple/list
             if len(other) == 4:
                 return (abs(self.x - other[0]) < G_EPSILON) and \
                        (abs(self.y - other[1]) < G_EPSILON) and \
@@ -115,7 +115,6 @@ class Vec4(object):
         else:
             raise ValueError("Can't compare this type")
 
-
     def __getitem__(self, key):
         if key == 0:
             return self.x
@@ -130,7 +129,7 @@ class Vec4(object):
 
     def __setitem__(self, key, value):
         if key == 0:
-             self.x = float(value)
+            self.x = float(value)
         elif key == 1:
             self.y = float(value)
         elif key == 2:
@@ -159,7 +158,7 @@ class Vec4(object):
         """
         :return: return length of vector
         """
-        return math.sqrt(self.x**2 + self.y**2 + self.z**2 + self.w**2)
+        return math.sqrt(self.x ** 2 + self.y ** 2 + self.z ** 2 + self.w ** 2)
 
     def normalize(self):
         """
@@ -171,4 +170,3 @@ class Vec4(object):
             self.y /= l
             self.z /= l
             self.w /= l
-

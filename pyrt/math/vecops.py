@@ -73,7 +73,7 @@ def reflect3(N, I):
     """Reflects a vector
     N: Normal
     I: Incdient vector"""
-    return I + N * (-2.0 * dot(N, I))
+    return I + N * (-2.0 * dot3(N, I))
 
 # ----------------------------------------------------------------------------------------------------------------------
 

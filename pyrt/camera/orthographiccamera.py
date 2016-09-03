@@ -9,10 +9,10 @@ class OrthographicCamera(object):
         """
         self.width = width
         self.height = height
-        self.direction = Vec3(0.0,0.0,-1.0)
+        self.direction = Vec3(0.0, 0.0, -1.0)
 
         print("[init] Orthographic Camera")
 
     def primaryRay(self, x, y):
-        r = Ray(Vec3(x,y,0), self.direction)
+        r = Ray(Vec3(x, y, 0), self.direction)
         return r

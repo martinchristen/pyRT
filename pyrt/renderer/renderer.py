@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from ..scene import *
 
+
 class Renderer(object):
     def __init__(self, name="UNKNOWN RENDERER"):
         self.name = name

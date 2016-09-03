@@ -2,6 +2,7 @@ from abc import abstractmethod
 from ..math.ray import *
 import uuid
 
+
 class Shape(object):
     def __init__(self, name: str) -> None:
         self.name = name
@@ -28,14 +29,12 @@ class Shape(object):
         '''
         pass
 
-    #####################
-    # TODO: BOUNDING BOX
-    #       implement abstract method to retrieve bounding box
-    ####################
+        #####################
+        # TODO: BOUNDING BOX
+        #       implement abstract method to retrieve bounding box
+        ####################
 
-    ####################
-    # TODO: MATERIAL
-    #       handle shape material (color, textures, ...)
-    ####################
-
-
+        ####################
+        # TODO: MATERIAL
+        #       handle shape material (color, textures, ...)
+        ####################

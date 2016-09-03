@@ -12,18 +12,20 @@ class Triangle(Shape):
         self.c = c
 
     def __str__(self):
-        return "△ABC: Position[" + str(self.a.position) + ", " + str(self.b.position) + ", " + str(self.c.position) + "]"
+        return "△ABC: Position[" + str(self.a.position) + ", " + str(self.b.position) + ", " + str(
+            self.c.position) + "]"
 
-    #-------------------------------------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------------------------------------
     def area(self) -> float:
         '''
         Calculate area of triangle
         :return: area
         '''
-        return cross3(self.b.position-self.a.position,
-               self.c.position-self.a.position).length() / 2.0
-    #-------------------------------------------------------------------------------------------------------------------
-    def toBarycentric(self, p : Vec3) -> Vec3:
+        return cross3(self.b.position - self.a.position,
+                      self.c.position - self.a.position).length() / 2.0
+
+    # -------------------------------------------------------------------------------------------------------------------
+    def toBarycentric(self, p: Vec3) -> Vec3:
         '''
         Calculate barycentric coordinate of point p
         :param P: the input point (cartesian)
@@ -34,33 +36,35 @@ class Triangle(Shape):
         apc = triangleArea(self.a.position, p, self.c.position)
 
         if abc == 0.0:
-            return Vec3(0,0,0)
+            return Vec3(0, 0, 0)
 
-        x = pbc/abc
-        y = apc/abc
+        x = pbc / abc
+        y = apc / abc
         return Vec3(x, y, 1.0 - x - y)
 
-    #-------------------------------------------------------------------------------------------------------------------
-    def fromBarycentric(self, b : Vec3) -> Vec3:
+    # -------------------------------------------------------------------------------------------------------------------
+    def fromBarycentric(self, b: Vec3) -> Vec3:
         '''
         Calculate cartesian coordinate from barycentric coordinate
         :param b: barycentric coordinate
         :return: cartesian coordinate
         '''
         return self.a.position * b.x + self.b.position * b.y + self.c.position * b.z
-    #-------------------------------------------------------------------------------------------------------------------
+
+    # -------------------------------------------------------------------------------------------------------------------
     def circumradius(self) -> float:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
         c = (self.b.position - self.a.position).length()
 
-        s = (a + b + c) / 2.0 # semiperimeter
-        z = a*b*c
-        n = 4.0 * math.sqrt(s*(a+b-s)*(a+c-s)*(b+c-s))
-        if n==0.0:
+        s = (a + b + c) / 2.0  # semiperimeter
+        z = a * b * c
+        n = 4.0 * math.sqrt(s * (a + b - s) * (a + c - s) * (b + c - s))
+        if n == 0.0:
             return 0.0
-        return z/n
-    #-------------------------------------------------------------------------------------------------------------------
+        return z / n
+
+    # -------------------------------------------------------------------------------------------------------------------
     def inradius(self) -> float:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
@@ -70,7 +74,7 @@ class Triangle(Shape):
             return 0.0
         return math.sqrt((s - a) * (s - b) * (s - c) / s)
 
-    #-------------------------------------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------------------------------------
     def circumcenter(self) -> Vec3:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
@@ -78,26 +82,28 @@ class Triangle(Shape):
         q = a * a * (-a * a + b * b + c * c)
         w = b * b * (a * a - b * b + c * c)
         e = c * c * (a * a + b * b - c * c)
-        n = q+w+e
-        if n==0.0:
-            return Vec3(0,0,0)
-        return self.fromBarycentric(Vec3(q/n,w/n,e/n))
+        n = q + w + e
+        if n == 0.0:
+            return Vec3(0, 0, 0)
+        return self.fromBarycentric(Vec3(q / n, w / n, e / n))
 
-    #-------------------------------------------------------------------------------------------------------------------
+    # -------------------------------------------------------------------------------------------------------------------
     def incenter(self) -> Vec3:
         a = (self.c.position - self.b.position).length()
         b = (self.c.position - self.a.position).length()
         c = (self.b.position - self.a.position).length()
-        n = a+b+c
-        if n==0.0:
-            return Vec3(0,0,0)
+        n = a + b + c
+        if n == 0.0:
+            return Vec3(0, 0, 0)
 
-        return self.fromBarycentric(Vec3(a/n, b/n, c/n))
-    #-------------------------------------------------------------------------------------------------------------------
+        return self.fromBarycentric(Vec3(a / n, b / n, c / n))
+
+    # -------------------------------------------------------------------------------------------------------------------
     def centroid(self) -> Vec3:
         return (self.a.position + self.b.position + self.c.position) / 3.0
-    #-------------------------------------------------------------------------------------------------------------------
-    def calcTexcoord(self, p : Vec3) -> Vec2:
+
+    # -------------------------------------------------------------------------------------------------------------------
+    def calcTexcoord(self, p: Vec3) -> Vec2:
         '''
         Returns texture-coordinate at cartesian position p
         :param p:
@@ -106,8 +112,9 @@ class Triangle(Shape):
         pb = self.toBarycentric(p)
         u = self.a.texcoord.x * pb.x + self.b.texcoord.x * pb.y + self.c.texcoord.x * pb.z
         v = self.a.texcoord.y * pb.x + self.b.texcoord.y * pb.y + self.c.texcoord.y * pb.z
-        return Vec2(u,v)
-    #-------------------------------------------------------------------------------------------------------------------
+        return Vec2(u, v)
+
+    # -------------------------------------------------------------------------------------------------------------------
 
     def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
         '''
@@ -124,7 +131,7 @@ class Triangle(Shape):
         :param hitrecord: the hitrecord which is only valid if there is a hit
         :return: True if there is a hit
         '''
-        EPSILON = 0.000001 # todo: move outside
+        EPSILON = 0.000001  # todo: move outside
 
         # find vectors for two edges sharing vert0
         edge1 = self.b.position - self.a.position
@@ -144,7 +151,7 @@ class Triangle(Shape):
 
             qvec = cross3(tvec, edge1)
             v = dot3(ray.direction, qvec)
-            if v < 0.0 or u+v > det:
+            if v < 0.0 or u + v > det:
                 return False
         elif det < -EPSILON:
             tvec = ray.start - self.a.position
@@ -155,7 +162,7 @@ class Triangle(Shape):
             qvec = cross3(tvec, edge1)
             v = dot3(ray.direction, qvec)
             if v > 0.0 or u + v < det:
-               return False
+                return False
         else:
             return False
 
@@ -164,21 +171,20 @@ class Triangle(Shape):
         u *= inv_det
         v *= inv_det
 
-        if t > 0.0: # and t<tmax
+        if t > 0.0:  # and t<tmax
             hitrecord.t = t
-            hitrecord.point = ray.start + t*ray.direction
+            hitrecord.point = ray.start + t * ray.direction
             hitrecord.normal = cross3(edge1, edge2)
             if self.a.normal != None and self.b.normal != None and self.c.normal != None:
                 nU = self.b.normal - self.a.normal
                 nV = self.c.normal - self.a.normal
-                hitrecord.normal_g = self.a.normal.normal + nU*u + nV*v
+                hitrecord.normal_g = self.a.normal.normal + nU * u + nV * v
             else:
                 hitrecord.normal_g = hitrecord.normal
 
             return True
 
         return False
-
 
     def hitShadow(self, ray: Ray) -> bool:
         '''
@@ -189,14 +195,13 @@ class Triangle(Shape):
         '''
         pass
 
-#-----------------------------------------------------------------------------------------------------------------------
+
+# -----------------------------------------------------------------------------------------------------------------------
 # Utility functions related to triangles
 
-def triangleArea(a: Vec3,b: Vec3,c: Vec3) -> float:
+def triangleArea(a: Vec3, b: Vec3, c: Vec3) -> float:
     '''
     Calculate area of triangle
     :return: area
     '''
     return cross3(b - a, c - a).length() / 2.0
-
-
