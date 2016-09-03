@@ -8,6 +8,8 @@ from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 import math
 from PIL import Image
+from typing import Type
+
 
 def snowflake(image: Image, lev: int, x1 : int, y1 : int, x5:int, y5: int, color : Vec3)  -> None:
     if lev == 0:

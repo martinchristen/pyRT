@@ -1,7 +1,7 @@
 from ..math import *
 
 
-class Vertex:
+class Vertex(object):
     def __init__(self, **kwargs):
         self.position = Vec3(0,0,0)
         self.normal = None

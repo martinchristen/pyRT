@@ -1,7 +1,7 @@
 from .vec3 import *
 
 
-class HitRecord:
+class HitRecord(object):
     def __init__(self):
         self.point = None       # hit point
         self.normal = None      # hit normal (shading normal!)
@@ -11,7 +11,7 @@ class HitRecord:
         self.obj = None         # hit object/geometry or None if not applicable
 
 
-class Ray:
+class Ray(object):
     def __init__(self, start: Vec3, direction: Vec3) -> None:
         if type(start) != Vec3 or type(direction) != Vec3:
             print("Error: start and direction must be Vec3")

@@ -1,14 +1,12 @@
 # pyRT Examples
 
-For the examples you need "pillow" installed. This can be done using pip:
+For the examples you need "pillow" installed. This can be done using pip
 
     pip install Pillow
     
-or by using this code:
+or by running this Python code:
 
     import pip
-    
-    
     pip.main(['install', 'Pillow'])
 
 ## Using 'pyrt.image'

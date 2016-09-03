@@ -2,8 +2,8 @@ from abc import abstractmethod
 from ..math.ray import *
 import uuid
 
-class Shape():
-    def __init__(self, name: str):
+class Shape(object):
+    def __init__(self, name: str) -> None:
         self.name = name
         self.id = str(uuid.uuid4())
 

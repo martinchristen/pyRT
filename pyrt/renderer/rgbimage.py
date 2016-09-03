@@ -1,6 +1,7 @@
 from ..math import Vec2, Vec3
 
-class RGBImage:
+
+class RGBImage(object):
     def __init__(self, width: int, height: int) -> None:
         self.width = width
         self.height = height

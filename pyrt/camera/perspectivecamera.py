@@ -1,7 +1,7 @@
 from ..math import *
 from math import pi, tan
 
-class PerspectiveCamera:
+class PerspectiveCamera(object):
     def __init__(self, width : float = 640, height : float = 480, vfov : float = 45, lookfrom: Vec3 = Vec3(0,0,10), lookat: Vec3 = Vec3(0,0,0), up : Vec3 = Vec3(0,1,0)) -> None:
         """
         :param width: horizontal resolution of the output image

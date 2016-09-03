@@ -2,7 +2,7 @@ import math
 from .constants import *
 from .vec3 import *
 
-class Vec4:
+class Vec4(object):
     """Class representing a 4D-Vector. Values are always stored as float
     """
     def __init__(self, *args, **kwargs):

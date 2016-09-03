@@ -1,7 +1,7 @@
-from ..math import *
+from ..math import Ray, Vec3
 
 
-class OrthographicCamera:
+class OrthographicCamera(object):
     def __init__(self, width=512, height=512):
         """
         :param width: horizontal resolution of the output image

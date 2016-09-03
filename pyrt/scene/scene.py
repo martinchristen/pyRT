@@ -1,7 +1,6 @@
 
 
-
-class Scene:
+class Scene(object):
     def __init__(self):
         self.camera = None
         self.nodes = []

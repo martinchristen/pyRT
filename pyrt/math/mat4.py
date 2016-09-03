@@ -4,7 +4,7 @@ from .vec3 import *
 from .vec4 import *
 
 
-class Mat4:
+class Mat4(object):
     """
     Class representing a 4x4 Matrix
     """
