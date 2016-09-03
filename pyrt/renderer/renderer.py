@@ -5,7 +5,7 @@ If you override if you implement your own.
 """
 
 from abc import abstractmethod
-from ..scene import *
+from ..scene import Scene
 
 
 class Renderer(object):

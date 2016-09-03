@@ -6,7 +6,7 @@ This is the geometric shape description
 
 
 from abc import abstractmethod
-from ..math.ray import *
+from ..math import Ray, HitRecord
 import uuid
 
 

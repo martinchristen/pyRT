@@ -4,7 +4,7 @@ This is the geometric object triangle
 (renderable object)
 """
 
-from ..geometry import *
+from ..geometry import Shape, Vertex
 from ..math import *
 
 

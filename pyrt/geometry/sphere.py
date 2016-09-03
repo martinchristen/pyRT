@@ -4,11 +4,13 @@ This is the geometric object sphere
 (renderable object)
 """
 
-from ..geometry import *
-from ..math import *
+from ..geometry import Shape
+from ..math import Ray, HitRecord
 
 
 class Sphere(Shape):
+    """The Sphere class for raytracing spheres"""
+
     def __init__(self):
         Shape.__init__(self, "Sphere")
         print("[init] sphere")
