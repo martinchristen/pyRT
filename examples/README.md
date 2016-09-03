@@ -11,7 +11,7 @@ Images are for example generated as list of RGB tuples, which are then stored as
 
 ### Drawing Points
 
-This example creates and image and draws 5000 random points using <span style="font-family:Monospace;">image.drawPoint(point,color)</span>
+This example creates an image and draws 5000 random points using <span style="font-family:Monospace;">image.drawPoint(point,color)</span>
 
 ![Example 01](00.png)
 
@@ -28,4 +28,5 @@ This example draws 500 random lines using using <span style="font-family:Monospa
 This example draws a Koch curve using recursion. It is just another example how line drawing can be used.
 
 ![Example 01](02.png)
+
 
