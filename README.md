@@ -5,8 +5,9 @@
 ![Logo](docs/img/pyRT_256.png)
 
 
-**PyRT** (pronounced _pirate_) is a raytracer written in Python 3.x. This project is mainly done with the following in mind:
+**PyRT** (pronounced _pirate_) is a raytracer/image generator written in Python 3.x. This project is mainly done with the following in mind:
 
+  * Server-side rendering / cloud based rendering
   * Ray Tracing in the Jupyter Notebook
   * Teaching Ray Tracing
   * Exploring ray tracing concepts for geo data using Python.
@@ -20,6 +21,14 @@ PyRT just started in July 2016, it is still **work in progress** - API changes w
 ## Dependencies ##
 
 PyRT doesn't have any dependencies at the moment. Generated images are just RGB or RGBA Arrays. To create jpg or png or other images, many demos use Pillow (PIL). So it is highly recommended to install it.
+
+## Getting Started: Try the examples ##
+
+There are a lot of examples available how to use this module. This is the recommended way to get started with pyRT.
+
+![Example 01](examples/01.png)  ![Example 03](examples/03.png)  ![Example 04](examples/04.png)
+
+[View all examples](examples/README.md)
 
 ## Creating Scenes ##
 
