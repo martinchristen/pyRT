@@ -100,6 +100,18 @@ This example creates a scene with the same triangle like in example 5. Then it r
 
 This example adds a triangle with different vertex colors to the scene.
 
-![Example 07](08.png)
+![Example 08](08.png)
+
+
+### Multiple triangles
+
+[09_multiple_triangles.py](09_multiple_triangles.py)
+
+This example renders two triangles
+
+![Example 09](09.png)
+
+
+
 
 
