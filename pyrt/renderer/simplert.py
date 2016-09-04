@@ -30,8 +30,8 @@ class SimpleRT(Renderer):
                 for element in scene.nodes:
                     if element.hit(ray, hr):
                         r = 255
-                        g = 0
-                        b = 0
+                        g = 255
+                        b = 255
 
                 image.append((r, g, b))
 

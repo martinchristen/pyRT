@@ -77,10 +77,22 @@ This example shows how a projection matrix and the viewing transformation is use
 
 ### Drawing an animated triangle in 3D
 
-[06_triangle3danim.py](05_triangle3danim.py)
+[06_triangle3danim.py](06_triangle3danim.py)
 
 This example generates an animated gif by moving the camera (changing the view matrix). The movie is created using moviepy module which is required to run this example.
 
 ![Example 06](06.gif)
+
+## Raytracing
+
+### Create a scene with a triangle
+
+[07_raytracingtriangle.py](07_raytracingtriangle.py)
+
+This example creates a scene with the same triangle like in example 5. Then it renders it using the SimpleRT raytracer.
+
+![Example 07](07.png)
+
+
 
 
