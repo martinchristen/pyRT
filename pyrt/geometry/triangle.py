@@ -196,6 +196,8 @@ class Triangle(Shape):
             cV = self.c.color - self.a.color
             hitrecord.color = self.a.color + cU * u + cV * v
 
+            hitrecord.point = ray.start + t * ray.direction
+
             return True
 
         return False

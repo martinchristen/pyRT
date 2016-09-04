@@ -119,5 +119,10 @@ This example renders a sphere
 
 ![Example 10](10.png)
 
+### Rendering a sphere with a light
 
+[11_sphere_light.py](11_sphere_light.py)
 
+This example renders a sphere with a light
+
+![Example 11](11.png)

@@ -1,6 +1,6 @@
 # PyRT - The Python Raytracer #
 
-[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/pyRT-dev.svg)](https://gitter.im/pyRT/pyRT-dev?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT) [![Code Health](https://landscape.io/github/martinchristen/pyRT/master/landscape.svg?style=flat)](https://landscape.io/github/martinchristen/pyRT/master) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/martinchristen/pyRT/blob/master/LICENSE.md)
+[![CI](https://travis-ci.org/martinchristen/pyRT.svg?branch=master)](https://travis-ci.org/martinchristen/pyRT) [![Gitter](https://badges.gitter.im/pyRT/Lobby.svg)](https://gitter.im/pyRT/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)  [![contributions welcome](https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat)](https://github.com/martinchristen/pyrt/issues) [![Code Climate](https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg)](https://codeclimate.com/github/martinchristen/pyRT) [![Code Health](https://landscape.io/github/martinchristen/pyRT/master/landscape.svg?style=flat)](https://landscape.io/github/martinchristen/pyRT/master) [![](https://img.shields.io/badge/license-MIT-blue.svg)](https://github.com/martinchristen/pyRT/blob/master/LICENSE.md)
 
 ![Logo](docs/img/pyRT_256.png)
 
@@ -26,7 +26,7 @@ PyRT doesn't have any dependencies at the moment. Generated images are just RGB 
 
 There are a lot of examples available how to use this module. This is the recommended way to get started with pyRT.
 
-![Example 01](examples/01.png)  ![Example 03](examples/03.png)  ![Example 06](examples/06.gif)  ![Example 08](examples/08.png)
+![Example 01](examples/11.png)  ![Example 03](examples/03.png)  ![Example 06](examples/06.gif)  ![Example 08](examples/08.png)
 
 [View all examples](examples/README.md)
 
@@ -71,5 +71,3 @@ More information about this license can be found under: [https://opensource.org/
 PyRT is created and maintained by Martin Christen. You can contact me by e-mail: martin.christen@gmail.com
 
 Please note: This project is developed in my spare time, there is no official support or anything.
-
-

@@ -48,8 +48,10 @@ class Sphere(Shape):
 
             # there is a valid hit!
             hitrecord.t = t
-            hitrecord.normal = hitrecord.normal_g = normalize3(ray.start + t  * ray.direction - self.center)
+            hitrecord.normal = hitrecord.normal_g = normalize3(ray.start + t * ray.direction - self.center)
             hitrecord.color = self.color
+
+            hitrecord.point = ray.start + t * ray.direction
             return True
 
         return False
