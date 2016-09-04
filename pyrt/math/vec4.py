@@ -104,6 +104,14 @@ class Vec4(object):
         other: vector to subtract"""
         return Vec4(self.x - other.x, self.y - other.y, self.z - other.z, self.w - other.w)
 
+    def __mul__(self, s):
+        if type(s) == Vec4:
+            return Vec4(self.x * s.x, self.y * s.y, self.z * s.z, self.w * s.w)
+        elif type(s) == float or type(s) == int:
+            return Vec4(self.x * s, self.y * s, self.z * s, self.w * s)
+        else:
+            raise ValueError("Vec4: Multiplicaton with wrong type: " + str(type(s)))
+
     def __eq__(self, other):
         if type(other) == list or type(other) == tuple:  # not checking type within tuple/list
             if len(other) == 4:

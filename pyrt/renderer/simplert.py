@@ -29,9 +29,9 @@ class SimpleRT(Renderer):
                 r = g = b = 0  # background color
                 for element in scene.nodes:
                     if element.hit(ray, hr):
-                        r = 255
-                        g = 255
-                        b = 255
+                        r = int(hr.color.x*255)
+                        g = int(hr.color.y*255)
+                        b = int(hr.color.z*255)
 
                 image.append((r, g, b))
 

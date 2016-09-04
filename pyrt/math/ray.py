@@ -13,6 +13,7 @@ class HitRecord(object):
         self.point = None  # hit point
         self.normal = None  # hit normal (shading normal!)
         self.normal_g = None  # hit normal (geometric normal!)
+        self.color = None # Color of object at hit point
         self.texcoord = None  # texture coordinate at hit point
         self.t = None  # intersection parameter of line
         self.obj = None  # hit object/geometry or None if not applicable

@@ -15,7 +15,7 @@ class Vertex(object):
     def __init__(self, **kwargs):
         self.position = Vec3(0, 0, 0)
         self.normal = None
-        self.color = None
+        self.color = Vec4(1.,1.,1.,1.)
         self.texcoord = None
 
         if len(kwargs) == 0:
@@ -44,18 +44,25 @@ class Vertex(object):
                 else:
                     raise ValueError("normal must be specified as Vec3 or a list/tuple")
 
-            # MATERIAL not yet supported
-            '''
-            if "color" in kwargs:   # it is probably better to have a class "Color" instead of using Vec4.
+
+            if "color" in kwargs:
                 if type(kwargs["color"]) == Vec4:
-                    pass
+                    self.color = kwargs["color"].copy()
                 elif type(kwargs["color"]) == Vec3:
-                    pass
+                    color = kwargs["color"]
+                    self.color = Vec4(color.x, color.y, color.z, 1.0)
                 elif type(kwargs["color"]) == tuple or type(kwargs["color"]) == list:
-                    pass
+                    color = kwargs["color"]
+                    if len(color) == 4:
+                        self.color = Vec4(color[0], color[1], color[2], color[3])
+                    elif len(color) == 3:
+                        self.color = Vec4(color[0], color[1], color[2], 1.0)
+                    else:
+                        raise ValueError("Wrong number of components for color")
                 else:
                     raise ValueError("color must be specified as Vec4/Vec3 or list/tuple")
 
+            '''
             if "texcoord" in kwargs:
                 if type(kwargs["texcoord"]) == Vec2:
                     pass

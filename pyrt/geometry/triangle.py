@@ -187,9 +187,14 @@ class Triangle(Shape):
             if self.a.normal is not None and self.b.normal is not None and self.c.normal is not None:
                 nU = self.b.normal - self.a.normal
                 nV = self.c.normal - self.a.normal
-                hitrecord.normal_g = self.a.normal.normal + nU * u + nV * v
+                hitrecord.normal_g = self.a.normal + nU * u + nV * v
             else:
                 hitrecord.normal_g = hitrecord.normal
+
+            # Calculate color
+            cU = self.b.color - self.a.color
+            cV = self.c.color - self.a.color
+            hitrecord.color = self.a.color + cU * u + cV * v
 
             return True
 

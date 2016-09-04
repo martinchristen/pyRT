@@ -94,5 +94,12 @@ This example creates a scene with the same triangle like in example 5. Then it r
 ![Example 07](07.png)
 
 
+### Raytrace triangle with different vertex colors
+
+[08_raytracingtriangle_colorvertex.py](08_raytracingtriangle_colorvertex.py)
+
+This example adds a triangle with different vertex colors to the scene.
+
+![Example 07](08.png)
 
 
