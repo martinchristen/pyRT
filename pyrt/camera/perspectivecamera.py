@@ -51,6 +51,7 @@ class PerspectiveCamera(Camera):
         self.matrixinv = inverse4(self.matrix)
         self.viewinv = inverse4(self.view)
 
+    # pylint: disable-msg=R0913
     def setProjection(self, fov: float, width: int, height: int, znear: float, zfar: float):
         """
         Redefine perspective projection.

@@ -202,15 +202,16 @@ def createOrtho4(left: float, right : float, bottom: float, top: float, znear: f
                  0., 0., 0., 1.))
 
 # ---------------------------------------------------------------------------------------------------------------------
+#pylint: disable-msg=R0914
 
 
 def inverse4(mat: Mat4) -> Mat4:
     """
     Calculate the inverse of the matrix
+
     :param m: matrix to inverse
     :return: inverted matrix
     """
-
     s0= mat.m[0] * mat.m[5] - mat.m[1] * mat.m[4]
     s1= mat.m[0] * mat.m[9] - mat.m[1] * mat.m[8]
     s2= mat.m[0] * mat.m[13] - mat.m[1] * mat.m[12]
