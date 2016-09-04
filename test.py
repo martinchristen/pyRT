@@ -3,6 +3,7 @@
 import unittest
 
 from pyrt.math import *
+from pyrt.camera import PerspectiveCamera
 
 
 # -- Testing Vec3 Class ------------------------------------------------------------------------------------------------
@@ -317,6 +318,60 @@ class Mat4Test(unittest.TestCase):
         self.assertEqual(Aproj, (0.6050660557326052, 3.2189514164974597, 0.9528619528619529))
         self.assertEqual(Bproj, (3.6303963343956314, 6.035533905932738, 0.9191919191919191))
         self.assertEqual(Cproj, (5.4455945015934475, 16.899494936611664, 0.8181818181818181))
+
+
+    def testCamera(self):
+        w=320
+        h=240
+
+        # Create a camere with width, height and field of view:
+        camera = PerspectiveCamera(w, h, 60)
+
+        # Set View matrix of camera: define where to look at
+        camera.setView(Vec3(0, -10, 0), Vec3(0, 0, 0), Vec3(0, 0, 1))
+
+        #  Get the view-projection matrix
+        vp = camera.getMatrix()
+
+        # Test view-projection matrix
+        '''self.assertEqual(vp, (1.2990381056766582, 0.0, 0.0, 0.0,
+                         0.0, 0.0, 1.7320508075688774, 0.0,
+                         0.0, 1.0002000200020003, 0.0, 9.801980198019804,
+                         0.0, 1.0, 0.0, 10.0))
+        '''
+        # Camera Matrices:
+        identity = camera.matrixinv * camera.matrix
+        self.assertEqual(identity, (1.0, 0.0, 0.0, 0.0,
+                                    0.0, 1.0, 0.0, 0.0,
+                                    0.0, 0.0, 1.0, 0.0,
+                                    0.0, 0.0, 0.0, 1.0))
+
+
+        # Check calculated camera position (with inverse view matrix)
+        pos = camera.viewinv * Vec3(0,0,0)
+        self.assertEqual(pos, Vec3(0.,-10.,0.0))
+
+        # Check front frustum plane:
+        pos0 = camera.matrixinv * Vec3(-1,-1,-1)
+        pos1 = camera.matrixinv * Vec3( 1,-1,-1)
+        pos2 = camera.matrixinv * Vec3( 1, 1,-1)
+        pos3 = camera.matrixinv * Vec3(-1, 1,-1)
+
+        self.assertEqual(pos0, Vec3(-0.07698003589194975, -9.9, -0.05773502691896232))
+        self.assertEqual(pos1, Vec3(0.07698003589194975, -9.9, -0.05773502691896232))
+        self.assertEqual(pos2, Vec3(0.07698003589194975, -9.9, 0.05773502691896232))
+        self.assertEqual(pos3, Vec3(-0.07698003589194975, -9.9, 0.05773502691896232))
+
+        # Check back frustum plane:
+        pos4 = camera.matrixinv * Vec3(-1, -1, 1)
+        pos5 = camera.matrixinv * Vec3(1, -1, 1)
+        pos6 = camera.matrixinv * Vec3(1, 1, 1)
+        pos7 = camera.matrixinv * Vec3(-1, 1, 1)
+
+        self.assertEqual(pos4, Vec3(-769.8003589185585, 989.9999999987921, -577.3502691889189))
+        self.assertEqual(pos5, Vec3(769.8003589185585, 989.9999999987921, -577.3502691889189))
+        self.assertEqual(pos6, Vec3(769.8003589185585, 989.9999999987921, 577.3502691889189))
+        self.assertEqual(pos7, Vec3(-769.8003589185585, 989.9999999987921, 577.3502691889189))
 
 
 """

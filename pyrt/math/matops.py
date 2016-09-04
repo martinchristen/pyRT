@@ -202,3 +202,56 @@ def createOrtho4(left: float, right : float, bottom: float, top: float, znear: f
                  0., 0., 0., 1.))
 
 # ---------------------------------------------------------------------------------------------------------------------
+
+
+def inverse4(mat: Mat4) -> Mat4:
+    """
+    Calculate the inverse of the matrix
+    :param m: matrix to inverse
+    :return: inverted matrix
+    """
+
+    s0= mat.m[0] * mat.m[5] - mat.m[1] * mat.m[4]
+    s1= mat.m[0] * mat.m[9] - mat.m[1] * mat.m[8]
+    s2= mat.m[0] * mat.m[13] - mat.m[1] * mat.m[12]
+    s3= mat.m[4] * mat.m[9] - mat.m[5] * mat.m[8]
+    s4= mat.m[4] * mat.m[13] - mat.m[5] * mat.m[12]
+    s5= mat.m[8] * mat.m[13] - mat.m[9] * mat.m[12]
+
+    c5= mat.m[10] * mat.m[15] - mat.m[11] * mat.m[14]
+    c4= mat.m[6] * mat.m[15] - mat.m[7] * mat.m[14]
+    c3= mat.m[6] * mat.m[11] - mat.m[7] * mat.m[10]
+    c2= mat.m[2] * mat.m[15] - mat.m[3] * mat.m[14]
+    c1= mat.m[2] * mat.m[11] - mat.m[3] * mat.m[10]
+    c0= mat.m[2] * mat.m[7] - mat.m[3] * mat.m[6]
+
+    det = (s0 * c5 - s1 * c4 + s2 * c3 + s3 * c2 - s4 * c1 + s5 * c0)
+
+    if abs(det)<G_EPSILON:
+        raise ArithmeticError("Can't calculate inverse of this matrix")
+
+    invdet = 1. / det
+
+    result = Mat4()
+    result.m[0] = (mat.m[5] * c5 - mat.m[9] * c4 + mat.m[13] * c3) * invdet
+    result.m[4] = (-mat.m[4] * c5 + mat.m[8] * c4 - mat.m[12] * c3) * invdet
+    result.m[8] = (mat.m[7] * s5 - mat.m[11] * s4 + mat.m[15] * s3) * invdet
+    result.m[12] = (-mat.m[6] * s5 + mat.m[10] * s4 - mat.m[14] * s3) * invdet
+
+    result.m[1] = (-mat.m[1] * c5 + mat.m[9] * c2 - mat.m[13] * c1) * invdet
+    result.m[5] = (mat.m[0] * c5 - mat.m[8] * c2 + mat.m[12] * c1) * invdet
+    result.m[9] = (-mat.m[3] * s5 + mat.m[11] * s2 - mat.m[15] * s1) * invdet
+    result.m[13] = (mat.m[2] * s5 - mat.m[10] * s2 + mat.m[14] * s1) * invdet
+
+    result.m[2] = (mat.m[1] * c4 - mat.m[5] * c2 + mat.m[13] * c0) * invdet
+    result.m[6] = (-mat.m[0] * c4 + mat.m[4] * c2 - mat.m[12] * c0) * invdet
+    result.m[10] = (mat.m[3] * s4 - mat.m[7] * s2 + mat.m[15] * s0) * invdet
+    result.m[14] = (-mat.m[2] * s4 + mat.m[6] * s2 - mat.m[14] * s0) * invdet
+
+    result.m[3] = (-mat.m[1] * c3 + mat.m[5] * c1 - mat.m[9] * c0) * invdet
+    result.m[7] = (mat.m[0] * c3 - mat.m[4] * c1 + mat.m[8] * c0) * invdet
+    result.m[11] = (-mat.m[3] * s3 + mat.m[7] * s1 - mat.m[11] * s0) * invdet
+    result.m[15] = (mat.m[2] * s3 - mat.m[6] * s1 + mat.m[10] * s0) * invdet
+
+    return result
+

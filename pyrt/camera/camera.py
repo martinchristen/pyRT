@@ -5,7 +5,7 @@ Inherit from this if you create a new camera model
 """
 
 from abc import abstractmethod
-from ..math import Vec3, createLookAt4, createIdentity4, Ray
+from ..math import Vec3, createLookAt4, createIdentity4, Ray, Mat4
 
 
 class Camera(object):
@@ -34,5 +34,14 @@ class Camera(object):
         :param x: screen position x (subpixel)
         :param y: screen position y (subpixel)
         :return: ray
+        """
+        pass
+
+    @abstractmethod
+    def getMatrix(self) -> Mat4:
+        """
+        Returns the view-projection matrix
+
+        :return:
         """
         pass
