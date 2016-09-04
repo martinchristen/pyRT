@@ -7,10 +7,10 @@ from pyrt.scene import *
 from pyrt.geometry import Triangle, Vertex
 from pyrt.camera import OrthographicCamera, PerspectiveCamera
 from pyrt.renderer import SimpleRT
-from PIL import Image
-
 
 # Specify width/height as in example 5
+from pyrt.utils import CreatePPM
+
 width = 320
 height = 240
 
@@ -36,6 +36,4 @@ engine = SimpleRT()
 imgdata = engine.render(scene)
 
 # Save the resulting image using pillow
-im = Image.new("RGBA", (width, height))
-im.putdata(imgdata)
-im.save("07.png")
+CreatePPM("07.ppm",(width,height),imgdata)

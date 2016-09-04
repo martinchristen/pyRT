@@ -6,8 +6,8 @@ from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 from pyrt.camera import PerspectiveCamera
 from pyrt.geometry import Triangle, Vertex
-from PIL import Image
 
+from pyrt.utils import CreatePPM
 
 w = 320
 h = 240
@@ -48,6 +48,4 @@ print(b_screenpos)
 print(c_screenpos)
 
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("05.png")
+CreatePPM("05.ppm",(w,h),image.data)
