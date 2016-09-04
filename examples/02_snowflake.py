@@ -4,12 +4,14 @@
 from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 import math
-from PIL import Image
 
 
 #don't warn about too many arguments, we know what we're doing ;-)
 #pylint: disable-msg=R0913
-def snowflake(image: Image, lev: int, x1: int, y1: int, x5: int, y5: int, color: Vec3) -> None:
+from pyrt.utils import CreatePPM
+
+
+def snowflake(image, lev: int, x1: int, y1: int, x5: int, y5: int, color: Vec3) -> None:
     if lev == 0:
         image.drawLine(Vec2(x1, y1), Vec2(x5, y5), color)
     else:
@@ -39,6 +41,4 @@ level = 5  # Change max recursion depth here
 
 snowflake(image, level, 0, 255, 511, 255, Vec3(1, 0, 0))
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("02.png")
+CreatePPM("02.ppm",(w,h),image.data)

@@ -4,8 +4,8 @@
 from pyrt.renderer import RGBImage
 from pyrt.math import Vec2, Vec3
 import random
-from PIL import Image
 
+from pyrt.utils import CreatePPM
 
 w = 320
 h = 240
@@ -18,6 +18,4 @@ for i in range(100):
 
 image.drawCircle(Vec2(159, 119), 100, Vec3(1, 0, 0))
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("03.png")
+CreatePPM("03.ppm",(w,h),image.data)

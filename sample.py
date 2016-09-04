@@ -1,17 +1,9 @@
-try:
-    from PIL import Image
-
-except:
-    import pip
-    pip.main(['install', 'Pillow'])    # install Pillow if you don't have it yet...
-    from PIL import Image
-
 from pyrt.math import *
 from pyrt.scene import *
 from pyrt.geometry import Triangle, Vertex
 from pyrt.camera import OrthographicCamera, PerspectiveCamera
 from pyrt.renderer import SimpleRT
-
+from pyrt.utils import CreatePPM
 width = 512
 height = 512
 camera = OrthographicCamera(width, height)
@@ -37,7 +29,4 @@ engine = SimpleRT()
 imgdata = engine.render(scene)
 
 
-# save image using pillow
-im = Image.new("RGBA", (width, height))
-im.putdata(imgdata)
-im.save("sample.png")
+CreatePPM("sample.ppm",(width,height),imgdata)
