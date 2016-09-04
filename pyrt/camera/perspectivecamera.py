@@ -34,7 +34,11 @@ class PerspectiveCamera(Camera):
         self.setView(Vec3(0, -10, 0), Vec3(0, 0, 0), Vec3(0, 0, 1))
 
     def primaryRay(self, x: float, y: float) -> Ray:
-        pass
+        planepoint = self.pos3 + self.ddx2 + self.ddy2 + x*self.ddx - y*self.ddy
+        direction = (planepoint - self.origin)
+        return Ray(self.origin, direction)
+
+
 
     def setView(self, eye: Vec3, center: Vec3, up: Vec3):
         """
@@ -50,6 +54,21 @@ class PerspectiveCamera(Camera):
         self.matrix = self.projection * self.view
         self.matrixinv = inverse4(self.matrix)
         self.viewinv = inverse4(self.view)
+        self.origin = self.viewinv * Vec3(0, 0, 0)
+
+        # Extract image plane points in world coordinates:
+        self.pos0 = self.matrixinv * Vec3(-1, -1, -1)
+        self.pos1 = self.matrixinv * Vec3(1, -1, -1)
+        self.pos2 = self.matrixinv * Vec3(1, 1, -1)
+        self.pos3 = self.matrixinv * Vec3(-1, 1, -1)
+
+        self.dx = self.pos2-self.pos3   # vector along x-axis of image plane
+        self.dy = self.pos3-self.pos0   # vector along y-axis of image plane
+
+        self.ddx = self.dx/self.width   # vector for one pixel (x-axis)
+        self.ddy = self.dy/self.height  # vector for one pixel (y-axis)
+        self.ddx2 = self.ddx / 2. # half pixel x
+        self.ddy2 = self.ddy / 2. # half pixel y
 
     # pylint: disable-msg=R0913
     def setProjection(self, fov: float, width: int, height: int, znear: float, zfar: float):
@@ -69,7 +88,7 @@ class PerspectiveCamera(Camera):
         self.projection = createPerspective4(fov, aspect, znear, zfar)
         self.matrix = self.projection * self.view
         self.matrixinv = inverse4(self.matrix)
-        self.viewinv = inverse4(self.view)
+
 
     def getMatrix(self) -> Mat4:
         """
@@ -78,3 +97,4 @@ class PerspectiveCamera(Camera):
         :return: view-projection
         """
         return self.matrix
+
