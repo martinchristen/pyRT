@@ -111,7 +111,13 @@ This example renders two triangles
 
 ![Example 09](09.png)
 
+### Rendering a sphere
 
+[10_sphere.py](10_sphere.py)
+
+This example renders a sphere
+
+![Example 10](10.png)
 
 
 
