@@ -35,8 +35,8 @@ class PerspectiveCamera(Camera):
 
     def primaryRay(self, x: float, y: float) -> Ray:
         planepoint = self.pos3 + self.ddx2 + self.ddy2 + x*self.ddx - y*self.ddy
-        direction = (planepoint - self.origin)
-        return Ray(self.origin, direction)
+        direction = (planepoint - self.position)
+        return Ray(self.position, direction)
 
 
 
@@ -54,7 +54,7 @@ class PerspectiveCamera(Camera):
         self.matrix = self.projection * self.view
         self.matrixinv = inverse4(self.matrix)
         self.viewinv = inverse4(self.view)
-        self.origin = self.viewinv * Vec3(0, 0, 0)
+        self.position = self.viewinv * Vec3(0, 0, 0)
 
         # Extract image plane points in world coordinates:
         self.pos0 = self.matrixinv * Vec3(-1, -1, -1)

@@ -44,7 +44,7 @@ class SimpleRT(Renderer):
                             # a material definition is still missing, so I do some odd things...
                             N = hr.normal_g
                             L = normalize3(hr.point - scene.lights[0].position)
-                            E = normalize3(scene.camera.origin - hr.point)
+                            E = normalize3(scene.camera.position - hr.point)
                             R = normalize3(-reflect3(L, N))
                             diffuse = max(1. - dot3(N, L), 0.0)
                             specular = pow(max(dot3(R,E),0.0),0.3*shininess)
