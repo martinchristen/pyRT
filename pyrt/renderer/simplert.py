@@ -39,6 +39,8 @@ class SimpleRT(Renderer):
 
                 for element in scene.nodes:
                     if element.hit(ray, hitrecord):
+                        hitrecord.obj = element # set hit object
+
                         # element hit -> call shader:
                         color = element.material.shade(scene.camera, ray, hitrecord, scene.lights)
                         r = int(color[0] * 255)

@@ -5,7 +5,7 @@ This is the geometric object sphere
 """
 
 from ..geometry import Shape
-from ..math import Ray, HitRecord, Vec3, Vec4, dot3,  normalize3
+from ..math import Ray, HitRecord, Vec3, dot3, G_EPSILON
 from ..material import Material, PhongMaterial
 from math import sqrt
 
@@ -24,7 +24,7 @@ class Sphere(Shape):
 
     def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
         """
-        Hit ray with sphere. Code based on: Shirley P., Morley R.K. (2003) "Realistic RayTracing", 2nd edition
+        Hit ray with sphere.
 
         :param ray: the ray to check hit
         :param hitrecord: the hitrecord which is only valid if there is a hit
@@ -32,34 +32,32 @@ class Sphere(Shape):
         """
         t0 = hitrecord.t
 
-        temp = ray.start - self.center
         a = dot3(ray.direction, ray.direction)
-        b = 2.*dot3(ray.direction, temp)
-        c = dot3(temp, temp) - self.radius * self.radius
+        b = dot3(ray.direction, (2.0 * (ray.start - self.center)))
+        c = dot3(self.center, self.center) + dot3(ray.start, ray.start) \
+            - 2.0 * dot3(ray.start,self.center) - self.radius * self.radius
+        D = b * b + (-4.0) * a * c
 
-        discriminant = b*b-4*a*c
+        if D < G_EPSILON:
+            return False
 
-        if discriminant>0.0:
-            discriminant = sqrt(discriminant)
-            t = -b-discriminant / (2*a)
+        D = sqrt(D)
+        t = -0.5*(b + D) / a
 
-            if t < 0.0:
-                t = -b + discriminant / (2*a)
-            if t < 0.0:
-                return False
-            if t0 is not None and t>t0:
-                return False
+        if t0 is not None and t0 < t:
+            return False
 
-            # there is a valid hit!
+        if t>0:
             hitrecord.t = t
-            hitrecord.normal = hitrecord.normal_g = normalize3(ray.start + t * ray.direction - self.center)
-            hitrecord.color = Vec3(1.,1.,1.) # spheres don't have interpolated colors, set to white
-            hitrecord.material = self.material
-
             hitrecord.point = ray.start + t * ray.direction
+            hitrecord.normal_g = (hitrecord.point - self.center) / self.radius
+            hitrecord.normal = hitrecord.normal_g
+            hitrecord.color = Vec3(1., 1., 1.)  # spheres don't have interpolated colors, set to white
+            hitrecord.material = self.material
             return True
-
         return False
+
+
 
     def hitShadow(self, ray: Ray) -> bool:
         """
