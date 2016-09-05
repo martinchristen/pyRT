@@ -66,4 +66,18 @@ class Sphere(Shape):
         :param tmax:
         :return:
         """
-        pass
+        a = dot3(ray.direction, ray.direction)
+        b = dot3(ray.direction, (2.0 * (ray.start - self.center)))
+        c = dot3(self.center, self.center) + dot3(ray.start, ray.start) \
+            - 2.0 * dot3(ray.start, self.center) - self.radius * self.radius
+        D = b * b + (-4.0) * a * c
+
+        if D < G_EPSILON:
+            return False
+
+        D = sqrt(D)
+        t = -0.5 * (b + D) / a
+
+        if t > 0:
+            return True
+        return False

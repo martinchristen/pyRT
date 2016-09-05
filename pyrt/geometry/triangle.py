@@ -216,7 +216,48 @@ class Triangle(Shape):
         :param tmax:
         :return:
         """
-        pass
+        # find vectors for two edges sharing vert0
+        edge1 = self.b.position - self.a.position
+        edge2 = self.c.position - self.a.position
+
+        # begin calculating determinant - also used to calculate U parameter
+        pvec = cross3(ray.direction, edge2)
+
+        # if determinant is near zero, ray lies in plane of triangle
+        det = dot3(edge1, pvec)
+
+        if det > self.EPSILON:
+            tvec = ray.start - self.a.position
+            u = dot3(tvec, pvec)
+            if u < 0.0 or u > det:
+                return False
+
+            qvec = cross3(tvec, edge1)
+            v = dot3(ray.direction, qvec)
+            if v < 0.0 or u + v > det:
+                return False
+        elif det < -self.EPSILON:
+            tvec = ray.start - self.a.position
+            u = dot3(tvec, pvec)
+            if u > 0.0 or u < det:
+                return False
+
+            qvec = cross3(tvec, edge1)
+            v = dot3(ray.direction, qvec)
+            if v > 0.0 or u + v < det:
+                return False
+        else:
+            return False
+
+        inv_det = 1.0 / det
+        t = dot3(edge2, qvec) * inv_det
+        u *= inv_det
+        v *= inv_det
+
+        if t > 0.0:
+            return True
+
+        return False
 
 
 # ----------------------------------------------------------------------------------------------------------------------

@@ -11,8 +11,9 @@ import time
 
 
 class SimpleRT(Renderer):
-    def __init__(self):
+    def __init__(self, shadow=False):
         Renderer.__init__(self, "Simple Raytracer")
+        self.shadow = shadow
 
     def render(self, scene: Scene) -> list:
         if not scene.camera:
@@ -36,9 +37,10 @@ class SimpleRT(Renderer):
                 num_rays += 1
 
                 r = g = b = 0  # background color
-
+                hit = False
                 for element in scene.nodes:
                     if element.hit(ray, hitrecord):
+                        hit = True
                         hitrecord.obj = element # set hit object
 
                         # element hit -> call shader:
@@ -46,6 +48,25 @@ class SimpleRT(Renderer):
                         r = int(color[0] * 255)
                         g = int(color[1] * 255)
                         b = int(color[2] * 255)
+
+
+                if hit and self.shadow:
+                    # is hitpoint in shadow ?
+                    numshadow = 0
+                    for light in scene.lights:
+                        shadowray = Ray(hitrecord.point, light.position - hitrecord.point)
+                        for testelement in scene.nodes:
+                            if testelement != hitrecord.obj: # avoid self-intersection
+                                if testelement.hitShadow(shadowray):
+                                    numshadow += 1
+                                    break
+                    for i in range(numshadow):
+                        r //= 4
+                        g //= 4
+                        b //= 4
+
+
+
 
                 image.append((r, g, b))
 
