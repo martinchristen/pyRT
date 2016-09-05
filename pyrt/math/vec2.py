@@ -99,3 +99,18 @@ class Vec2(object):
         :return: copy of current vector
         """
         return Vec2(self.x, self.y)
+
+    def length(self):
+        """
+        :return: return length of vector
+        """
+        return math.sqrt(self.x ** 2 + self.y ** 2)
+
+    def normalize(self):
+        """
+        normalize this vector
+        """
+        l = self.length()
+        if l != 0:
+            self.x /= l
+            self.y /= l
