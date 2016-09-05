@@ -26,7 +26,7 @@ PyRT doesn't have any dependencies at the moment. Generated images are just RGB 
 
 There are a lot of examples available how to use this module. This is the recommended way to get started with pyRT.
 
-![Example 01](examples/11.png)  ![Example 12](examples/12.png) ![Example 06](examples/06.gif)  ![Example 08](examples/08.png)
+![Example 01](examples/11.png)  ![Example 12b](examples/12b.gif) ![Example 06](examples/06.gif)  ![Example 08](examples/08.png)
 
 [View all examples](examples/README.md)
 

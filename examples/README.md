@@ -129,6 +129,10 @@ This example renders a sphere with a light
 
 ### Rendering a small scene with shadow
 
-This example renders 4 spheres on ground (2 triangles).
+[12_smallscene.py](12_smallscene.py)
+[12b_animated_scene.py](12b_animated_scene.py)
 
-![Example 12](12.png)
+This example renders 4 spheres on ground (2 triangles). 
+The second version (12b) animates the light source and generates a gif.
+
+![Example 12](12.png) ![Example 12b](12b.gif)

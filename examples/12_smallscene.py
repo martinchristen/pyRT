@@ -1,6 +1,6 @@
-# Example 11: Raytracing a sphere with light
+# Example 12: small scene
 #
-# This time we render a sphere and add a light to the scene
+# This time we render a small scene with shadow
 
 from pyrt.math import Vec3
 from pyrt.scene import Scene
