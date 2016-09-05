@@ -143,6 +143,7 @@ class Triangle(Shape):
         :param hitrecord: the hitrecord which is only valid if there is a hit
         :return: True if there is a hit
         """
+        t0 = hitrecord.t
 
         # find vectors for two edges sharing vert0
         edge1 = self.b.position - self.a.position
@@ -181,6 +182,9 @@ class Triangle(Shape):
         t = dot3(edge2, qvec) * inv_det
         u *= inv_det
         v *= inv_det
+
+        if t0 is not None and t > t0:
+            return False
 
         if t > 0.0:  # and t<tmax
             hitrecord.t = t

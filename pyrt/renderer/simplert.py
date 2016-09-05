@@ -21,7 +21,7 @@ class SimpleRT(Renderer):
 
         time_start = time.time()
         num_rays = 0
-        hr = HitRecord()
+        hitrecord = HitRecord()
 
         w = scene.camera.width
         h = scene.camera.height
@@ -32,14 +32,15 @@ class SimpleRT(Renderer):
         for y in range(0, h):
             for x in range(0, w):
                 ray = scene.camera.primaryRay(x, y)
+                hitrecord.reset()
                 num_rays += 1
 
                 r = g = b = 0  # background color
-                # TODO: handle multiple objects correctly
+
                 for element in scene.nodes:
-                    if element.hit(ray, hr):
+                    if element.hit(ray, hitrecord):
                         # element hit -> call shader:
-                        color = element.material.shade(scene.camera, ray, hr, scene.lights)
+                        color = element.material.shade(scene.camera, ray, hitrecord, scene.lights)
                         r = int(color[0] * 255)
                         g = int(color[1] * 255)
                         b = int(color[2] * 255)

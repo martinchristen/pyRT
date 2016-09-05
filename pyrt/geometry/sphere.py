@@ -30,6 +30,7 @@ class Sphere(Shape):
         :param hitrecord: the hitrecord which is only valid if there is a hit
         :return: True if there is a hit
         """
+        t0 = hitrecord.t
 
         temp = ray.start - self.center
         a = dot3(ray.direction, ray.direction)
@@ -45,6 +46,8 @@ class Sphere(Shape):
             if t < 0.0:
                 t = -b + discriminant / (2*a)
             if t < 0.0:
+                return False
+            if t0 is not None and t>t0:
                 return False
 
             # there is a valid hit!
