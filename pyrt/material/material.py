@@ -4,7 +4,9 @@ Base Material
 This is the description of a base material. If you want to add new materials, inherit from this class.
 """
 
-from ..math import Vec3
+from abc import abstractmethod
+from ..math import Vec3, Ray, HitRecord
+from ..camera import Camera
 
 
 class Material(object):
@@ -15,7 +17,7 @@ class Material(object):
         self.color = color
         self.shininess = shininess
         self.reflectivity = reflectivity
-        '''
+        """
         some important refractive indices:
 
         vacuum: 1.0
@@ -24,6 +26,15 @@ class Material(object):
         more indices can be found at: https://en.wikipedia.org/wiki/List_of_refractive_indices
 
         Also check the "refract3" function in math/vecops.py
-        '''
+        """
         self.refraction = refraction
+
+    @abstractmethod
+    def shade(self, camera: Camera, ray: Ray, hitrecord: HitRecord,  lights: list) -> Vec3:
+        """
+        Shade method
+
+        This is the base shade method.
+        """
+        pass
 
