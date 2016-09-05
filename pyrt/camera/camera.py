@@ -13,6 +13,7 @@ class Camera(object):
     """This defines the base class for all cameras"""
 
     def __init__(self):
+        self.position = Vec3(0.,0.,0.)
         self.view = createIdentity4()
 
     def setView(self, eye: Vec3, center: Vec3, up: Vec3):
