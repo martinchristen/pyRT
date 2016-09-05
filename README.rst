@@ -7,8 +7,6 @@ PyRT - The Python Raytracer
 .. figure:: docs/img/pyRT_256.png
    :alt: Logo
 
-   Logo
-
 **PyRT** (pronounced *pirate*) is a raytracer/image generator written in
 Python 3.x. This project is mainly done with the following in mind:
 
@@ -80,13 +78,13 @@ Python & RayTracing, isn't that too slow ?
 No. Custom renderers can be written in C with Python bindings. This is
 planned in future, later versions will even support the GPU using OpenCL
 and/or other libraries, but at the moment the primary focus is to create
-a pythonic interface to scenegraph based ray tracing.
+a "pythonic" ray tracer.
 
 License
 -------
 
 PyRT is released under MIT. More information about this license can be
-found under: `https://opensource.org/licenses/MIT <>`__
+found under: https://opensource.org/licenses/MIT
 
 About the Author
 ----------------
