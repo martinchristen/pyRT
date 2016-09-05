@@ -126,3 +126,9 @@ This example renders a sphere
 This example renders a sphere with a light
 
 ![Example 11](11.png)
+
+### Rendering a small scene with shadow
+
+This example renders 4 spheres on ground (2 triangles).
+
+![Example 12](12.png)
