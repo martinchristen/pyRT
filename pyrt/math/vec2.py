@@ -21,3 +21,9 @@ class Vec2(object):
         """Convert vector to string
         """
         return "Vec2(" + str(self.x) + ", " + str(self.y) + ")"
+
+    def copy(self):
+        """
+        :return: copy of current vector
+        """
+        return Vec2(self.x, self.y)

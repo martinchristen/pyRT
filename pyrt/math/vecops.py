@@ -124,3 +124,114 @@ def sign3(v):
     return Vec3(fsign(v.x), fsign(v.y), fsign(v.z))
 
 # ---------------------------------------------------------------------------------------------------------------------
+def clamp(v: float, minVal: float, maxVal: float):
+    """
+        Component-wise clamp
+
+        In case v is smaller than minVal, minVal is returned.
+        If v is larger than maxVal, maxVal is returned.
+
+        :param v: vector to clamp
+        :param minVal: minimal value (component-wise)
+        :param maxVal: maximal value (component-wise)
+        :return: clamped value
+    """
+    if v<minVal:
+        return minVal
+    elif v>maxVal:
+        return maxVal
+    else:
+        return v
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+def clamp2(v: Vec2, minVal: Vec2, maxVal: Vec2):
+    """
+    Component-wise clamp
+
+    In case v is smaller than minVal, minVal is returned.
+    If v is larger than maxVal, maxVal is returned.
+
+    :param v: vector to clamp
+    :param minVal: minimal value (component-wise)
+    :param maxVal: maximal value (component-wise)
+    :return: clamped value
+    """
+    result = v.copy()
+    if v.x < minVal.x:
+        result.x = minVal.x
+    if v.y < minVal.y:
+        result.y = minVal.y
+    if v.x > maxVal.x:
+        result.x = maxVal.x
+    if v.y > maxVal.y:
+        result.y = maxVal.y
+
+    return result
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+
+def clamp3(v: Vec3, minVal: Vec3, maxVal:Vec3):
+    """
+    Component-wise clamp
+
+    In case v is smaller than minVal, minVal is returned.
+    If v is larger than maxVal, maxVal is returned.
+
+    :param v: vector to clamp
+    :param minVal: minimal value (component-wise)
+    :param maxVal: maximal value (component-wise)
+    :return: clamped value
+    """
+    result = v.copy()
+    if v.x < minVal.x:
+        result.x = minVal.x
+    if v.y < minVal.y:
+        result.y = minVal.y
+    if v.z < minVal.z:
+        result.z = minVal.z
+    if v.x > maxVal.x:
+        result.x = maxVal.x
+    if v.y > maxVal.y:
+        result.y = maxVal.y
+    if v.z > maxVal.z:
+        result.z = maxVal.z
+
+    return result
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+
+def clamp4(v: Vec4, minVal: Vec4, maxVal: Vec4):
+    """
+    Component-wise clamp
+
+    In case v is smaller than minVal, minVal is returned.
+    If v is larger than maxVal, maxVal is returned.
+
+    :param v: vector to clamp
+    :param minVal: minimal value (component-wise)
+    :param maxVal: maximal value (component-wise)
+    :return: clamped value
+    """
+    result = v.copy()
+    if v.x < minVal.x:
+        result.x = minVal.x
+    if v.y < minVal.y:
+        result.y = minVal.y
+    if v.z < minVal.z:
+        result.z = minVal.z
+    if v.w < minVal.w:
+        result.w = minVal.w
+    if v.x > maxVal.x:
+        result.x = maxVal.x
+    if v.y > maxVal.y:
+        result.y = maxVal.y
+    if v.z > maxVal.z:
+        result.z = maxVal.z
+    if v.w > maxVal.w:
+        result.w = maxVal.w
+
+    return result
+
