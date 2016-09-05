@@ -15,6 +15,7 @@ class Shape(object):
 
     def __init__(self, name: str) -> None:
         self.name = name
+        self.material = None
         self.id = str(uuid.uuid4())
 
     @abstractmethod

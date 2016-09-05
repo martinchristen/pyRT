@@ -5,8 +5,10 @@
 from pyrt.math import *
 from pyrt.scene import *
 from pyrt.geometry import Sphere
+from pyrt.material import PhongMaterial
 from pyrt.camera import PerspectiveCamera
 from pyrt.renderer import SimpleRT
+
 from PIL import Image
 
 
@@ -22,7 +24,7 @@ camera.setView(Vec3(0,-10,0), Vec3(0,0,0), Vec3(0,0,1))
 scene = Scene()
 
 # Add a triangle (same as example 5) to the scene:
-scene.add(Sphere(center=Vec3(0.,0.,0.), radius=3., color=Vec4(1.,0.,0.,1.)))
+scene.add(Sphere(center=Vec3(0.,0.,0.), radius=3., material=PhongMaterial(color=Vec3(1.,0.,0.))))
 
 # Now tell the scene which camera we use
 scene.setCamera(camera)

@@ -5,4 +5,4 @@ This contains different Material definitions. The base class is defined in mater
 """
 
 from .material import Material
-from .material import PhongMaterial
+from .phongmaterial import PhongMaterial

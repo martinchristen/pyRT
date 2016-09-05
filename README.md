@@ -39,14 +39,15 @@ In PyRT you create a scene first. Scenes consist of atleast one camera and geome
 ```python
 from pyrt.math import *
 from pyrt.geometry import Triangle, Vertex
+from pyrt.material import PhongMaterial
 from pyrt.camera import PerspectiveCamera
 from pyrt.renderer import SimpleRT
 
 camera = PerspectiveCamera(640,480)
 scene = Scene()
-scene.add(Triangle(Vertex(position=(0, 0, 0), color=(1,0,0)), 
-                   Vertex(position=(0, 5, 0), color=(0,1,0)), 
-                   Vertex(position=(1, 5, 0), color=(0,0,1))))
+scene.add(Triangle(Vertex(position=(0, 0, 0)), 
+                   Vertex(position=(0, 5, 0)), 
+                   Vertex(position=(1, 5, 0)), material=PhongMaterial()))
                    
 scene.setCamera(camera)
 

@@ -2,10 +2,11 @@
 #
 # This time we render a sphere and add a light to the scene
 
-from pyrt.math import *
-from pyrt.scene import *
+from pyrt.math import Vec3
+from pyrt.scene import Scene
 from pyrt.light import PointLight
 from pyrt.geometry import Sphere
+from pyrt.material import PhongMaterial
 from pyrt.camera import PerspectiveCamera
 from pyrt.renderer import SimpleRT
 from PIL import Image
@@ -25,7 +26,7 @@ scene = Scene()
 scene.addLight(PointLight(Vec3(-1,-8,1)))
 
 # Add a triangle (same as example 5) to the scene:
-scene.add(Sphere(center=Vec3(0.,0.,0.), radius=3., color=Vec4(1.,0.,0.,1.)))
+scene.add(Sphere(center=Vec3(0.,0.,0.), radius=3., material=PhongMaterial(color=Vec3(1.,0.,0.))))
 
 # Now tell the scene which camera we use
 scene.setCamera(camera)

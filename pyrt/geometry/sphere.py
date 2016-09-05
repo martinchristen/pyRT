@@ -6,6 +6,7 @@ This is the geometric object sphere
 
 from ..geometry import Shape
 from ..math import Ray, HitRecord, Vec3, Vec4, dot3,  normalize3
+from ..material import Material, PhongMaterial
 from math import sqrt
 
 
@@ -13,12 +14,12 @@ class Sphere(Shape):
 
     """The Sphere class for raytracing"""
 
-    def __init__(self, center: Vec3, radius: float, color: Vec4 = Vec4(1.,1.,1.,1.)) -> None:
+    def __init__(self, center: Vec3, radius: float, material: Material = PhongMaterial()) -> None:
         Shape.__init__(self, "Sphere")
 
         self.center = center
         self.radius = radius
-        self.color = color
+        self.material = material
 
 
     def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
@@ -49,7 +50,8 @@ class Sphere(Shape):
             # there is a valid hit!
             hitrecord.t = t
             hitrecord.normal = hitrecord.normal_g = normalize3(ray.start + t * ray.direction - self.center)
-            hitrecord.color = self.color
+            hitrecord.color = Vec3(1.,1.,1.) # spheres don't have interpolated colors, set to white
+            hitrecord.material = self.material
 
             hitrecord.point = ray.start + t * ray.direction
             return True

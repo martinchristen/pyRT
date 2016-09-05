@@ -5,6 +5,7 @@ This is the geometric object triangle
 """
 
 from ..geometry import Shape, Vertex
+from ..material import PhongMaterial
 from ..math import *
 
 
@@ -12,13 +13,14 @@ class Triangle(Shape):
 
     """Triangle class for raytracing"""
 
-    def __init__(self, a: Vertex, b: Vertex, c: Vertex):
+    def __init__(self, a: Vertex, b: Vertex, c: Vertex, material=PhongMaterial()):
         if type(a) != Vertex or type(b) != Vertex or type(c) != Vertex:
             raise ValueError("Please initialize Triangle with 3x Vertex")
         Shape.__init__(self, "Triangle")
         self.a = a
         self.b = b
         self.c = c
+        self.material = material
         self.EPSILON = 0.000001
 
     def __str__(self):
@@ -195,6 +197,7 @@ class Triangle(Shape):
             cU = self.b.color - self.a.color
             cV = self.c.color - self.a.color
             hitrecord.color = self.a.color + cU * u + cV * v
+            hitrecord.material = self.material
 
             hitrecord.point = ray.start + t * ray.direction
 
