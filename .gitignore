@@ -1,4 +1,7 @@
 .idea
 .pyc
 __pycache__/
-sample.png
+*.egg-info/
+.installed.cfg
+*.egg
+dist/
