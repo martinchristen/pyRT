@@ -22,11 +22,22 @@ Python 3.x. This project is mainly done with the following in mind:
 PyRT just started in July 2016, it is still **work in progress** - API
 changes will be frequent.
 
+Installation
+------------
+
+Installation is easy
+
+.. code:: python
+
+    pip install pyrt
+
+...or just get the source from github: https://github.com/martinchristen/pyRT or gitlab: https://gitlab.com/martin.christen/pyRT
+
 Dependencies
 ------------
 
-PyRT doesn't have any dependencies at the moment. Generated images are
-just RGB or RGBA Arrays. To create jpg or png or other images, many
+PyRT doesn't have any dependencies.
+Generated images are just RGB or RGBA Arrays. To create jpg or png or other images, many
 demos use Pillow (PIL). So it is highly recommended to install it.
 
 Getting Started: Try the examples
