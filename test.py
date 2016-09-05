@@ -5,6 +5,72 @@ import unittest
 from pyrt.math import *
 from pyrt.camera import PerspectiveCamera
 
+# -- Testing Vec2 Class ------------------------------------------------------------------------------------------------
+
+class Vec2Test(unittest.TestCase):
+    # ------------------------------------------------------------------------------------------------------------------
+    def testStandardConstructor(self):
+        s = Vec2(1, 2)
+        self.assertEqual(s.x, 1.0)
+        self.assertEqual(s.y, 2.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testAccess(self):
+        a = Vec2(5, 6)
+        self.assertEqual(a.x, 5.0)
+        self.assertEqual(a.y, 6.0)
+
+        self.assertEqual(a[0], 5.0)
+        self.assertEqual(a[1], 6.0)
+
+        a[0] = 10
+        a[1] = 11
+        self.assertEqual(a[0], 10.0)
+        self.assertEqual(a[1], 11.0)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testEqual(self):
+        a = Vec2(4.5, 5.5)
+        b = Vec2(4.5, 5.5)
+        c = Vec2(5, 4)
+
+        self.assertEqual(a, b)
+        self.assertEqual(a, (4.5, 5.5))
+        self.assertEqual(a, [4.5, 5.5])
+        self.assertNotEqual(a, c)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testMultiplication(self):
+        a = Vec2(1, 2)
+        b = Vec2(2, 3)
+        c = a * b
+        d = 3 * b
+        e = b * 3
+        x = Vec2(2, 2)
+        self.assertEqual(c, (2, 6))
+        self.assertEqual(d, (6, 9))
+        self.assertEqual(a * b * x, (4, 12))
+        self.assertEqual(d, e)
+
+    # ------------------------------------------------------------------------------------------------------------------
+    def testDivision(self):
+        v1 = Vec2(1, 2)
+        v2 = Vec2(4, 4)
+        v3 = v1 / v2
+        self.assertEqual(v3, (0.25, 0.5))
+
+        v4 = Vec2(2, 4)
+        v5 = v4 / 2.0
+        self.assertEqual(v5, (1.0, 2.0))
+
+        v6 = Vec2(2, 4)
+        v7 = 2.0 / v6
+        self.assertEqual(v7, (1.0, 0.5))
+
+        v8 = Vec2(2, 25)
+        v9 = Vec2(4, 5)
+        v10 = v8 / v9
+        self.assertEqual(v10, (0.5, 5.0))
 
 # -- Testing Vec3 Class ------------------------------------------------------------------------------------------------
 
