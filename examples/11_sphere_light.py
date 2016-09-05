@@ -25,7 +25,7 @@ scene = Scene()
 # Add a light to the scene
 scene.addLight(PointLight(Vec3(-1,-8,1)))
 
-# Add a triangle (same as example 5) to the scene:
+# Add a sphere to the scene:
 scene.add(Sphere(center=Vec3(0.,0.,0.), radius=3., material=PhongMaterial(color=Vec3(1.,0.,0.))))
 
 # Now tell the scene which camera we use
