@@ -7,31 +7,33 @@ PyRT - The Python Raytracer
 .. figure:: docs/img/pyRT_256.png
    :alt: Logo
 
-**PyRT** (pronounced *pirate*) is a raytracer/image generator written in
-Python 3.x. This project is mainly done with the following in mind:
+**PyRT** (pronounced *pirate*) is a raytracer/image generator for **Python 3.5**.
+This project is mainly done with the following in mind:
 
--  Server-side rendering / cloud based rendering
 -  Ray Tracing in the Jupyter Notebook
--  Teaching Ray Tracing
+-  Teaching ray tracing
 -  Exploring ray tracing concepts for geo data using Python.
 -  Rendering geo data, including large point clouds.
--  Implementing new algorithms for large 3D City Model rendering.
+-  Implementing new algorithms for rendering large 3D city models.
 -  Creating 3D-Maps from OpenStreetMap data
+-  Server-side rendering / cloud based rendering
 -  ...
 
-PyRT just started in July 2016, it is still **work in progress** - API
-changes will be frequent.
+PyRT is **work in progress**.
 
 Installation
 ------------
 
-Installation is easy
+Installation can be done with pip. Please note that pyrt is still under **heavy development** and not yet meant for production.
+(API breaks are frequent!)
 
 .. code:: python
 
     pip install pyrt
 
 ...or just get the source from github: https://github.com/martinchristen/pyRT or gitlab: https://gitlab.com/martin.christen/pyRT
+
+
 
 Dependencies
 ------------
@@ -53,7 +55,7 @@ the recommended way to get started with pyRT.
 Creating Scenes
 ---------------
 
-PyRT is *not* a 3D-Modelling package. It is all about rendering from
+PyRT is *not* a 3D-modelling package. It is all about rendering from
 code.
 
 In PyRT you create a scene first. Scenes consist of atleast one camera
@@ -81,7 +83,7 @@ and geometry. Creation of scenes is done in an object oriented way:
 
 PyRT has an open rendering concept, you can create **your own
 renderer**. In the example above "SimpleRT" was used, which is a
-minimalistic raycaster.
+minimalistic reference implementation.
 
 Python & RayTracing, isn't that too slow ?
 ------------------------------------------
