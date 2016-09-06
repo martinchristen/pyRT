@@ -53,6 +53,22 @@ class SimpleRT(Renderer):
 
         return fs,local_num_shadow_rays
 
+    def _reflect(self, r: int, g: int, b: int, scene: Scene, ray: Ray, hitrecord: HitRecord) -> tuple:
+        reflect_ray = Ray(hitrecord.point, reflect3(hitrecord.normal_g, ray.direction))
+        reflect_hitrecord = HitRecord()
+
+        hit, rnew, gnew, bnew = self._shade(scene, reflect_ray, reflect_hitrecord)
+
+        if hit:
+            ref1 = hitrecord.material.reflectivity
+            ref2 = 1.-ref1
+            rnew = int ( ref1 * rnew + ref2 * r)
+            gnew = int ( ref1 * gnew + ref2 * g)
+            bnew = int ( ref1 * bnew + ref2 * b)
+            return rnew, gnew, bnew, reflect_ray, reflect_hitrecord
+        else:
+            return r,g,b,None,None
+
     def render(self, scene: Scene) -> list:
         if not scene.camera:
             print("Warning: Can't render: there is no (active) camera in the scene!")
@@ -77,9 +93,15 @@ class SimpleRT(Renderer):
                 # Primary Ray:
                 hit, r, g, b = self._shade(scene, ray, hitrecord)
 
-                if hit:
+                if hit and hitrecord.material.reflectivity != 0.0:
+                    refhit = hitrecord.copy()
+                    refray = ray.copy()
                     for i in range(self.iterations - 1):
-                        pass # TODO: implement
+                        r, g, b, refray, refhit = self._reflect(r,g,b, scene, refray, refhit)
+                        num_secondary_rays += 1
+                        if refray is None:
+                            break
+
 
                 # Calculate shadow
                 if hit and self.shadow:
