@@ -20,7 +20,7 @@ from os import path
 here = path.abspath(path.dirname(__file__))
 
 # Get the long description from the README file
-# TODO: run pandoc --from=markdown --to=rst --output=README.rst README.md
+# README.rst was created using: run pandoc --from=markdown --to=rst --output=README.rst README.md
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 
