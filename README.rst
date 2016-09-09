@@ -48,7 +48,7 @@ Getting Started: Try the examples
 There are a lot of examples available how to use this module. This is
 the recommended way to get started with pyRT.
 
-|Example 01| |Example 12b| |Example 06| |Example 08|
+|Example 01| |Example 12b| |Example 13| |Example 08|
 
 `View all examples <examples/README.md>`__
 
@@ -122,6 +122,6 @@ official support or anything.
    :target: https://github.com/martinchristen/pyRT/blob/master/LICENSE.md
 .. |Example 01| image:: examples/11.png
 .. |Example 12b| image:: examples/12b.gif
-.. |Example 06| image:: examples/06.gif
+.. |Example 13| image:: examples/13.png
 .. |Example 08| image:: examples/08.png
 
