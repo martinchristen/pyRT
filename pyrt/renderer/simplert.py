@@ -33,6 +33,17 @@ class SimpleRT(Renderer):
                 r = int(color[0] * 255)
                 g = int(color[1] * 255)
                 b = int(color[2] * 255)
+
+                # Calculate shadow
+                if self.shadow:
+                    # is hitpoint in shadow ?
+                    f, n = self._shadow(scene, hitrecord)
+                    self.num_shadow_rays += n
+                    r = int(r * f)
+                    g = int(g * f)
+                    b = int(b * f)
+
+
         return hit, r, g, b
 
     def _shadow(self, scene: Scene, hitrecord: HitRecord) -> tuple:
@@ -75,9 +86,9 @@ class SimpleRT(Renderer):
             return None
 
         time_start = time.time()
-        num_rays = 0
-        num_shadow_rays  = 0
-        num_secondary_rays = 0
+        self.num_rays = 0
+        self.num_shadow_rays  = 0
+        self.num_secondary_rays = 0
         hitrecord = HitRecord()
 
         w = scene.camera.width
@@ -88,7 +99,7 @@ class SimpleRT(Renderer):
             for x in range(0, w):
                 ray = scene.camera.primaryRay(x, y)
                 hitrecord.reset()
-                num_rays += 1
+                self.num_rays += 1
 
                 # Primary Ray:
                 hit, r, g, b = self._shade(scene, ray, hitrecord)
@@ -98,20 +109,9 @@ class SimpleRT(Renderer):
                     refray = ray.copy()
                     for i in range(self.iterations - 1):
                         r, g, b, refray, refhit = self._reflect(r,g,b, scene, refray, refhit)
-                        num_secondary_rays += 1
+                        self.num_secondary_rays += 1
                         if refray is None:
                             break
-
-
-                # Calculate shadow
-                if hit and self.shadow:
-                    # is hitpoint in shadow ?
-                    f, n = self._shadow(scene, hitrecord)
-                    num_shadow_rays += n
-                    r = int(r * f)
-                    g = int(g * f)
-                    b = int(b * f)
-
 
                 image.append((r, g, b))
 
@@ -119,10 +119,10 @@ class SimpleRT(Renderer):
         print("# RENDER STATISTICS" + 31 * "#")
         time_total = time_end - time_start
         print("TIME FOR RENDERING: " + str(time_total) + "s")
-        print("NUMBER OF PRIMARY RAYS: " + str(num_rays))
-        print("NUMBER OF SECONDARY RAYS: " + str(num_secondary_rays))
-        print("NUMBER OF SHADOW RAYS: " + str(num_shadow_rays))
-        print("RAYS/s: " + str((num_rays + num_secondary_rays + num_shadow_rays) / time_total))
+        print("NUMBER OF PRIMARY RAYS: " + str(self.num_rays))
+        print("NUMBER OF SECONDARY RAYS: " + str(self.num_secondary_rays))
+        print("NUMBER OF SHADOW RAYS: " + str(self.num_shadow_rays))
+        print("RAYS/s: " + str((self.num_rays + self.num_secondary_rays + self.num_shadow_rays) / time_total))
         print(50 * "#")
 
         return image
