@@ -6,7 +6,6 @@ This code is not essential for pyRT, it just simplifies displaying stuff in Jupy
 """
 
 
-
 try:
     from IPython.core.display import HTML
     g_hasIPython = True
