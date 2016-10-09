@@ -54,7 +54,7 @@ class Ray(object):
 
         self.start = start
         self.direction = direction
-        self.invdir = Vec3(1e20, 1e20, 1e20)
+        self.invdir = Vec3(1e20, 1e20, 1e20)  # TODO: make this IEEE 754 compliant
         if abs(self.direction.x)>0.000000000001:
             self.invdir.x = 1.0 / self.direction.x
         if abs(self.direction.y)>0.000000000001:
