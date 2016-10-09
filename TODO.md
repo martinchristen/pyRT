@@ -21,7 +21,7 @@ There is no order in which the classes are implemented, some things are even dev
 ### Scenegraph
 
 - [ ] Create Scenegraph
-- [ ] Acceleration Structure: HBV
+- [ ] Acceleration Structure: BVH
 
 ## Material
 
@@ -34,12 +34,13 @@ There is no order in which the classes are implemented, some things are even dev
 - [ ] Directional Light
 - [ ] Spot Light
 - [ ] Area Light
+- [ ] Ambient Occlusion
 
 ### Create renderer
 
 - [X] Base Class
 - [ ] RayTester
-- [ ] SimpleRT
+- [X] SimpleRT
 
 ### Importer / Exporter
 
