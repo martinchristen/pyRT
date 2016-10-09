@@ -4,6 +4,7 @@ import unittest
 
 from pyrt.math import *
 from pyrt.camera import PerspectiveCamera
+from pyrt.geometry import BBox
 
 # -- Testing Vec2 Class ------------------------------------------------------------------------------------------------
 
@@ -438,6 +439,21 @@ class Mat4Test(unittest.TestCase):
         self.assertEqual(pos5, Vec3(769.8003589185585, 989.9999999987921, -577.3502691889189))
         self.assertEqual(pos6, Vec3(769.8003589185585, 989.9999999987921, 577.3502691889189))
         self.assertEqual(pos7, Vec3(-769.8003589185585, 989.9999999987921, 577.3502691889189))
+
+    def testRay(self):
+        ray = Ray(Vec3(0,0,0), Vec3(1,0,0))
+
+        self.assertEqual(ray.start, Vec3(0,0,0))
+        self.assertEqual(ray.direction, Vec3(1,0,0))
+
+        b = BBox(Vec3(1,-1,-1), Vec3(3,1,1))
+        self.assertEqual(b.hitShadow(ray), True)
+
+        hr = HitRecord()
+        self.assertEqual(b.hit(ray,hr), True)
+        self.assertEqual(hr.point, Vec3(1,0,0))
+
+
 
 
 """

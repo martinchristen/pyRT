@@ -104,7 +104,7 @@ class BBox(Shape):
         tmax = min(min(tmax, tymax), tzmax)
         tmin = (self[ray.sign[0]].x - ray.start.x) * ray.invdir.x
 
-        return tmin > tmax
+        return tmin < tmax
 
 
     def surfaceArea(self) -> float:

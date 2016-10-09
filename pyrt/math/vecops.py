@@ -270,9 +270,7 @@ def sign(v : float) -> float:
     :return: sign of v (1 positive, -1 negative or 0)
     """
     if v<0:
-        return -1.0
-    elif v>0:
-        return 1.0
+        return 1
     else:
         return 0.0
 

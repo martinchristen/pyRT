@@ -54,8 +54,21 @@ class Ray(object):
 
         self.start = start
         self.direction = direction
-        self.invdir = Vec3(1.0 / self.direction.x, 1.0 / self.direction.y, 1.0 / self.direction.z)
-        self.sign = sign3(self.invdir)
+        self.invdir = Vec3(1e20, 1e20, 1e20)
+        if abs(self.direction.x)>0.000000000001:
+            self.invdir.x = 1.0 / self.direction.x
+        if abs(self.direction.y)>0.000000000001:
+            self.invdir.y = 1.0 / self.direction.y
+        if abs(self.direction.z)>0.000000000001:
+            self.invdir.z = 1.0 / self.direction.z
+
+        self.sign = [0,0,0]
+        if self.invdir.x < 0:
+            self.sign[0] = 1
+        if self.invdir.y < 0:
+            self.sign[1] = 1
+        if self.invdir.z < 0:
+            self.sign[2] = 1
 
     def copy(self):
         """
