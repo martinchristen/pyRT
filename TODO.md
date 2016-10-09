@@ -5,7 +5,7 @@ There is no order in which the classes are implemented, some things are even dev
 
 ### Create all math classes
 
-- [ ] Vec2
+- [X] Vec2
 - [X] Vec3
 - [X] Vec4
 - [X] Mat4
@@ -15,7 +15,7 @@ There is no order in which the classes are implemented, some things are even dev
 
 - [X] Base Class  ("Shape")
 - [X] Triangle
-- [ ] Sphere
+- [X] Sphere
 - [ ] Mesh
 
 ### Scenegraph
@@ -25,20 +25,19 @@ There is no order in which the classes are implemented, some things are even dev
 
 ## Material
 
-- [ ] Color Class (RGB)
-- [ ] Basic Material
+- [X] Basic Material (PhongMaterial)
 
 ## Lighting models
 
-- [ ] Base Class
-- [ ] Point Light
+- [X] Base Class
+- [X] Point Light
 - [ ] Directional Light
 - [ ] Spot Light
 - [ ] Area Light
 
 ### Create renderer
 
-- [ ] Base Class
+- [X] Base Class
 - [ ] RayTester
 - [ ] SimpleRT
 

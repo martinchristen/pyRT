@@ -26,7 +26,7 @@ scene = Scene()
 scene.addLight(PointLight(Vec3(0,0,15)))
 
 # create some materials:
-floormaterial = PhongMaterial(color=Vec3(0.0,0.1,0.1))
+floormaterial = PhongMaterial(color=Vec3(0.1,0.1,0.1))
 sphere0material = PhongMaterial(color=Vec3(1.,0.,0.), reflectivity=0.5)
 sphere1material = PhongMaterial(color=Vec3(0.,1.,0.), reflectivity=0.5)
 sphere2material = PhongMaterial(color=Vec3(0.,0.,1.), reflectivity=0.5)
@@ -55,7 +55,7 @@ scene.add(Sphere(center=Vec3(-2.5, 2.5,1.75), radius=1.75, material=sphere3mater
 scene.setCamera(camera)
 
 # Create a raytracer using "SimpleRT"
-engine = SimpleRT(shadow=False, iterations=3)   # TODO: Reflect Shadow too (put in shade calculatation)
+engine = SimpleRT(shadow=True, iterations=3)
 
 # Render the scene:
 imgdata = engine.render(scene)

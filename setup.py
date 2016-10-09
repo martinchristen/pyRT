@@ -33,7 +33,8 @@ setup(
               'pyrt.material',
               'pyrt.math',
               'pyrt.renderer',
-              'pyrt.scene'],
+              'pyrt.scene',
+              'pyrt.utils'],
     package_dir={
         'pyrt.camera': 'pyrt/camera',
         'pyrt.geometry': 'pyrt/geometry',
@@ -41,11 +42,12 @@ setup(
         'pyrt.material': 'pyrt/material',
         'pyrt.math': 'pyrt/math',
         'pyrt.renderer': 'pyrt/renderer',
-        'pyrt.scene': 'pyrt/scene'
+        'pyrt.scene': 'pyrt/scene',
+        'pyrt.utils': 'pyrt/utils'
     },
     package_data={'pyrt': ['camera/*.py']},
     include_package_data=True,
-    version='0.0.1a0',
+    version='0.0.1a2',
     description='pyRT - The Python Raytracer',
     long_description=long_description,
     url='https://github.com/martinchristen/pyRT',

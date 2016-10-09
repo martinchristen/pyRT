@@ -136,3 +136,12 @@ This example renders 4 spheres on ground (2 triangles).
 The second version (12b) animates the light source and generates a gif.
 
 ![Example 12](12.png) ![Example 12b](12b.gif)
+
+### Adding reflections
+
+This example uses the scene from example 11. It changes the material of the spheres to supoprt reflections.
+
+[13_reflections.py](13_reflections.py)
+[13_reflections.py](13_reflections.py)
+
+![Example 13](13.png)

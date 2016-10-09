@@ -5,3 +5,6 @@ __pycache__/
 .installed.cfg
 *.egg
 dist/
+build/
+jupyter/.ipynb_checkpoints/
+jupyter/rendering.png
