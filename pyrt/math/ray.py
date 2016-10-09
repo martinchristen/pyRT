@@ -5,6 +5,7 @@ This is the code for handling 3D rays
 """
 
 from .vec3 import Vec3
+from .vecops import sign3
 
 
 class HitRecord(object):
@@ -51,11 +52,10 @@ class Ray(object):
             print("Error: start and direction must be Vec3")
             return
 
-        self.start = start  # todo: Property
-        self.direction = direction  # todo: Property
-
-        # self.invdir = Vec3(1.0 / self.direction.x, 1.0 / self.direction.y, 1.0 / self.direction.z)
-        # self.sign = sign(self.invdir)
+        self.start = start
+        self.direction = direction
+        self.invdir = Vec3(1.0 / self.direction.x, 1.0 / self.direction.y, 1.0 / self.direction.z)
+        self.sign = sign3(self.invdir)
 
     def copy(self):
         """
