@@ -235,3 +235,27 @@ def clamp4(v: Vec4, minVal: Vec4, maxVal: Vec4):
 
     return result
 
+
+# ---------------------------------------------------------------------------------------------------------------------
+
+
+def min3(a: Vec3, b: Vec3) -> Vec3:
+    """
+    component wise minimum
+
+    :param a: first vector
+    :param b: second vector
+    :return: minimum vector
+    """
+    return Vec3(min(a.x, b.x), min(a.y, b.y), min(a.z, b.z))
+
+
+def max3(a: Vec3, b: Vec3) -> Vec3:
+    """
+    component wise maximum
+
+    :param a: first vector
+    :param b: second vector
+    :return: maximum vector
+    """
+    return Vec3(max(a.x, b.x), max(a.y, b.y), max(a.z, b.z))
