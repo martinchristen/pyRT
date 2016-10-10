@@ -261,26 +261,3 @@ def max3(a: Vec3, b: Vec3) -> Vec3:
     return Vec3(max(a.x, b.x), max(a.y, b.y), max(a.z, b.z))
 
 # ---------------------------------------------------------------------------------------------------------------------
-
-def sign(v : float) -> float:
-    """
-    sgn function.
-
-    :param v: value
-    :return: sign of v (1 positive, -1 negative or 0)
-    """
-    if v<0:
-        return 1
-    else:
-        return 0.0
-
-def sign3(a: Vec3) -> Vec3:
-    """
-    Returns a vector containing the signs of the components of the input vector
-
-    :param a: input vector
-    :return: vector containing signs
-    """
-    return Vec3(sign(a.x), sign(a.y), sign(a.z))
-
-# ---------------------------------------------------------------------------------------------------------------------
