@@ -284,6 +284,13 @@ class Triangle(Shape):
         """
         return self.centroid()
 
+    def getSurfaceArea(self) -> float:
+        """
+        Retrieve Surface area of Triangle
+
+        :return: surface area
+        """
+        return self.area()
 
 
 

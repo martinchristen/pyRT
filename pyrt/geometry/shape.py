@@ -57,6 +57,15 @@ class Shape(object):
         """
         return Vec3(0,0,0)
 
+    @abstractmethod
+    def getSurfaceArea(self) -> float:
+        """
+        Retrieve Surface area of Triangle
+
+        :return: surface area
+        """
+        return 0
+
 
 
         ####################
