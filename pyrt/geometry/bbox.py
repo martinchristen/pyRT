@@ -4,9 +4,11 @@ This file contains all bounding box realated stuff
 The main class is "BBox"
 """
 
+from .shape import Shape
 from ..math import Vec3, Ray, HitRecord
 from ..math.vecops import *
-from ..geometry import Shape
+
+
 
 class BBox(Shape):
     """

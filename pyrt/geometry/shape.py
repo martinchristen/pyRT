@@ -5,12 +5,11 @@ This is the geometric shape description
 """
 
 from abc import abstractmethod
-from ..math import Ray, HitRecord
+from ..math import Ray, HitRecord, Vec3
 import uuid
 
 
 class Shape(object):
-
     """This is the base class for all geometries"""
 
     def __init__(self, name: str) -> None:
@@ -30,7 +29,7 @@ class Shape(object):
         pass
 
     @abstractmethod
-    def hitShadow(self, ray: Ray) -> bool:
+    def hitShadow(self, ray: Ray) -> bool:         # TODO: This method should be renamed to "hitTest".
         """
         :param ray:
         :param tmin:
@@ -39,10 +38,26 @@ class Shape(object):
         """
         pass
 
-        #####################
-        # TODO: BOUNDING BOX
-        #       implement abstract method to retrieve bounding box
-        ####################
+
+    @abstractmethod
+    def getBBox(self):
+        """
+        Retrieve axis aligned bounding box of the shape
+
+
+        :return: bounding box
+        """
+        return BBox(Vec3(0,0,0), Vec3(1,1,1))
+
+    @abstractmethod
+    def getCentroid(self) -> Vec3:
+        """
+        Retrieve centroid of shape
+        :return:
+        """
+        return Vec3(0,0,0)
+
+
 
         ####################
         # TODO: MATERIAL

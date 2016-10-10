@@ -7,7 +7,8 @@ This is the geometric object sphere
 from ..geometry import Shape
 from ..math import Ray, HitRecord, Vec3, dot3, G_EPSILON
 from ..material import Material, PhongMaterial
-from math import sqrt
+from .bbox import BBox
+from math import sqrt, pi
 
 
 class Sphere(Shape):
@@ -81,3 +82,32 @@ class Sphere(Shape):
         if t > 0:
             return True
         return False
+
+
+    def getBBox(self):
+        """
+        Retrieve axis aligned bounding box of the sphere
+
+
+        :return: bounding box
+        """
+        bbmin = Vec3(self.center - Vec3(self.radius, self.radius, self.radius))
+        bbmax = Vec3(self.center + Vec3(self.radius, self.radius, self.radius))
+        return BBox(bbmin, bbmax)
+
+
+    def getCentroid(self) -> Vec3:
+        """
+        Retrieve center of sphere
+        :return:
+        """
+        return self.center
+
+
+    def getSurfaceArea(self):
+        """
+        Retrieve surface area
+
+        :return: surface area
+        """
+        return 4. * pi * self.radius**2

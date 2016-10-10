@@ -260,6 +260,34 @@ class Triangle(Shape):
         return False
 
 
+    def getBBox(self):
+        """
+        Retrieve axis aligned bounding box of the triangle
+
+        :return: bounding box
+        """
+        xmin = min(self.a.position.x, self.b.position.x, self.c.position.x)
+        ymin = min(self.a.position.y, self.b.position.y, self.c.position.y)
+        zmin = min(self.a.position.z, self.b.position.z, self.c.position.z)
+
+        xmax = max(self.a.position.x, self.b.position.x, self.c.position.x)
+        ymax = max(self.a.position.y, self.b.position.y, self.c.position.y)
+        zmax = max(self.a.position.z, self.b.position.z, self.c.position.z)
+
+        return BBox(Vec3(xmin, ymin, zmin), Vec3(xmax, ymax, zmax))
+
+
+    def getCentroid(self) -> Vec3:
+        """
+        Retrieve center of triangle
+        :return:
+        """
+        return self.centroid()
+
+
+
+
+
 # ----------------------------------------------------------------------------------------------------------------------
 # Utility functions related to triangles
 
