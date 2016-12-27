@@ -62,7 +62,9 @@ def _mat_parse(materialfile, state):
         elif line[0:6] == "map_Kd":
             m = line.split(" ")
             materials[curmtl]["map_Kd"] = state["file"][1] + m[1]
-            pass
+        elif line[0:5] == "illum":
+            m = line.split(" ")
+            materials[curmtl]["illum"] = m[1]
 
 
 
