@@ -69,8 +69,12 @@ class RGBImage(object):
     # -------------------------------------------------------------------------------------------------------------------
     def display(self):
         if RGBImage_has_ipython and RBGImage_has_pillow:
-            im = Image.new("RGB", (self.width, self.height))
-            im.putdata(self.data)
+            if RGBImage_has_numpy:
+                im = Image.fromarray(self.data)
+            else:
+                im = Image.new("RGB", (self.width, self.height))
+                im.putdata(self.data)
+            
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
