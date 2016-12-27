@@ -27,14 +27,14 @@ Installation
 Installation can be done with pip. Please note that pyrt is still under **heavy development** and not yet meant for production.
 (API breaks are frequent!)
 
-.. code:: python
+.. code:: shell
 
     pip install pyrt
 
 
 Currently it is recommended to pip directly from the repository:
 
-.. code:: python
+.. code:: shell
 
     pip install https://github.com/martinchristen/pyRT/archive/master.zip --upgrade
 
