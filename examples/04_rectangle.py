@@ -16,6 +16,4 @@ for i in range(100):
                         random.randint(1, w / 2), random.randint(1, h / 2),
                         Vec3(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1)))
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("04.png")
+image.save("04.png")

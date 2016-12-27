@@ -39,6 +39,4 @@ level = 5  # Change max recursion depth here
 
 snowflake(image, level, 0, 255, 511, 255, Vec3(1, 0, 0))
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("02.png")
+image.save("02.png")

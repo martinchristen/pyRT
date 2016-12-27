@@ -66,11 +66,8 @@ def make_frame(t):
     engine = SimpleRT(shadow=True)
 
     # Render the scene:
-    imgdata = engine.render(scene)
-
-    im = Image.new("RGB", (width, height))
-    im.putdata(imgdata)
-    return np.asarray(im)
+    image = engine.render(scene)
+    return image.data
 
 
 clip = mpy.VideoClip(make_frame, duration=4) # duration 4 seconds

@@ -12,12 +12,11 @@ h = 240
 image = RGBImage(w, h)
 
 for i in range(100):
-    image.drawCircle(Vec2(random.randint(0, w - 1), random.randint(0, h - 1)),
-                     random.randint(3, 100),
-                     Vec3(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1)))
+    image.drawCircle(Vec2(random.randint(0, w - 1), random.randint(0, h - 1)),  # Center
+                     random.randint(3, 100), #  Radius
+                     Vec3(random.uniform(0, 1), random.uniform(0, 1), random.uniform(0, 1)), # Color
+                     random.randint(1, 3)) # Size
 
 image.drawCircle(Vec2(159, 119), 100, Vec3(1, 0, 0))
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("03.png")
+image.save("03.png")

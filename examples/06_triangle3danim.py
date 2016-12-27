@@ -51,9 +51,7 @@ def make_frame(t):
     image.drawLine(c_screenpos, b_screenpos, color)
     image.drawLine(b_screenpos, a_screenpos, color)
 
-    im = Image.new("RGB", (w, h))
-    im.putdata(image.data)
-    return np.asarray(im)
+    return np.asarray(image.data)
 
 
 # Create the clipp.

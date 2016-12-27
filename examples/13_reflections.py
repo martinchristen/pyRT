@@ -58,9 +58,7 @@ scene.setCamera(camera)
 engine = SimpleRT(shadow=True, iterations=3)
 
 # Render the scene:
-imgdata = engine.render(scene)
+image = engine.render(scene)
 
 # Save the resulting image using pillow
-im = Image.new("RGBA", (width, height))
-im.putdata(imgdata)
-im.save("13.png")
+image.save("13.png")

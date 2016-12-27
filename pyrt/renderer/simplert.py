@@ -4,9 +4,11 @@ A simple ray tracer
 Reference implementation...
 """
 
+from .rgbimage import *
 from .renderer import Renderer
 from ..scene import Scene
 from ..math import *
+
 import time
 
 
@@ -80,7 +82,7 @@ class SimpleRT(Renderer):
         else:
             return r,g,b,None,None
 
-    def render(self, scene: Scene) -> list:
+    def render(self, scene: Scene) -> RGBImage:
         if not scene.camera:
             print("Warning: Can't render: there is no (active) camera in the scene!")
             return None
@@ -94,7 +96,8 @@ class SimpleRT(Renderer):
         w = scene.camera.width
         h = scene.camera.height
 
-        image = []
+        image = RGBImage(w,h)
+
         for y in range(0, h):
             for x in range(0, w):
                 ray = scene.camera.primaryRay(x, y)
@@ -113,7 +116,8 @@ class SimpleRT(Renderer):
                         if refray is None:
                             break
 
-                image.append((r, g, b))
+                image.drawPixelFast8(x, y, r, g, b)
+
 
         time_end = time.time()
         print("# RENDER STATISTICS" + 31 * "#")

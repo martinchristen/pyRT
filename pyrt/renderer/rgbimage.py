@@ -1,5 +1,40 @@
 from ..math import Vec2, Vec3
 
+#-----------------------------------------------------------------------------------------------------------------------
+# options:
+RBGImage_use_numpy = True       # set to False if you don't want to use numpy
+RGBImage_use_pillow = True      # set to False if you don't want to use pillow (store images manually)
+RGBImage_use_ipython = True     # set to False if you don't want ipython/jupyter support
+
+#-----------------------------------------------------------------------------------------------------------------------
+RGBImage_has_numpy = False
+if RBGImage_use_numpy:
+    try:
+        import numpy as np
+        RGBImage_has_numpy = True
+    except ImportError:
+        RGBImage_has_numpy = False
+
+RBGImage_has_pillow = False
+if RGBImage_use_pillow:
+    try:
+        from PIL import Image
+        RBGImage_has_pillow = True
+    except ImportError:
+        RBGImage_has_pillow = False
+
+RGBImage_has_ipython = False
+if RGBImage_use_ipython:
+    try:
+        __IPYTHON__
+        from IPython.core.display import HTML
+        from io import BytesIO
+        import base64
+        RGBImage_has_ipython = True
+    except NameError:
+        RGBImage_has_ipython = False
+#-----------------------------------------------------------------------------------------------------------------------
+
 
 class RGBImage(object):
     def __init__(self, width: int, height: int) -> None:
@@ -8,24 +43,117 @@ class RGBImage(object):
         self.type = "RGB"
 
         if self.type == "RGB":
-            self.data = [(0, 0, 0) for i in range(0, self.width*self.height)]
+            if RGBImage_has_numpy:
+                self.data = np.zeros((self.height, self.width, 3), dtype=np.uint8)
+            else:
+                self.data = [[0, 0, 0] for i in range(0, self.width*self.height)]
         else:   # in future there will be RGBA, FLOAT images
             raise ValueError("unknown/unsupported image type")
 
+
     #-------------------------------------------------------------------------------------------------------------------
 
-    def drawPoint(self, pos: Vec2, color: Vec3) -> None:
-        # This code is really slow if you write many pixels - it even contains a bounds check.
-        # If you draw many points, please use self.data directly.
-        # This draw point assumes (0,0) to be bottom left
+    def save(self, filename: str) -> None:
+        if RBGImage_has_pillow:
+            if RBGImage_use_numpy:
+                im = Image.fromarray(self.data)
+                im.save(filename)
+            else:
+                im = Image.new("RGB", (self.width, self.height))
+                im.putdata(self.data)
+                im.save(filename)
+        else:
+            print("WARNING: Pillow module is required to export images!")
+            print("         not saved anything!")
+
+    # -------------------------------------------------------------------------------------------------------------------
+    def display(self):
+        if RGBImage_has_ipython and RBGImage_has_pillow:
+            im = Image.new("RGB", (self.width, self.height))
+            im.putdata(self.data)
+            buffer = BytesIO()
+            im.save(buffer, format="PNG")
+            img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
+            return HTML('<img src="data:image/png;base64,' + img_str + '"></img>')
+        else:
+            print("ERROR: RGBImage.display() only works from IPython/Jupyter Notebook and also requires PIL")
+
+
+    #-------------------------------------------------------------------------------------------------------------------
+    def drawPixelFast8(self, x, y, r, g, b):
+        """
+        Set 8-bit RGB pixel without boundary check
+
+
+        :param x: x-Pos
+        :param y: y-Pos
+        :param r: red
+        :param g: green
+        :param b: blue
+        :return:
+        """
+        if RGBImage_has_numpy:
+            self.data[y][x][0] = r
+            self.data[y][x][1] = g
+            self.data[y][x][2] = b
+        else:
+            self.data[y * self.width + x] = (r, g, b )
+    # -------------------------------------------------------------------------------------------------------------------
+
+    def drawPixel(self, pos: Vec2, color: Vec3) -> None:
+        """
+        This code is really slow if you write many pixels - it even contains a bounds check.
+        If you draw many points, consider using self.data directly.
+
+
+        :param pos: position of the point, with (0,0) being bottom left
+        :param color: RGB Color (8 bit per channel)
+        """
         x = pos.x
         y = self.height-pos.y-1
-        if x>=0 and x<self.width and y>=0 and y<self.height:
-            self.data[y*self.width+x] = (int(color[0]*255.), int(color[1]*255.), int(color[2]*255.))
+        if x >= 0 and x < self.width and y >= 0 and y < self.height:
+            if RGBImage_has_numpy:
+                self.data[y][x][0] = int(color[0]*255.)
+                self.data[y][x][1] = int(color[1]*255.)
+                self.data[y][x][2] = int(color[2]*255.)
+            else:
+                self.data[y*self.width+x] = (int(color[0]*255.), int(color[1]*255.), int(color[2]*255.))
+
+    def drawPoint(self, pos: Vec2, color: Vec3, size : int = 1) -> None:
+        """
+        Draws a point
+
+
+        :param pos: position of the point, with (0,0) being bottom left
+        :param color: RGB Color (8 bit per channel)
+        :param size: size of the point
+        :return:
+        """
+
+        # TODO: use arbitrary size, currently only size 1,2 and 3 are supported...
+
+        if size == 1:
+            self.drawPixel(pos,color)
+        if size == 2:
+            self.drawPixel(Vec2(pos.x, pos.y), color)
+            self.drawPixel(Vec2(pos.x, pos.y+1), color)
+            self.drawPixel(Vec2(pos.x+1, pos.y), color)
+            self.drawPixel(Vec2(pos.x+1, pos.y+1), color)
+        elif size == 3:
+            self.drawPixel(Vec2(pos.x-1, pos.y-1), color)
+            self.drawPixel(Vec2(pos.x, pos.y-1), color)
+            self.drawPixel(Vec2(pos.x+1, pos.y-1), color)
+            self.drawPixel(Vec2(pos.x-1, pos.y), color)
+            self.drawPixel(Vec2(pos.x, pos.y), color)
+            self.drawPixel(Vec2(pos.x+1, pos.y), color)
+            self.drawPixel(Vec2(pos.x-1, pos.y+1), color)
+            self.drawPixel(Vec2(pos.x, pos.y+1), color)
+            self.drawPixel(Vec2(pos.x+1, pos.y+1), color)
+
 
     #-------------------------------------------------------------------------------------------------------------------
 
-    def drawLine(self, start: Vec2, end: Vec2, color: Vec3 = Vec3(1.,1.,1.)) -> None:
+    def drawLine(self, start: Vec2, end: Vec2, color: Vec3 = Vec3(1.,1.,1.), size : int = 1) -> None:
         """Bresenham's line algorithm
            modified from: https://rosettacode.org/wiki/Bitmap/Bresenham%27s_line_algorithm#Python
         """
@@ -37,7 +165,7 @@ class RGBImage(object):
         if dx > dy:
             err = dx / 2.0
             while x != end.x:
-                self.drawPoint(Vec2(x, y), color)
+                self.drawPoint(Vec2(x, y), color, size)
                 err -= dy
                 if err < 0:
                     y += sy
@@ -46,29 +174,29 @@ class RGBImage(object):
         else:
             err = dy / 2.0
             while y != end.y:
-                self.drawPoint(Vec2(x, y), color)
+                self.drawPoint(Vec2(x, y), color, size)
                 err -= dx
                 if err < 0:
                     x += sx
                     err += dy
                 y += sy
-        self.drawPoint(Vec2(x, y), color)
+        self.drawPoint(Vec2(x, y), color, size)
 
     #-------------------------------------------------------------------------------------------------------------------
 
-    def drawCircle(self, center: Vec2, radius: int, color: Vec3):
+    def drawCircle(self, center: Vec2, radius: int, color: Vec3, size : int = 1):
         switch = 3 - (2 * radius)
         x = 0
         y = radius
         while x <= y:
-            self.drawPoint(Vec2(x + center.x, -y + center.y), color)
-            self.drawPoint(Vec2(y + center.x, -x + center.y), color)
-            self.drawPoint(Vec2(y + center.x, x + center.y), color)
-            self.drawPoint(Vec2(x + center.x, y + center.y), color)
-            self.drawPoint(Vec2(-x + center.x, y + center.y), color)
-            self.drawPoint(Vec2(-y + center.x, x + center.y), color)
-            self.drawPoint(Vec2(-y + center.x, -x + center.y), color)
-            self.drawPoint(Vec2(-x + center.x, -y + center.y), color)
+            self.drawPoint(Vec2(x + center.x, -y + center.y), color, size)
+            self.drawPoint(Vec2(y + center.x, -x + center.y), color, size)
+            self.drawPoint(Vec2(y + center.x, x + center.y), color, size)
+            self.drawPoint(Vec2(x + center.x, y + center.y), color, size)
+            self.drawPoint(Vec2(-x + center.x, y + center.y), color, size)
+            self.drawPoint(Vec2(-y + center.x, x + center.y), color, size)
+            self.drawPoint(Vec2(-y + center.x, -x + center.y), color, size)
+            self.drawPoint(Vec2(-x + center.x, -y + center.y), color, size)
             if switch < 0:
                 switch = switch + (4 * x) + 6
             else:

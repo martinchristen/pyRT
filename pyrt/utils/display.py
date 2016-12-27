@@ -3,6 +3,11 @@ This is a display utility for IPython / Jupyter Notebook
 
 It also uses PIL (Pillow) to encode images
 This code is not essential for pyRT, it just simplifies displaying stuff in Jupyter.
+
+** THIS IS OBSOLETE AND WILL BE REMOVED IN A LATER VERSION ***
+** in the RGBImage-Class use display() **
+
+
 """
 
 

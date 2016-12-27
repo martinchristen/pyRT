@@ -48,6 +48,4 @@ print(b_screenpos)
 print(c_screenpos)
 
 
-im = Image.new("RGB", (w, h))
-im.putdata(image.data)
-im.save("05.png")
+image.save("05.png")
