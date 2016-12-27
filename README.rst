@@ -31,7 +31,12 @@ Installation can be done with pip. Please note that pyrt is still under **heavy 
 
     pip install pyrt
 
-...or just get the source from github: https://github.com/martinchristen/pyRT or gitlab: https://gitlab.com/martin.christen/pyRT
+
+Currently it is recommended to pip directly from the repository:
+
+.. code:: python
+
+    pip install https://github.com/martinchristen/pyRT/archive/master.zip --upgrade
 
 
 
