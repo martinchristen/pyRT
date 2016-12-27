@@ -78,9 +78,20 @@ def _obj_parse(line, state):
             materialfile = state["file"][1] + materialfile
             _mat_parse(materialfile, state)
 
+    elif line[0:2] == "v ":
+        v = line.split(" ")
+        state["raw_vertices"].append([float(v[1]), float(v[2]), float(v[3])])
+
+    elif line[0:2] == "vt":
+        vt = line.split(" ")
+        state["raw_texcoords"].append([float(vt[1]), float(vt[2])])
+
+    elif line[0:2] == "vn":
+        vn = line.split(" ")
+        state["raw_normals"].append([float(vn[1]), float(vn[2]), float(vn[3])])
 
 
-#-----------------------------------------------------------------------------------------------------------------------
+    #-----------------------------------------------------------------------------------------------------------------------
 def loadObj(filename: str) -> TriangleMesh:
     parsestate = {}
 
@@ -88,6 +99,9 @@ def loadObj(filename: str) -> TriangleMesh:
     path = os.path.join(path, '')
 
     parsestate["materials"] = {}
+    parsestate["raw_vertices"] = []
+    parsestate["raw_normals"] = []
+    parsestate["raw_texcoords"] = []
     parsestate["file"] = [name, path]
 
 
@@ -106,6 +120,9 @@ def loadObj(filename: str) -> TriangleMesh:
 
     # remove temporary info which was required for parsing:
     # del parsestate["file"]
+    # del parsestate["raw_vertices"]
+    # del parsestate["raw_normals"]
+    # del parsestate["raw_texcoords"]
 
 
     import pprint
