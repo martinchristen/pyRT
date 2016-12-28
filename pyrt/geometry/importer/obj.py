@@ -4,11 +4,8 @@ Simple Wavefront OBJ Importer
 
 There are some restrictions:
 - obj must be triangulated
-- every group returns a TriangleMesh
-- only single file obj are supported
 - material file and obj file must be in same directory
 - filenames of textures must be relative to the material/obj file
-
 
 """
 
@@ -18,7 +15,6 @@ from ..trianglemesh import *
 
 import os.path
 import uuid
-
 
 
 #-----------------------------------------------------------------------------------------------------------------------
@@ -101,7 +97,9 @@ def _mat_parse(materialfile, state):
 
 #-----------------------------------------------------------------------------------------------------------------------
 def _obj_parse(line, state):
-    curgroup = str(uuid.uuid4())[0:8]
+    geometry = state["geometry"]
+
+
     if line[0:6] == "mtllib":
         materialfile = line.split(" ")
         if len(materialfile) == 2:
@@ -124,16 +122,94 @@ def _obj_parse(line, state):
         vn = vn.split(" ")
         state["raw_normals"].append([float(vn[0]), float(vn[1]), float(vn[2])])
 
-    elif line[0:1] == "g":
+    elif line[0:1] == "o": # object group
+        o = line[1:len(line)].strip()
+        state["curobject"] = o
+
+    elif line[0:1] == "g": # polygon group
         g = line[1:len(line)].strip()
-        curgroup = g
+        state["curgroup"] = g
+
+    elif line[0:6] == "usemtl":
+        m = line[6:len(line)].strip()
+        state["curmaterial"] = m
 
     elif line[0:1] == "f":
+
+        curobject = state["curobject"]
+        curgroup = state["curgroup"]
+
+        if not curobject in geometry:
+            geometry[curobject] = {}
+
+        if not curgroup in geometry[curobject]:
+            geometry[curobject][curgroup] = {"positions": [], "texcoords": [], "normals": []}
+
         f = line[1:len(line)].strip()
         f = f.split(" ")
 
-        #if len(f) != 3:
-        #    print("ERROR: Currently only triangulated objects are supported")
+        if len(f) != 3:
+            raise ImportError("Currently only triangulated OBJ files are supported")
+
+        indexlist = []
+        for element in f:
+            vec = element.split("/")
+            n = []
+            for i in vec:
+                try:
+                    n.append(int(i))
+                except:
+                    n.append(0)     # 0 means "NO DATA"
+            while len(n) != 3:
+                n.append(0)         # 0 means "NO DATA"
+
+            indexlist.append(n)
+
+        for index in indexlist:
+            position = index[0]
+            texcoord = index[1]
+            normal = index[2]
+
+            if position == 0:
+                raise ImportError("position not defined in face list")
+            elif position>0:
+                position -= 1
+
+            vertices = state["raw_vertices"]
+
+            vertex = vertices[position]
+            for coord in vertex:
+                geometry[curobject][curgroup]["positions"].append(coord)
+
+            tc = True
+            if texcoord == 0:
+                tc = False
+            elif texcoord>0:
+                texcoord -= 1
+
+
+            texcoords = state["raw_texcoords"]
+            if tc:
+                txcoord = texcoords[texcoord]
+                for coord in txcoord:
+                    geometry[curobject][curgroup]["texcoords"].append(coord)
+
+
+            norm = True
+            if normal == 0:
+                norm = False
+            elif normal>0:
+                normal -= 1
+
+            normals = state["raw_normals"]
+            if norm:
+                ncoord = normals[normal]
+                for coord in ncoord:
+                    geometry[curobject][curgroup]["normals"].append(coord)
+
+
+
+
 
 
     #-----------------------------------------------------------------------------------------------------------------------
@@ -148,33 +224,43 @@ def loadObj(filename: str, debug: bool = False) -> TriangleMesh:
     parsestate["raw_normals"] = []
     parsestate["raw_texcoords"] = []
     parsestate["file"] = [name, path]
+    parsestate["geometry"] = {}
+
+    parsestate["curobject"] = str(uuid.uuid4())[0:8]
+    parsestate["curgroup"] = str(uuid.uuid4())[0:8]
+    parsestate["curmaterial"] = ""
+
 
     if debug:
         print("processing: " + name + " in directory " + path)
+
 
     file = open(filename, "r")
     for line in file:
         line = line.rstrip()
 
-
-        if line[0:1] != '#':  # not a comment
+        if line[0:1] != '#':  # only parse line if it is not a comment
             _obj_parse(line, parsestate)
 
     file.close()
 
 
     # remove temporary info which was required for parsing:
-    # del parsestate["file"]
-    # del parsestate["raw_vertices"]
-    # del parsestate["raw_normals"]
-    # del parsestate["raw_texcoords"]
+    del parsestate["file"]
+    del parsestate["raw_vertices"]
+    del parsestate["raw_normals"]
+    del parsestate["raw_texcoords"]
+    del parsestate["curobject"]
+    del parsestate["curgroup"]
+    del parsestate["curmaterial"]
 
 
     if debug:
         import pprint
         print("PARSED OUTPUT:")
 
-        pp = pprint.PrettyPrinter(depth=6)
+        #pp = pprint.PrettyPrinter(depth=4)
+        pp = pprint.PrettyPrinter(depth=10)
         pp.pprint(parsestate)
 
 
