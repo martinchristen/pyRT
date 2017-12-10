@@ -73,6 +73,7 @@ and geometry. Creation of scenes is done in an object oriented way:
     from pyrt.material import PhongMaterial
     from pyrt.camera import PerspectiveCamera
     from pyrt.renderer import SimpleRT
+    from pyrt.scene import Scene
 
     camera = PerspectiveCamera(640,480)
     scene = Scene()
