@@ -44,6 +44,9 @@ class BBox(Shape):
 
         pass
 
+    def __str__(self):
+        return "BBOX: " + str(self.min) + "-" + str(self.max)
+
     def maxComponent(self):
         """
         Return the max component of bounding box
