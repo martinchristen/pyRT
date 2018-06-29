@@ -9,3 +9,4 @@ from .shape import Shape
 from .triangle import Triangle
 from .sphere import Sphere
 from .bbox import BBox
+from .trianglemesh import TriangleMesh
