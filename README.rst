@@ -7,7 +7,7 @@ PyRT - The Python Raytracer
 .. figure:: docs/img/pyRT_256.png
    :alt: Logo
 
-**PyRT** (pronounced *pirate*) is a raytracer/image generator for **Python 3.5**.
+**PyRT** (pronounced *pirate*) is a raytracer/image generator for **Python 3.5** and higher.
 This project is mainly done with the following in mind:
 
 -  Ray Tracing in the Jupyter Notebook
@@ -109,9 +109,9 @@ About the Author
 ----------------
 
 PyRT is created and maintained by Martin Christen. You can contact me by
-e-mail: martin.christen@gmail.com
+e-mail: martin.christen@fhnw.ch
 
-Please note: This project is developed in my spare time, there is no
+Please note: This project is mostly developed in my spare time, there is no
 official support or anything.
 
 .. |CI| image:: https://travis-ci.org/martinchristen/pyRT.svg?branch=master
