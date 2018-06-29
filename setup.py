@@ -47,7 +47,7 @@ setup(
     },
     package_data={'pyrt': ['camera/*.py']},
     include_package_data=True,
-    version='0.0.3',
+    version='0.1.0',
     description='pyRT - The Python Raytracer',
     long_description=long_description,
     url='https://github.com/martinchristen/pyRT',
@@ -60,7 +60,8 @@ setup(
         'Topic :: Multimedia :: Graphics :: 3D Rendering',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.5',
-        'Programming Language :: Python :: 3.6'
+        'Programming Language :: Python :: 3.6',
+        'Programming Language :: Python :: 3.7'
     ],
     keywords=['raytracing','3d-graphics'],
 )
