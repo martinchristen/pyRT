@@ -152,6 +152,15 @@ class Vec3(object):
         else:
             raise IndexError("Vec3 has 3 components: [0] [1] and [2]")
 
+    def dot(self, s):
+        if type(s) == Vec3:
+            return float(self.x * s.x + self.y * s.y + self.z * s.z)
+        else:
+            raise ValueError("Dot with wrong type: " + str(type(s)))
+
+    def length(self):
+        return float(math.sqrt(self.x * self.x + self.y * self.y + self.z * self.z))
+
     def copy(self):
         """
         :return: copy of current vector
