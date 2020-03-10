@@ -14,14 +14,14 @@ class SpotLight(Light):
 
     """Class describing a spot light source"""
 
-    def __init__(self, position: Vec3, direction: Vec3, angle: float) -> None:
+    def __init__(self, position: Vec3, direction: Vec3, angle: float, coef:float) -> None:
         """
         Constructor:
         param position: position of the light
         param direction: direction of the light
         param angle: light angle around direction(0 - 180)
         """
-        Light.__init__(self, "SpotLight")
+        Light.__init__(self, coef, "SpotLight")
         self.position = position
         self.direction = direction
         self.angle = angle
@@ -36,6 +36,6 @@ class SpotLight(Light):
         radians = np.arccos(self.direction.dot(-shadowray.direction) / (self.direction.length() * shadowray.direction.length()))
         if(np.degrees(radians) <= self.angle):
             fs += 1 - np.degrees(radians) / (1.5 * self.angle)
-        return fs
+        return fs * self.coef
 
 
