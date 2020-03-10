@@ -7,6 +7,7 @@ A spot light emits light to one directions with some angle around it.
 from .light import Light
 from ..math import Vec3
 from ..math import Ray
+from ..renderer.rgbimage import *
 
 
 class SpotLight(Light):
@@ -25,5 +26,16 @@ class SpotLight(Light):
         self.direction = direction
         self.angle = angle
         self.dir_ray = Ray(position, self.direction - self.position)
+
+    def intensity(self, shadowray):
+        """
+        Point intensity calculation:
+        param shadowray: ray from light to hitrecord point
+        """
+        fs = 0.0
+        radians = np.arccos(self.direction.dot(-shadowray.direction) / (self.direction.length() * shadowray.direction.length()))
+        if(np.degrees(radians) <= self.angle):
+            fs += 1 - np.degrees(radians) / (1.5 * self.angle)
+        return fs
 
 
