@@ -13,7 +13,7 @@ class Light(object):
 
     """Base Light Class"""
 
-    def __init__(self, name="UNKNOWN LIGHT"):
+    def __init__(self, coef = 1.0, name="UNKNOWN LIGHT"):
         """
         Base Constructor
 
@@ -21,6 +21,7 @@ class Light(object):
         """
         self.name = name
         self.position = Vec3(0.,0.,0.)
+        self.coef = coef
 
 
     def intensity(self, shadowray):
@@ -28,4 +29,4 @@ class Light(object):
         Point intensity calculation:
         param shadowray: ray from light to hitrecord point
         """
-        return 0.8
+        return self.coef
