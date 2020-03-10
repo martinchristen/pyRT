@@ -24,9 +24,9 @@ camera.setView(Vec3(0.,-10.,10.), Vec3(0.,0.,0.), Vec3(0.,0.,1.))
 scene = Scene()
 
 # Add a light to the scene
-#scene.addLight(PointLight(Vec3(0,5,15)))
+scene.addLight(PointLight(Vec3(0,5,15)))
 scene.addLight(SpotLight(Vec3(0, 0, 5), Vec3(-0.5, 0.5, -1), 30))
-scene.addLight(SpotLight(Vec3(2.5, -5, 1.75), Vec3(0, 1, 0), 30))
+#scene.addLight(SpotLight(Vec3(2.5, -5, 1.75), Vec3(0, 1, 0), 30))
 
 # create some materials:
 floormaterial = PhongMaterial(color=Vec3(0.5,0.5,0.5))
