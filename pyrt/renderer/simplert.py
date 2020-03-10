@@ -50,19 +50,12 @@ class SimpleRT(Renderer):
 
     def _shadow(self, scene: Scene, hitrecord: HitRecord) -> tuple:
         # is hitpoint in shadow ?
-        fs = 0.1
+        fs = 0.0
         local_num_shadow_rays = 0
         numshadow = 0
         for light in scene.lights:
             shadowray = Ray(hitrecord.point, light.position - hitrecord.point)
-            if light.name == "SpotLight":
-                radians = np.arccos(light.direction.dot(-shadowray.direction) / (light.direction.length() * shadowray.direction.length()))
-                if(np.degrees(radians) > light.angle):
-                    continue
-                else:
-                    fs += (1 - np.degrees(radians) / (1.5 * light.angle)) / len(scene.lights)
-            else:
-                fs += 1 / len(scene.lights)
+            fs += light.intensity(shadowray) 
 
             local_num_shadow_rays += 1
             for testelement in scene.nodes:
@@ -71,8 +64,6 @@ class SimpleRT(Renderer):
                         numshadow += 1
                         break
 
-
-        fs *= 0.6 * (len(scene.lights) + 1)
         fs = np.clip(fs, 0, 1)
         for i in range(numshadow):
             fs /= 4.
