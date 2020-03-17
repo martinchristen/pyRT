@@ -12,16 +12,15 @@ class PointLight(Light):
 
     """Class describing a point light source"""
 
-    def __init__(self, position: Vec3, coef: float) -> None:
+    def __init__(self, position: Vec3) -> None:
         """
         Constructor
 
         Not yet complete - params will change in near future!
         :param position: position of the light
         """
-        Light.__init__(self, coef, "PointLight")
+        Light.__init__(self,  "PointLight")
         self.position = position
-
 
 
 
