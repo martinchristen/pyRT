@@ -14,18 +14,22 @@ class SpotLight(Light):
 
     """Class describing a spot light source"""
 
-    def __init__(self, position: Vec3, direction: Vec3, p: int) -> None:
+    def __init__(self, position: Vec3, direction: Vec3, p: int, a = 0.02, b = 0.1, c = 0) -> None:
         """
         Constructor:
         param position: position of the light
         param direction: direction of the light
         param p: controls how much the spotlight is focussed
+        params a, b, c: quadratic equation coefficients for ad^2 + bd + c
         """
         Light.__init__(self,  "SpotLight")
         self.position = position
         self.direction = direction
         self.p = p
         self.dir_ray = Ray(position, self.direction - self.position)
+        self.a = a
+        self.b = b
+        self.c = c
 
     def intensity(self, shadowray):
         """
@@ -33,12 +37,8 @@ class SpotLight(Light):
         param shadowray: ray from light to hitrecord point
         """
 
-        c1 = 0.0
-        c2 = 0.1
-        c3 = 0.02
-        
         d = shadowray.direction.length()
-        f_att = np.clip(1 / (c1 + c2 * d + c3 * d * d), 0, 1)
+        f_att = np.clip(1 / (self.c + self.b * d + self.a * d * d), 0, 1)
         cos_angle = self.direction.dot(-shadowray.direction) / (self.direction.length() * shadowray.direction.length())
         return f_att * (cos_angle ** self.p)
 
