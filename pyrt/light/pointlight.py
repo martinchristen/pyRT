@@ -19,7 +19,7 @@ class PointLight(Light):
         Not yet complete - params will change in near future!
         :param position: position of the light
         """
-        Light.__init__(self, "PointLight")
+        Light.__init__(self,  "PointLight")
         self.position = position
 
 

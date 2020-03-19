@@ -21,3 +21,11 @@ class Light(object):
         """
         self.name = name
         self.position = Vec3(0.,0.,0.)
+
+
+    def intensity(self, shadowray):
+        """
+        Point intensity calculation:
+        param shadowray: ray from light to hitrecord point
+        """
+        return 1
