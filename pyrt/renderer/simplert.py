@@ -50,17 +50,21 @@ class SimpleRT(Renderer):
 
     def _shadow(self, scene: Scene, hitrecord: HitRecord) -> tuple:
         # is hitpoint in shadow ?
-        fs = 1.0
+        fs = 0.0
         local_num_shadow_rays = 0
         numshadow = 0
         for light in scene.lights:
             shadowray = Ray(hitrecord.point, light.position - hitrecord.point)
+            fs += light.intensity(shadowray) 
+
             local_num_shadow_rays += 1
             for testelement in scene.nodes:
                 if testelement != hitrecord.obj:  # avoid self-intersection
                     if testelement.hitShadow(shadowray):
                         numshadow += 1
                         break
+
+        fs = np.clip(fs, 0, 1)
         for i in range(numshadow):
             fs /= 4.
 
