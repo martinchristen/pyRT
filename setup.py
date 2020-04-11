@@ -47,7 +47,7 @@ setup(
     },
     package_data={'pyrt': ['camera/*.py']},
     include_package_data=True,
-    version='0.1.0',
+    version='0.5.0',
     description='pyRT - The Python Raytracer',
     long_description=long_description,
     url='https://github.com/martinchristen/pyRT',

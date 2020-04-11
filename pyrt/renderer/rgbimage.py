@@ -1,4 +1,5 @@
 from ..math import Vec2, Vec3
+import random
 
 #-----------------------------------------------------------------------------------------------------------------------
 # options:
@@ -27,7 +28,7 @@ RGBImage_has_ipython = False
 if RGBImage_use_ipython:
     try:
         __IPYTHON__
-        from IPython.core.display import HTML
+        from IPython.display import clear_output, display, HTML, Javascript 
         from io import BytesIO
         import base64
         RGBImage_has_ipython = True
@@ -67,7 +68,8 @@ class RGBImage(object):
             print("         not saved anything!")
 
     # -------------------------------------------------------------------------------------------------------------------
-    def display(self):
+    
+    def _repr_html_(self):
         if RGBImage_has_ipython and RBGImage_has_pillow:
             if RGBImage_has_numpy:
                 im = Image.fromarray(self.data)
@@ -78,10 +80,52 @@ class RGBImage(object):
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
-            return HTML('<img src="data:image/png;base64,' + img_str + '"></img>')
+            return f'<img src="data:image/png;base64,{img_str}"></img>'
+        else:
+            return ''
+        
+    # -------------------------------------------------------------------------------------------------------------------
+    
+    def framebuffer(self, myid="pyrtfb"):
+        if RGBImage_has_ipython and RBGImage_has_pillow:
+            if RGBImage_has_numpy:
+                im = Image.fromarray(self.data)
+            else:
+                im = Image.new("RGB", (self.width, self.height))
+                im.putdata(self.data)
+            
+            buffer = BytesIO()
+            im.save(buffer, format="PNG")
+            img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
+            display(HTML(f'<img src="data:image/png;base64,{img_str}"></img>'), display_id=myid, update=False)
+        else:
+            return ''
+    # -------------------------------------------------------------------------------------------------------------------
+    
+    def update(self, myid="pyrtfb"):
+        if RGBImage_has_ipython and RBGImage_has_pillow:
+            if RGBImage_has_numpy:
+                im = Image.fromarray(self.data)
+            else:
+                im = Image.new("RGB", (self.width, self.height))
+                im.putdata(self.data)
+            
+            buffer = BytesIO()
+            im.save(buffer, format="PNG")
+            img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
+            display(HTML(f'<img src="data:image/png;base64,{img_str}"></img>'), display_id=myid, update=True)
+        else:
+            return ''
+        
+    # -------------------------------------------------------------------------------------------------------------------            
+    
+    def display(self):
+        print("**warning, display() is deprecated and will be removed**: Use the object directly in jupyter notebooks")
+        if RGBImage_has_ipython and RBGImage_has_pillow:
+            return HTML(data=self._repr_html_())
         else:
             print("ERROR: RGBImage.display() only works from IPython/Jupyter Notebook and also requires PIL")
-
+            return None
 
     #-------------------------------------------------------------------------------------------------------------------
     def drawPixelFast8(self, x, y, r, g, b):
