@@ -25,7 +25,7 @@ Installation
 ------------
 
 Installation can be done with pip. Please note that pyrt is still under **heavy development** and not yet meant for production.
-(API breaks are frequent!)
+(API breaks are possible!)
 
 .. code:: shell
 
