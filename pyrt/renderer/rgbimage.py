@@ -1,20 +1,26 @@
 from ..math import Vec2, Vec3
 import random
+from time import time
+from time import sleep
 
 #-----------------------------------------------------------------------------------------------------------------------
 # options:
 RBGImage_use_numpy = True       # set to False if you don't want to use numpy
 RGBImage_use_pillow = True      # set to False if you don't want to use pillow (store images manually)
 RGBImage_use_ipython = True     # set to False if you don't want ipython/jupyter support
-
+RGBImage_develop = True         # set to True for debug output
 #-----------------------------------------------------------------------------------------------------------------------
-RGBImage_has_numpy = False
+RGBImage_use_numpy_array = False  # not a setting. 
+                                  # If True: store rgb data i numpy, if False: store rgb data in Python list
+                                  # [This is set to True automatically if numpy is available]
+#-----------------------------------------------------------------------------------------------------------------------
+
 if RBGImage_use_numpy:
     try:
         import numpy as np
-        RGBImage_has_numpy = True
+        RGBImage_use_numpy_array = True
     except ImportError:
-        RGBImage_has_numpy = False
+        RGBImage_use_numpy_array = False
 
 RBGImage_has_pillow = False
 if RGBImage_use_pillow:
@@ -44,7 +50,7 @@ class RGBImage(object):
         self.type = "RGB"
 
         if self.type == "RGB":
-            if RGBImage_has_numpy:
+            if RGBImage_use_numpy_array:
                 self.data = np.zeros((self.height, self.width, 3), dtype=np.uint8)
             else:
                 self.data = [[0, 0, 0] for i in range(0, self.width*self.height)]
@@ -71,7 +77,7 @@ class RGBImage(object):
     
     def _repr_html_(self):
         if RGBImage_has_ipython and RBGImage_has_pillow:
-            if RGBImage_has_numpy:
+            if RGBImage_use_numpy_array:
                 im = Image.fromarray(self.data)
             else:
                 im = Image.new("RGB", (self.width, self.height))
@@ -87,8 +93,9 @@ class RGBImage(object):
     # -------------------------------------------------------------------------------------------------------------------
     
     def framebuffer(self, myid="pyrtfb"):
+        t0 = time()
         if RGBImage_has_ipython and RBGImage_has_pillow:
-            if RGBImage_has_numpy:
+            if RGBImage_use_numpy_array:
                 im = Image.fromarray(self.data)
             else:
                 im = Image.new("RGB", (self.width, self.height))
@@ -97,14 +104,20 @@ class RGBImage(object):
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
+
             display(HTML('<img src="data:image/png;base64,' + img_str + '"></img>'), display_id=myid, update=False)
+            t1 = time()
+            if RGBImage_develop:
+                print("Time to display: " + str(round(t1-t0,2)) + "s")
+            
         else:
             return ''
     # -------------------------------------------------------------------------------------------------------------------
     
-    def update(self, myid="pyrtfb"):
+    def update(self, myid="pyrtfb", fps=0):
+        t0 = time()
         if RGBImage_has_ipython and RBGImage_has_pillow:
-            if RGBImage_has_numpy:
+            if RGBImage_use_numpy_array:
                 im = Image.fromarray(self.data)
             else:
                 im = Image.new("RGB", (self.width, self.height))
@@ -113,14 +126,32 @@ class RGBImage(object):
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
+                  
             display(HTML('<img src="data:image/png;base64,' + img_str + '"></img>'), display_id=myid, update=True)
+            
+            #adapt to fps:
+            t1 = time()
+            dt = t1-t0
+                
+            if fps != 0:
+                wait = 1/fps - dt
+                if wait>0:
+                    sleep(wait)
+            
+            if RGBImage_develop:
+                if fps == 0:
+                    print("\rTime to display: " + str(round(dt,2)) + "s" + " [FPS: " + str(round(1./(dt),1)) + "]     ", end='')
+                else:
+                    dt = time()-t0
+                    print("\rTime to display: " + str(round(dt,2)) + "s" + " [FPS: " + str(round(1./(dt),1)) + "]     ", end='')    
         else:
             return ''
         
     # -------------------------------------------------------------------------------------------------------------------            
     
     def display(self):
-        print("**warning, display() is deprecated and will be removed**: Use the object directly in jupyter notebooks")
+        print("**warning, display() is deprecated and will be removed**: Use the object directly in Jupyter")
+        print("           also check out the new methods framebuffer() and update() for animations in Jupyter")
         if RGBImage_has_ipython and RBGImage_has_pillow:
             return HTML(data=self._repr_html_())
         else:
@@ -140,7 +171,7 @@ class RGBImage(object):
         :param b: blue
         :return:
         """
-        if RGBImage_has_numpy:
+        if RGBImage_use_numpy_array:
             self.data[y][x][0] = r
             self.data[y][x][1] = g
             self.data[y][x][2] = b
@@ -160,7 +191,7 @@ class RGBImage(object):
         x = pos.x
         y = self.height-pos.y-1
         if x >= 0 and x < self.width and y >= 0 and y < self.height:
-            if RGBImage_has_numpy:
+            if RGBImage_use_numpy_array:
                 self.data[y][x][0] = int(color[0]*255.)
                 self.data[y][x][1] = int(color[1]*255.)
                 self.data[y][x][2] = int(color[2]*255.)
