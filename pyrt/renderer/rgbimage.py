@@ -299,6 +299,28 @@ class RGBImage(object):
                 switch = switch + (4 * (x - y)) + 10
                 y = y - 1
             x = x + 1
+            
+    #-------------------------------------------------------------------------------------------------------------------
+    
+    def drawCircleFilled(self, center: Vec2, radius: int, color: Vec3, fillcolor: Vec3, size : int = 1):
+        switch = 3 - (2 * radius)
+        x = 0
+        y = radius
+        while x <= y:
+            self.drawLine(Vec2(x + center.x, -y + center.y), Vec2(-x + center.x, -y + center.y), fillcolor)
+            self.drawLine(Vec2(y + center.x, -x + center.y), Vec2(-y + center.x, -x + center.y), fillcolor)
+            self.drawLine(Vec2(y + center.x, x + center.y), Vec2(-y + center.x, x + center.y), fillcolor)
+            self.drawLine(Vec2(x + center.x, y + center.y), Vec2(-x + center.x, y + center.y), fillcolor)
+            
+            
+            if switch < 0:
+                switch = switch + (4 * x) + 6
+            else:
+                switch = switch + (4 * (x - y)) + 10
+                y = y - 1
+            x = x + 1
+                          
+        self.drawCircle(center, radius, color, size)
 
     #-------------------------------------------------------------------------------------------------------------------
 
