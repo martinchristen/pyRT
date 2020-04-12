@@ -4,6 +4,11 @@ PyRT - The Python Raytracer
 |CI| |Gitter| |contributions welcome| |Code Climate| |Code Health|
 |image5|
 
+If you like this project, please support development: 
+https://pages.donately.com/pybaselassociation/campaign/pyrt-version-1-0
+
+
+
 .. figure:: docs/img/pyRT_256.png
    :alt: Logo
 
