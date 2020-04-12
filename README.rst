@@ -1,8 +1,8 @@
 PyRT - The Python Raytracer
 ===========================
 
-|CI| |Gitter| |contributions welcome| |Code Climate| |Code Health|
-|image5|
+|CI| |donate| |contributions welcome| |Code Climate| |Code Health|
+|image5| 
 
 If you like this project, please support development: 
 https://pages.donately.com/pybaselassociation/campaign/pyrt-version-1-0
@@ -121,8 +121,8 @@ official support or anything.
 
 .. |CI| image:: https://travis-ci.org/martinchristen/pyRT.svg?branch=master
    :target: https://travis-ci.org/martinchristen/pyRT
-.. |Gitter| image:: https://badges.gitter.im/pyRT/Lobby.svg
-   :target: https://gitter.im/pyRT/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge
+.. |donate| image:: https://img.shields.io/badge/donate-pyRT%20backers-orange
+   :target: https://pages.donately.com/pybaselassociation/campaign/pyrt-version-1-0
 .. |contributions welcome| image:: https://img.shields.io/badge/contributions-welcome-brightgreen.svg?style=flat
    :target: https://github.com/martinchristen/pyrt/issues
 .. |Code Climate| image:: https://codeclimate.com/github/martinchristen/pyRT/badges/gpa.svg
@@ -131,6 +131,7 @@ official support or anything.
    :target: https://landscape.io/github/martinchristen/pyRT/master
 .. |image5| image:: https://img.shields.io/badge/license-MIT-blue.svg
    :target: https://github.com/martinchristen/pyRT/blob/master/LICENSE.md
+
 .. |Example 01| image:: examples/11.png
 .. |Example 12b| image:: examples/12b.gif
 .. |Example 13| image:: examples/13.png
