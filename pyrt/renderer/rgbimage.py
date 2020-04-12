@@ -80,7 +80,7 @@ class RGBImage(object):
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
-            return f'<img src="data:image/png;base64,{img_str}"></img>'
+            return '<img src="data:image/png;base64,' + img_str + '"></img>'
         else:
             return ''
         
@@ -97,7 +97,7 @@ class RGBImage(object):
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
-            display(HTML(f'<img src="data:image/png;base64,{img_str}"></img>'), display_id=myid, update=False)
+            display(HTML('<img src="data:image/png;base64,' + img_str + '"></img>'), display_id=myid, update=False)
         else:
             return ''
     # -------------------------------------------------------------------------------------------------------------------
@@ -113,7 +113,7 @@ class RGBImage(object):
             buffer = BytesIO()
             im.save(buffer, format="PNG")
             img_str = str(base64.b64encode(buffer.getvalue()), encoding="ascii")
-            display(HTML(f'<img src="data:image/png;base64,{img_str}"></img>'), display_id=myid, update=True)
+            display(HTML('<img src="data:image/png;base64,' + img_str + '"></img>'), display_id=myid, update=True)
         else:
             return ''
         
@@ -128,9 +128,9 @@ class RGBImage(object):
             return None
 
     #-------------------------------------------------------------------------------------------------------------------
-    def drawPixelFast8(self, x, y, r, g, b):
+    def drawPixelFast8(self, x: int, y: int, r: int, g: int, b: int) -> None:
         """
-        Set 8-bit RGB pixel without boundary check
+        Set 8-bit RGB pixel without boundary check and without float to int conversion.
 
 
         :param x: x-Pos
@@ -272,4 +272,9 @@ class RGBImage(object):
 
 
 
-
+    #-------------------------------------------------------------------------------------------------------------------
+    def drawPolygon(self, bl : Vec2, width: int, height: int, color: Vec3, fillcolor: Vec3) -> None:
+        """
+        Draws a Polygon
+        """
+        pass
