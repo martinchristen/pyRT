@@ -6,4 +6,4 @@ custom renderers can be placed here.
 
 from .renderer import Renderer
 from .simplert import SimpleRT
-from .rgbimage import RGBImage
+from .rgbimage import RGBImage, loadimage

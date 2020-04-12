@@ -44,18 +44,18 @@ if RGBImage_use_ipython:
 
 
 class RGBImage(object):
-    def __init__(self, width: int, height: int) -> None:
+    def __init__(self, width: int, height: int, init_memory=True) -> None:
         self.width = width
         self.height = height
         self.type = "RGB"
 
-        if self.type == "RGB":
+        if init_memory:
             if RGBImage_use_numpy_array:
                 self.data = np.zeros((self.height, self.width, 3), dtype=np.uint8)
             else:
                 self.data = [[0, 0, 0] for i in range(0, self.width*self.height)]
-        else:   # in future there will be RGBA, FLOAT images
-            raise ValueError("unknown/unsupported image type")
+        else:
+            self.data = None
 
 
     #-------------------------------------------------------------------------------------------------------------------
@@ -148,7 +148,6 @@ class RGBImage(object):
             return ''
         
     # -------------------------------------------------------------------------------------------------------------------            
-    
     def display(self):
         print("**warning, display() is deprecated and will be removed**: Use the object directly in Jupyter")
         print("           also check out the new methods framebuffer() and update() for animations in Jupyter")
@@ -159,10 +158,26 @@ class RGBImage(object):
             return None
 
     #-------------------------------------------------------------------------------------------------------------------
+    
+    def clear(self, color: Vec3) -> None:
+        """
+        Clear Image with specified color
+        """
+        r = int(color[0]*255.)
+        g = int(color[1]*255.)
+        b = int(color[2]*255.)
+        if RGBImage_use_numpy_array:
+            self.data[:,:] = [r,g,b]
+        else:
+            for y in range(self.height):
+                for x in range(self.width):
+                    self.data[y * self.width + x] = (r,g,b)
+    
+    #-------------------------------------------------------------------------------------------------------------------
+    
     def drawPixelFast8(self, x: int, y: int, r: int, g: int, b: int) -> None:
         """
         Set 8-bit RGB pixel without boundary check and without float to int conversion.
-
 
         :param x: x-Pos
         :param y: y-Pos
@@ -198,6 +213,8 @@ class RGBImage(object):
             else:
                 self.data[y*self.width+x] = (int(color[0]*255.), int(color[1]*255.), int(color[2]*255.))
 
+    # -------------------------------------------------------------------------------------------------------------------
+    
     def drawPoint(self, pos: Vec2, color: Vec3, size : int = 1) -> None:
         """
         Draws a point
@@ -302,10 +319,21 @@ class RGBImage(object):
             self.drawLine(start, end, color)
 
 
+def loadimage(filename) -> RGBImage:
+    """
+    Load a RGBImage. This requires pillow and numpy
+    """
 
-    #-------------------------------------------------------------------------------------------------------------------
-    def drawPolygon(self, bl : Vec2, width: int, height: int, color: Vec3, fillcolor: Vec3) -> None:
-        """
-        Draws a Polygon
-        """
-        pass
+    if not RGBImage_use_pillow or not RGBImage_use_ipython:
+        raise NotImplementedError("Load only works if numpy and pillow is installed")
+    
+    im = Image.open(filename)
+    if im.mode != 'RGB':
+        im = im.convert('RGB')
+
+    data = np.array(im.getdata(), dtype=np.uint8).reshape(im.size[1], im.size[0], 3)
+    result = RGBImage(im.size[0], im.size[1], False)
+    result.data = data
+    
+    return result
+    
