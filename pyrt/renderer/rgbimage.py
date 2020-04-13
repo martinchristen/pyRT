@@ -341,7 +341,7 @@ class RGBImage(object):
             self.drawLine(start, end, color)
 
 
-def loadimage(filename) -> RGBImage:
+def loadimage(filename: str) -> RGBImage:
     """
     Load a RGBImage. This requires pillow and numpy
     """
