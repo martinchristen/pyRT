@@ -11,3 +11,4 @@ jupyter/.ipynb_checkpoints/
 jupyter/rendering.png
 .DS_Store
 
+earthquakes.geojson
