@@ -47,13 +47,14 @@ setup(
     },
     package_data={'pyrt': ['camera/*.py']},
     include_package_data=True,
-    version='0.5.0',
+    version='0.5.3',
     description='pyRT - The Python Raytracer',
     long_description=long_description,
     url='https://github.com/martinchristen/pyRT',
     author='Martin Christen',
     author_email='martin.christen@gmail.com',
     license='MIT',
+	long_description_content_type='text/x-rst',
     classifiers=[
         'Development Status :: 2 - Pre-Alpha',
         'Intended Audience :: Education',
@@ -61,7 +62,8 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 3.5',
         'Programming Language :: Python :: 3.6',
-        'Programming Language :: Python :: 3.7'
+        'Programming Language :: Python :: 3.7',
+		'Programming Language :: Python :: 3.8'
     ],
     keywords=['raytracing','3d-graphics'],
 )

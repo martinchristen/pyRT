@@ -2,6 +2,7 @@ from ..math import Vec2, Vec3
 import random
 from time import time
 from time import sleep
+from typing import Type
 
 #-----------------------------------------------------------------------------------------------------------------------
 # options:
@@ -324,7 +325,7 @@ class RGBImage(object):
 
     #-------------------------------------------------------------------------------------------------------------------
 
-    def drawRectangle(self, bl : Vec2, width: int, height: int, color: Vec3) -> None:
+    def drawRectangle(self, bl: Vec2, width: int, height: int, color: Vec3) -> None:
         """
         Draws a rectangle.
         This is quite slow and would be much faster using direct image buffer filling instead of using bresenham lines.
@@ -339,14 +340,16 @@ class RGBImage(object):
             start = Vec2(bl.x, bl.y + y)
             end = Vec2(bl.x + width, bl.y + y)
             self.drawLine(start, end, color)
-
+            
+    #-------------------------------------------------------------------------------------------------------------------
+    
 
 def loadimage(filename: str) -> RGBImage:
     """
     Load a RGBImage. This requires pillow and numpy
     """
 
-    if not RGBImage_use_pillow or not RGBImage_use_ipython:
+    if not RGBImage_use_pillow or not RBGImage_use_numpy:
         raise NotImplementedError("Load only works if numpy and pillow is installed")
     
     im = Image.open(filename)

@@ -1,15 +1,9 @@
 PyRT - The Python Raytracer
 ===========================
 
-|CI| |donate| |contributions welcome| |Code Climate| |Code Health|
-|image5| 
+|CI| |donate| |contributions welcome| |Code Climate| |Code Health| |image5| 
 
-If you like this project, please support development: 
-https://pages.donately.com/pybaselassociation/campaign/pyrt-version-1-0
-
-
-
-.. figure:: docs/img/pyRT_256.png
+.. figure::   https://github.com/martinchristen/pyRT/blob/master/docs/img/pyRT_256.png
    :alt: Logo
 
 **PyRT** (pronounced *pirate*) is a raytracer/image generator for **Python 3.5** and higher.
@@ -132,8 +126,8 @@ official support or anything.
 .. |image5| image:: https://img.shields.io/badge/license-MIT-blue.svg
    :target: https://github.com/martinchristen/pyRT/blob/master/LICENSE.md
 
-.. |Example 01| image:: examples/11.png
-.. |Example 12b| image:: examples/12b.gif
-.. |Example 13| image:: examples/13.png
-.. |Example 08| image:: examples/08.png
+.. |Example 01| image:: https://github.com/martinchristen/pyRT/blob/master/examples/11.png
+.. |Example 12b| image:: https://github.com/martinchristen/pyRT/blob/master/examples/12b.gif
+.. |Example 13| image:: https://github.com/martinchristen/pyRT/blob/master/examples/13.png
+.. |Example 08| image:: https://github.com/martinchristen/pyRT/blob/master/sexamples/08.png
 
