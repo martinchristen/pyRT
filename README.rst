@@ -129,5 +129,5 @@ official support or anything.
 .. |Example 01| image:: https://github.com/martinchristen/pyRT/blob/master/examples/11.png
 .. |Example 12b| image:: https://github.com/martinchristen/pyRT/blob/master/examples/12b.gif
 .. |Example 13| image:: https://github.com/martinchristen/pyRT/blob/master/examples/13.png
-.. |Example 08| image:: https://github.com/martinchristen/pyRT/blob/master/sexamples/08.png
+.. |Example 08| image:: https://github.com/martinchristen/pyRT/blob/master/examples/08.png
 
