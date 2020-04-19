@@ -11,6 +11,9 @@ This is the Setup-Script...
 #    set HOME=C:\users\username    # or wherever your .pypirc is
 #    python3 setup.py sdist
 #    python3 setup.py sdist upload
+#or by using twine:
+#    python setup.py sdist bdist_wheel
+#    python -m twine upload --repository-url https://upload.pypi.org/legacy/ dist/*
 
 
 from setuptools import setup
