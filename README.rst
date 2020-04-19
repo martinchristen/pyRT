@@ -42,9 +42,8 @@ Currently it is recommended to pip directly from the repository:
 Dependencies
 ------------
 
-PyRT doesn't have any dependencies.
-Generated images are just RGB or RGBA Arrays. To create jpg or png or other images, many
-demos use Pillow (PIL). So it is highly recommended to install it.
+PyRT doesn't have any dependencies, however, pillow and numpy are highly recommended.
+ 
 
 Getting Started: Try the examples
 ---------------------------------
@@ -125,9 +124,12 @@ official support or anything.
    :target: https://landscape.io/github/martinchristen/pyRT/master
 .. |image5| image:: https://img.shields.io/badge/license-MIT-blue.svg
    :target: https://github.com/martinchristen/pyRT/blob/master/LICENSE.md
-
 .. |Example 01| image:: https://github.com/martinchristen/pyRT/blob/master/examples/11.png
 .. |Example 12b| image:: https://github.com/martinchristen/pyRT/blob/master/examples/12b.gif
 .. |Example 13| image:: https://github.com/martinchristen/pyRT/blob/master/examples/13.png
 .. |Example 08| image:: https://github.com/martinchristen/pyRT/blob/master/examples/08.png
+.. |mandelbrot| image:: https://github.com/martinchristen/pyRT/blob/master/docs/img/mandelbrot.png
+.. |noise| image:: https://github.com/martinchristen/pyRT/blob/master/docs/img/noise.png
+.. |earthquake| image:: https://github.com/martinchristen/pyRT/blob/master/docs/img/earthquake.png
+
 
