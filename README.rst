@@ -18,6 +18,8 @@ This project is mainly done with the following in mind:
 -  Server-side rendering / cloud based rendering
 -  ...
 
+|mandelbrot| |earthquake| |noise|
+
 PyRT is **work in progress**.
 
 Installation
