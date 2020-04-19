@@ -11,5 +11,5 @@ from .ray import Ray, HitRecord
 from .vec3 import Vec3
 from .vec4 import Vec4
 from .vecops import *
-
-
+from .perlin import *
+from .ops import *

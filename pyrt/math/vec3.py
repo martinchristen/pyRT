@@ -7,7 +7,6 @@ This is the class for handling 3 dimensional vectors
 import math
 from .constants import *
 
-
 class Vec3(object):
     """Class representing a 3D-Vector. Values are always stored as float
     """
