@@ -48,7 +48,6 @@ class RGBImage(object):
     def __init__(self, width: int, height: int, init_memory=True) -> None:
         self.width = width
         self.height = height
-        self.type = "RGB"
 
         if init_memory:
             if RGBImage_use_numpy_array:
