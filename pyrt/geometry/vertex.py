@@ -59,11 +59,13 @@ class Vertex(object):
                 else:
                     raise ValueError("color must be specified as Vec3 or list/tuple with 3 components")
 
-            '''
             if "texcoord" in kwargs:
                 if type(kwargs["texcoord"]) == Vec2:
-                    pass
+                    self.texcoord = kwargs["texcoord"].copy()
                 elif type(kwargs["texcoord"]) == tuple or type(kwargs["texcoord"]) == list:
+                    if len(kwargs["texcoord"]) == 2:
+                        self.texcoord = Vec2(kwargs["texcoord"][0], kwargs["texcoord"][1])
+                    else:
+                        raise ValueError("Wrong number of components for texcoord")
                 else:
                     raise ValueError("position must be specified as Vec2 or list/tuple")
-            '''

@@ -73,6 +73,7 @@ class Sphere(Shape):
             hitrecord.normal = hitrecord.normal_g
             hitrecord.color = Vec3(1., 1., 1.)  # spheres don't have interpolated colors, set to white
             hitrecord.material = self.material
+            hitrecord.texcoord = self.calcTexcoord(hitrecord.point)
             return True
         return False
 
