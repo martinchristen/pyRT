@@ -1,19 +1,16 @@
 # Example 16: Textured raytracing
 #
-# This time we render a triangle
-# TODO render sphere in this scene
+# This time we render a triangle and scene
+
 from pyrt.light import PointLight
-from pyrt.material.texturematerial import TextureMaterial
-from pyrt.math import *
 from pyrt.scene import *
 from pyrt.geometry import Sphere
-from pyrt.material import PhongMaterial
+from pyrt.material.texturematerial import TextureMaterial
 from pyrt.camera import PerspectiveCamera
 from pyrt.renderer import SimpleRT
 
 from pyrt.renderer import RGBImage
-from pyrt.math import Vec2, Vec3
-from pyrt.camera import PerspectiveCamera
+from pyrt.math import Vec3
 from pyrt.geometry import Triangle, Vertex
 from PIL import Image
 
@@ -43,8 +40,13 @@ t = Triangle(Vertex(position=(-5, 1, 0), texcoord=(0, 0)),
              material=
              TextureMaterial(texturepath='tex16.png'))
 
-# Add a sphere to the scene:
+s = Sphere(center=Vec3(0, -3, 0), radius=1,
+           material=
+           TextureMaterial(texturepath='tex16.png'))
+
+# Add triangle and sphere to the scene:
 scene.add(t)
+scene.add(s)
 
 # Now tell the scene which camera we use
 scene.setCamera(camera)
