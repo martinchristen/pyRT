@@ -13,9 +13,10 @@ class TextureMaterial(Material):
 
     """Texture Material Class"""
 
-    def __init__(self, color: Vec3 = Vec3(1.,1.,1.), shininess: float = 10.0, reflectivity: float = 0.0, refraction: float = 1.0):
+    def __init__(self, color: Vec3 = Vec3(1.,1.,1.), shininess: float = 10.0, reflectivity: float = 0.0, refraction: float = 1.0,
+                 texturepath: str = ''):
         Material.__init__(self, color, shininess, reflectivity, refraction)
-        self.texture = None
+        self.texture = None if len(texturepath) == 0 else Texture(texturepath)
 
     def setTexture(self, texture: Texture):
         self.texture = texture
@@ -28,7 +29,9 @@ class TextureMaterial(Material):
         """
         colorsum = Vec3(0.,0.,0.)
 
-        if len(lights)>0:
+        texcolor = self.texture.color(hitrecord.texcoord)
+
+        if 0: #len(lights) > 0:
             for light in lights:
                 N = hitrecord.normal_g
                 L = normalize3(hitrecord.point - light.position)
@@ -37,14 +40,13 @@ class TextureMaterial(Material):
                 diffuse = max(1. - dot3(N, L), 0.0)
                 specular = pow(max(dot3(R, E), 0.0), 0.3 * self.shininess)
 
-                # TODO: just take color from self.texture.color(hitrecord.texcoord.x, hitrecord.texcoord.y)?
-                color = self.color * 0.5 * (diffuse + specular) * hitrecord.color
+                color = texcolor * 0.5 * (diffuse + specular) * hitrecord.color
                 colorsum += color
             colorsum /= len(lights)
             colorsum = clamp3(colorsum, Vec3(0.,0.,0.), Vec3(1.,1.,1.))
         else:
             # no light in scene, use material color
-            colorsum = self.color * hitrecord.color
+            colorsum = texcolor * hitrecord.color
 
         return colorsum
 
