@@ -34,7 +34,7 @@ vp =  camera.projection * camera.view
 scene = Scene()
 
 # Add a light to the scene
-scene.addLight(PointLight(Vec3(-1, -8, 1)))
+scene.addLight(PointLight(Vec3(0, -5, 0)))
 
 # Create a triangle
 t = Triangle(Vertex(position=(-5, 1, 0), texcoord=(0, 0)),

@@ -31,16 +31,16 @@ class TextureMaterial(Material):
 
         texcolor = self.texture.color(hitrecord.texcoord)
 
-        if 0: #len(lights) > 0:
+        if len(lights) > 0:
             for light in lights:
-                N = hitrecord.normal_g
+                N = normalize3(hitrecord.normal_g)
                 L = normalize3(hitrecord.point - light.position)
                 E = normalize3(camera.position - hitrecord.point)
                 R = normalize3(-reflect3(L, N))
                 diffuse = max(1. - dot3(N, L), 0.0)
                 specular = pow(max(dot3(R, E), 0.0), 0.3 * self.shininess)
 
-                color = texcolor * 0.5 * (diffuse + specular) * hitrecord.color
+                color = texcolor * (diffuse + specular) * hitrecord.color
                 colorsum += color
             colorsum /= len(lights)
             colorsum = clamp3(colorsum, Vec3(0.,0.,0.), Vec3(1.,1.,1.))
