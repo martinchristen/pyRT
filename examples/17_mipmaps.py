@@ -63,5 +63,5 @@ def make_frame(t):
     return image.data
 
 
-clip = mpy.VideoClip(make_frame, duration=7)
-clip.write_gif("17.gif",fps=1)
+clip = mpy.VideoClip(make_frame, duration=10)
+clip.write_gif("17.gif",fps=20)
