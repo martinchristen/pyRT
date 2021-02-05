@@ -1,4 +1,4 @@
-# Example 16: Normal mappings
+# Example 18: Normal mappings
 #
 # Two spheres are rendered, one with normal map and the other without it
 
@@ -29,7 +29,7 @@ scene.addLight(PointLight(Vec3(0,0,0)))
 material0 = NormalMappedMaterial(texturepath='tex16.png', normalmappath='normalmap.png')
 material1 = TextureMaterial(texturepath='tex16.png')
 
-# Add a sphere to the scene:
+# Add spheres to the scene:
 scene.add(Sphere(center=Vec3(-3.5,0.,0.), radius=2.8, material=material0))
 scene.add(Sphere(center=Vec3(3.5,0.,0.), radius=2.8, material=material1))
 
