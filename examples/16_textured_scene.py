@@ -1,6 +1,6 @@
 # Example 16: Textured raytracing
 #
-# This time we render a triangle and scene
+# This time we render a triangle and sphere
 
 from pyrt.light import PointLight
 from pyrt.scene import *
@@ -38,11 +38,11 @@ t = Triangle(Vertex(position=(-5, 1, 0), texcoord=(0, 0)),
              Vertex(position=(0, 1, 5), texcoord=(1, 0)),
              Vertex(position=(5, 1, 0), texcoord=(1, 1)),
              material=
-             TextureMaterial(texturepath='tex16.png'))
+             TextureMaterial(texturepath=['tex16.png']))
 
 s = Sphere(center=Vec3(0, -3, 0), radius=1,
            material=
-           TextureMaterial(texturepath='tex16.png'))
+           TextureMaterial(texturepath=['tex16.png']))
 
 # Add triangle and sphere to the scene:
 scene.add(t)
