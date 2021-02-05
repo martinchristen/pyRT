@@ -7,6 +7,7 @@ from .texture import Texture
 from .material import Material
 from ..math import Vec3, Ray, HitRecord, dot3, reflect3, normalize3, clamp3
 from ..camera import Camera
+from math import log2, floor
 
 
 class TextureMaterial(Material):
@@ -14,12 +15,14 @@ class TextureMaterial(Material):
     """Texture Material Class"""
 
     def __init__(self, color: Vec3 = Vec3(1.,1.,1.), shininess: float = 10.0, reflectivity: float = 0.0, refraction: float = 1.0,
-                 texturepath: str = ''):
+                 texturepath: list = None):
         Material.__init__(self, color, shininess, reflectivity, refraction)
-        self.texture = None if len(texturepath) == 0 else Texture(texturepath)
+        self.texture = None \
+            if texturepath is None \
+            else {i: Texture(texturepath[i]) for i in range(len(texturepath))}
 
-    def setTexture(self, texture: Texture):
-        self.texture = texture
+    def addTexture(self, lod: int, texture: Texture):
+        self.texture.update({lod: texture})
 
     def shade(self, camera: Camera, ray: Ray, hitrecord: HitRecord,  lights: list) -> Vec3:
         """
@@ -29,7 +32,13 @@ class TextureMaterial(Material):
         """
         colorsum = Vec3(0.,0.,0.)
 
-        texcolor = self.texture.color(hitrecord.texcoord)
+        if self.texture is None or len(self.texture) == 0:
+            texcolor = self.color
+        else:
+            size = camera.getSize();
+            resolution = size[0] * size[1];
+            lod = floor(log2((hitrecord.point - camera.position).length() / resolution) + 14)
+            texcolor = self.texture[max(0, min(lod, len(self.texture) - 1))].color(hitrecord.texcoord)
 
         if len(lights) > 0:
             for light in lights:

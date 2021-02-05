@@ -17,6 +17,7 @@ class SimpleRT(Renderer):
         Renderer.__init__(self, "Simple Raytracer")
         self.shadow = shadow
         self.iterations = iterations
+
         if self.shadow:
             print("# Shadow Enabled")
         if self.iterations>1:

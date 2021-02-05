@@ -89,7 +89,6 @@ class PerspectiveCamera(Camera):
         self.matrix = self.projection * self.view
         self.matrixinv = inverse4(self.matrix)
 
-
     def getMatrix(self) -> Mat4:
         """
         Returns the view-projection matrix
@@ -98,3 +97,5 @@ class PerspectiveCamera(Camera):
         """
         return self.matrix
 
+    def getSize(self) -> tuple:
+        return self.width, self.height
