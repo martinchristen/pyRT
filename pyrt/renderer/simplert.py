@@ -85,6 +85,22 @@ class SimpleRT(Renderer):
             return rnew, gnew, bnew, reflect_ray, reflect_hitrecord
         else:
             return r,g,b,None,None
+    
+    def _refract(self, r: int, g: int, b: int, scene: Scene, ray: Ray, hitrecord: HitRecord, eta: float) -> tuple:
+        refract_ray = Ray(hitrecord.point, refract3(hitrecord.normal_g, ray.direction, hitrecord.material.refraction))
+        refract_hitrecord = HitRecord()
+
+        hit, rnew, gnew, bnew = self._shade(scene, refract_ray, refract_hitrecord)
+
+        if hit:
+            ref1 = hitrecord.material.transparency
+            ref2 = 1.-ref1
+            rnew = int ( ref1 * rnew + ref2 * r)
+            gnew = int ( ref1 * gnew + ref2 * g)
+            bnew = int ( ref1 * bnew + ref2 * b)
+            return rnew, gnew, bnew, refract_ray, refract_hitrecord
+        else:
+            return r,g,b,None,None
 
     def render(self, scene: Scene) -> RGBImage:
         if not scene.camera:
@@ -116,6 +132,15 @@ class SimpleRT(Renderer):
                     refray = ray.copy()
                     for i in range(self.iterations - 1):
                         r, g, b, refray, refhit = self._reflect(r,g,b, scene, refray, refhit)
+                        self.num_secondary_rays += 1
+                        if refray is None:
+                            break
+                
+                if hit and hitrecord.material.transparency != 0.0:
+                    refhit = hitrecord.copy()
+                    refray = ray.copy()
+                    for i in range(self.iterations - 1):
+                        r, g, b, refray, refhit = self._refract(r,g,b, scene, refray, refhit, 1)
                         self.num_secondary_rays += 1
                         if refray is None:
                             break
