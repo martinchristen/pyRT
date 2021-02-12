@@ -13,7 +13,7 @@ class Material(object):
 
     """Base Material Class"""
 
-    def __init__(self, color: Vec3 = Vec3(0.,0.,0.), shininess: float = 0.0, reflectivity: float = 0.5, refraction: float = 1.0):
+    def __init__(self, color: Vec3 = Vec3(0.,0.,0.), shininess: float = 0.0, reflectivity: float = 0.5, refraction: float = 1.0, transparency = 0.0):
         self.color = color
         self.shininess = shininess
         self.reflectivity = reflectivity
@@ -28,6 +28,7 @@ class Material(object):
         Also check the "refract3" function in math/vecops.py
         """
         self.refraction = refraction
+        self.transparency = transparency
 
     @abstractmethod
     def shade(self, camera: Camera, ray: Ray, hitrecord: HitRecord,  lights: list) -> Vec3:
