@@ -17,13 +17,14 @@ class SimpleRT(Renderer):
         Renderer.__init__(self, "Simple Raytracer")
         self.shadow = shadow
         self.iterations = iterations
+        self.background = (0, 0, 0)
         if self.shadow:
             print("# Shadow Enabled")
         if self.iterations>1:
             print("# Iterations: " + str(self.iterations))
 
     def _shade(self, scene: Scene, ray: Ray, hitrecord: HitRecord) -> tuple:
-        r = g = b = 0  # background color
+        r, g, b = self.background
         hit = False
         for element in scene.nodes:
             if element.hit(ray, hitrecord):
@@ -69,38 +70,39 @@ class SimpleRT(Renderer):
             fs /= 4.
 
         return fs,local_num_shadow_rays
+    
+    def _recurse_shade(self, scene: Scene, ray: Ray, iteration_num: int) -> tuple:
+        hitrecord = HitRecord()
+        hit, r, g, b = self._shade(scene, ray, hitrecord)
 
-    def _reflect(self, r: int, g: int, b: int, scene: Scene, ray: Ray, hitrecord: HitRecord) -> tuple:
-        reflect_ray = Ray(hitrecord.point, reflect3(hitrecord.normal_g, ray.direction))
-        reflect_hitrecord = HitRecord()
+        if not hit or iteration_num == 0:
+            return r, g, b
+        
+        if hitrecord.material.reflectivity != 0.0:
+            reflect_ray = Ray(hitrecord.point, reflect3(hitrecord.normal_g, ray.direction))
+            new_r, new_g, new_b = self._recurse_shade(scene, reflect_ray, iteration_num - 1)
 
-        hit, rnew, gnew, bnew = self._shade(scene, reflect_ray, reflect_hitrecord)
-
-        if hit:
             ref1 = hitrecord.material.reflectivity
             ref2 = 1.-ref1
-            rnew = int ( ref1 * rnew + ref2 * r)
-            gnew = int ( ref1 * gnew + ref2 * g)
-            bnew = int ( ref1 * bnew + ref2 * b)
-            return rnew, gnew, bnew, reflect_ray, reflect_hitrecord
-        else:
-            return r,g,b,None,None
-    
-    def _refract(self, r: int, g: int, b: int, scene: Scene, ray: Ray, hitrecord: HitRecord, eta: float) -> tuple:
-        refract_ray = Ray(hitrecord.point, refract3(hitrecord.normal_g, ray.direction, hitrecord.material.refraction))
-        refract_hitrecord = HitRecord()
+            r = int ( ref1 * new_r + ref2 * r)
+            g = int ( ref1 * new_g + ref2 * g)
+            b = int ( ref1 * new_b + ref2 * b)
 
-        hit, rnew, gnew, bnew = self._shade(scene, refract_ray, refract_hitrecord)
+            self.num_secondary_rays += 1
 
-        if hit:
+        if hitrecord.material.transparency != 0.0:
+            refract_ray = Ray(hitrecord.point + ray.direction * 0.01, refract3(hitrecord.normal_g, ray.direction, hitrecord.material.refraction))
+            new_r, new_g, new_b = self._recurse_shade(scene, refract_ray, iteration_num - 1)
+
             ref1 = hitrecord.material.transparency
             ref2 = 1.-ref1
-            rnew = int ( ref1 * rnew + ref2 * r)
-            gnew = int ( ref1 * gnew + ref2 * g)
-            bnew = int ( ref1 * bnew + ref2 * b)
-            return rnew, gnew, bnew, refract_ray, refract_hitrecord
-        else:
-            return r,g,b,None,None
+            r = int ( ref1 * new_r + ref2 * r)
+            g = int ( ref1 * new_g + ref2 * g)
+            b = int ( ref1 * new_b + ref2 * b)
+
+            self.num_secondary_rays += 1
+        
+        return r, g, b
 
     def render(self, scene: Scene) -> RGBImage:
         if not scene.camera:
@@ -125,26 +127,7 @@ class SimpleRT(Renderer):
                 self.num_rays += 1
 
                 # Primary Ray:
-                hit, r, g, b = self._shade(scene, ray, hitrecord)
-
-                if hit and hitrecord.material.reflectivity != 0.0:
-                    refhit = hitrecord.copy()
-                    refray = ray.copy()
-                    for i in range(self.iterations - 1):
-                        r, g, b, refray, refhit = self._reflect(r,g,b, scene, refray, refhit)
-                        self.num_secondary_rays += 1
-                        if refray is None:
-                            break
-                
-                if hit and hitrecord.material.transparency != 0.0:
-                    refhit = hitrecord.copy()
-                    refray = ray.copy()
-                    for i in range(self.iterations - 1):
-                        r, g, b, refray, refhit = self._refract(r,g,b, scene, refray, refhit, 1)
-                        self.num_secondary_rays += 1
-                        if refray is None:
-                            break
-
+                r, g, b = self._recurse_shade(scene, ray, self.iterations - 1)
                 image.drawPixelFast8(x, y, r, g, b)
 
 
