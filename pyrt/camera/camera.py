@@ -46,3 +46,11 @@ class Camera(object):
         :return:
         """
         pass
+
+    @abstractmethod
+    def getSize(self) -> tuple:
+        """
+        Returns the resolution tuple (w, h)
+        :return:
+        """
+        pass

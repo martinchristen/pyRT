@@ -4,8 +4,8 @@ This is the geometric shape description
 (renderable object)
 """
 
-from abc import abstractmethod
-from ..math import Ray, HitRecord, Vec3
+from abc import abstractmethod, abstractclassmethod
+from ..math import Ray, HitRecord, Vec2, Vec3
 import uuid
 
 
@@ -65,7 +65,6 @@ class Shape(object):
         :return: surface area
         """
         return 0
-
 
 
         ####################
