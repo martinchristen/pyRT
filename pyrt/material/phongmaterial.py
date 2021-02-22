@@ -12,8 +12,8 @@ class PhongMaterial(Material):
 
     """Base Material Class"""
 
-    def __init__(self, color: Vec3 = Vec3(1.,1.,1.), shininess: float = 10.0, reflectivity: float = 0.0, refraction: float = 1.0):
-        Material.__init__(self, color, shininess, reflectivity, refraction)
+    def __init__(self, color: Vec3 = Vec3(1.,1.,1.), shininess: float = 10.0, reflectivity: float = 0.0, refraction: float = 1.0, transparency = 0.0):
+        Material.__init__(self, color, shininess, reflectivity, refraction, transparency)
 
     def shade(self, camera: Camera, ray: Ray, hitrecord: HitRecord,  lights: list) -> Vec3:
         """
