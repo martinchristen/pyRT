@@ -22,6 +22,9 @@ class SimpleRT(Renderer):
         if self.iterations>1:
             print("# Iterations: " + str(self.iterations))
 
+        self._epsilon = 1e-4 # for float comparison
+        self._refract_offset = 1e-6 # refraction ray origin offset
+
     def _shade(self, scene: Scene, ray: Ray, hitrecord: HitRecord) -> tuple:
         r = g = b = 0  # background color
         hit = False
@@ -77,7 +80,7 @@ class SimpleRT(Renderer):
         if not hit or iteration_num == 0:
             return r, g, b
         
-        if hitrecord.material.reflectivity != 0.0:
+        if hitrecord.material.reflectivity > self._epsilon:
             reflect_ray = Ray(hitrecord.point, reflect3(hitrecord.normal_g, ray.direction))
             new_r, new_g, new_b = self._recurse_shade(scene, reflect_ray, iteration_num - 1)
 
@@ -89,8 +92,11 @@ class SimpleRT(Renderer):
 
             self.num_secondary_rays += 1
 
-        if hitrecord.material.transparency != 0.0:
-            refract_ray = Ray(hitrecord.point + ray.direction * 0.01, refract3(hitrecord.normal_g, ray.direction, hitrecord.material.refraction))
+        if hitrecord.material.transparency > self._epsilon:
+            refract_ray = Ray(
+                hitrecord.point + normalize3(ray.direction) * self._refract_offset, 
+                refract3(normalize3(hitrecord.normal_g), normalize3(ray.direction), hitrecord.material.refraction)
+            )
             new_r, new_g, new_b = self._recurse_shade(scene, refract_ray, iteration_num - 1)
 
             ref1 = hitrecord.material.transparency
