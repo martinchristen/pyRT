@@ -6,7 +6,7 @@ This is the geometric object sphere
 
 from ..geometry import Shape
 from ..math import Ray, HitRecord, Vec2, Vec3, dot3, G_EPSILON
-from ..material import Material, PhongMaterial
+from ..material import Material, PhongMaterial, TextureMaterial, NormalMappedMaterial
 from .bbox import BBox
 from math import sqrt, pi, asin, atan2
 
@@ -73,7 +73,8 @@ class Sphere(Shape):
             hitrecord.normal = hitrecord.normal_g
             hitrecord.color = Vec3(1., 1., 1.)  # spheres don't have interpolated colors, set to white
             hitrecord.material = self.material
-            hitrecord.texcoord = self.calcTexcoord(hitrecord.point)
+            if isinstance(hitrecord.material, TextureMaterial) or isinstance(hitrecord.material, NormalMappedMaterial):
+                hitrecord.texcoord = self.calcTexcoord(hitrecord.point)
             return True
         return False
 
