@@ -25,7 +25,7 @@ class PhongMaterial(Material):
 
         if len(lights)>0:
             for light in lights:
-                N = hitrecord.normal_g
+                N = normalize3(hitrecord.normal_g)
                 L = normalize3(hitrecord.point - light.position)
                 E = normalize3(camera.position - hitrecord.point)
                 R = normalize3(-reflect3(L, N))

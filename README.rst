@@ -1,6 +1,8 @@
 PyRT - The Python Raytracer
 ===========================
 
+http://pyrt.org
+
 |CI| |donate| |contributions welcome| |Code Climate| |image5| 
 
 .. figure::   https://github.com/martinchristen/pyRT/blob/master/docs/img/pyRT_256.png

@@ -5,10 +5,10 @@ This is the geometric object sphere
 """
 
 from ..geometry import Shape
-from ..math import Ray, HitRecord, Vec3, dot3, G_EPSILON
+from ..math import Ray, HitRecord, Vec2, Vec3, dot3, G_EPSILON
 from ..material import Material, PhongMaterial
 from .bbox import BBox
-from math import sqrt, pi
+from math import sqrt, pi, asin, atan2
 
 
 class Sphere(Shape):
@@ -21,6 +21,24 @@ class Sphere(Shape):
         self.center = center
         self.radius = radius
         self.material = material
+
+
+    def calcTexcoord(self, p: Vec3) -> Vec2:
+        """
+        Returns texture-coordinate at cartesian position p
+        :param p:
+        :return: returns
+        """
+
+        # change coordinate system's origin to sphere's center
+        p_central = p - self.center
+
+        # sphere radius
+        r = p_central.length()
+
+        u = 1.0 - (atan2(p_central.z, p_central.x) + pi) / (2.0 * pi)
+        v = (asin(p_central.y / r) + pi / 2) / pi
+        return Vec2(u, v)
 
 
     def hit(self, ray: Ray, hitrecord: HitRecord) -> bool:
@@ -55,6 +73,7 @@ class Sphere(Shape):
             hitrecord.normal = hitrecord.normal_g
             hitrecord.color = Vec3(1., 1., 1.)  # spheres don't have interpolated colors, set to white
             hitrecord.material = self.material
+            hitrecord.texcoord = self.calcTexcoord(hitrecord.point)
             return True
         return False
 

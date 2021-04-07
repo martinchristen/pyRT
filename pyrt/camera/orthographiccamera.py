@@ -27,3 +27,6 @@ class OrthographicCamera(Camera):
     def primaryRay(self, x: float, y: float) -> Ray:
         r = Ray(Vec3(x, y, 0.), self.direction)
         return r
+
+    def getSize(self) -> tuple:
+        return self.width, self.height
