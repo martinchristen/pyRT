@@ -103,7 +103,10 @@ def refract3(N, I, eta):
     I: Incident vector
     eta: Refraction koefficient
     """
-    d = dot3(I, N)
+    d = dot3(N, I)
+    if d > 0:
+        return refract3(I, N * -1, 1 / eta)
+    eta = 1 / eta
     k = 1 - eta * eta * (1 - d * d)
     if k < 0:
         return I

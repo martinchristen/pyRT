@@ -5,7 +5,7 @@ This is the geometric object triangle
 """
 
 from ..geometry import Shape, Vertex
-from ..material import PhongMaterial
+from ..material import PhongMaterial, TextureMaterial, NormalMappedMaterial
 from ..math import *
 
 
@@ -202,7 +202,8 @@ class Triangle(Shape):
             cV = self.c.color - self.a.color
             hitrecord.color = self.a.color + cU * u + cV * v
             hitrecord.material = self.material
-            hitrecord.texcoord = self.calcTexcoord(hitrecord.point)
+            if isinstance(hitrecord.material, TextureMaterial) or isinstance(hitrecord.material, NormalMappedMaterial):
+                hitrecord.texcoord = self.calcTexcoord(hitrecord.point)
 
             # why would we?
             # hitrecord.point = ray.start + t * ray.direction

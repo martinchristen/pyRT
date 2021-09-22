@@ -78,7 +78,7 @@ class SimpleRT(Renderer):
         if not hit or iteration_num == 0:
             return r, g, b
         
-        if hitrecord.material.reflectivity != 0.0:
+        if abs(hitrecord.material.reflectivity) > G_EPSILON:
             reflect_ray = Ray(hitrecord.point, reflect3(hitrecord.normal_g, ray.direction))
             new_r, new_g, new_b = self._recurse_shade(scene, reflect_ray, iteration_num - 1)
 
@@ -90,8 +90,11 @@ class SimpleRT(Renderer):
 
             self.num_secondary_rays += 1
 
-        if hitrecord.material.transparency != 0.0:
-            refract_ray = Ray(hitrecord.point + ray.direction * 0.01, refract3(hitrecord.normal_g, ray.direction, hitrecord.material.refraction))
+        if abs(hitrecord.material.transparency) > G_EPSILON:
+            refract_ray = Ray(
+                hitrecord.point + ray.direction * G_REFRACTION_EPSILON, 
+                refract3(normalize3(hitrecord.normal_g), normalize3(ray.direction), hitrecord.material.refraction)
+            )
             new_r, new_g, new_b = self._recurse_shade(scene, refract_ray, iteration_num - 1)
 
             ref1 = hitrecord.material.transparency
