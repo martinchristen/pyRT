@@ -8,3 +8,4 @@ from .renderer import Renderer
 from .simplert import SimpleRT
 from .mprt import MultiProcessRT
 from .rgbimage import RGBImage, loadimage
+from .aosimplert import AOSimpleRT
