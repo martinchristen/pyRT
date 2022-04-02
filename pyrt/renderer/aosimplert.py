@@ -6,7 +6,7 @@ class AOSimpleRT(SimpleRT):
         super().__init__(shadow, iterations)
         
         self.aorays_len = aoray_len
-        self.random_directions = [Vec3(*((random.random()) * 2 - 1 for _ in range(3))) for _ in range(n_aorays)]
+        self.random_directions = [Vec3(*((random.uniform(-1, 1)) for _ in range(3))) for _ in range(n_aorays)]
     
     def _shade(self, scene: Scene, ray: Ray, hitrecord: HitRecord) -> tuple:
         
